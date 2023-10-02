@@ -4,18 +4,24 @@ import Base from './pages/Base'
 import Home from './pages/Home';
 import './App.css';
 import Cadastro from './pages/Cadastro';
-import Login from './pages/Login';
+import LoginEmpresa from './pages/LoginEmpresa';
+import LoginUsuario from './pages/LoginUsuario';
+import CadastroEmpresa from './pages/CadastroEmpresa';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Base />}>
+        <Route path="/" element={<LoginEmpresa />}/>
+        <Route path="empresa" element={<LoginEmpresa />}/>
+        <Route path="usuario" element={<LoginUsuario />}/>
+        <Route path="cadastroEmpresa" element={<CadastroEmpresa />} />
+        <Route path="/base" element={<Base />}>
           <Route index element={<Home />} />
+          <Route path="cadastro" element={<LoginEmpresa />} />
           <Route path="cadastro" element={<Cadastro />} />
-          <Route path="login" element={<Login />} />
           {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<LoginUsuario />} />
         </Route>
       </Routes>
     </BrowserRouter>
