@@ -1,0 +1,76 @@
+:root{
+    --larguraFormsCadastro: 90vw;
+    /* BORDAS */
+    --bordaForms: 20px;
+    --bordaInput: 10px;
+    --bordaInputButton: 20px;
+    /* ESPAÇAMENTOS */
+    --paddingInput: 9px;
+    --paddingInputButton: 5px 15px;
+    /* MARGENS */
+    --marginForms: 20px;
+    --marginSpanInput: 10px;
+    --marginSenha: 20px;
+}
+
+.formEmpresaCadastro{
+    background-color: var(--cinzaClaro);
+    padding: var(--marginForms);
+    width: calc(var(--larguraFormsCadastro) - 2 * var(--marginForms));
+    margin: var(--marginForms) auto;
+    border-radius: var(--bordaForms);
+}
+
+.formEmpresaCadastro h1{
+    font: var(--títulos);
+    text-align: center;
+}
+
+.formEmpresaCadastro span{
+    margin-bottom: var(--marginSpanInput);
+}
+
+.formEmpresaCadastro input, .formEmpresaCadastro{
+    margin-bottom: var(--marginForms);
+}
+
+.formEmpresaCadastro input{
+    background-color: var(--branco);
+    color: var(--cinzaEscuro);
+    width: calc(100% - var(--paddingInput));
+    border: 0;
+    padding: var(--paddingInput);
+    border-radius: var(--bordaInput);
+    font-size: var(--textInput);
+}
+
+.div2ColunasFormCadastro{
+    display: flex;
+}
+
+.div2ColunasFormCadastro div{
+    width: calc(50% - (var(--marginSenha) + var(--paddingInput))/2);
+}
+
+.div2ColunasFormCadastro div:first-child{
+    margin-right: calc(var(--marginSenha) + var(--paddingInput));
+}
+
+input[type="button"]{
+    background-color: var(--vermelho);
+    border-radius: var(--bordaInputButton);
+    color: var(--branco);
+    font: var(--textos);
+    margin: 0  auto;
+    padding: var(--paddingInputButton);
+    width: auto;
+}
+
+.divEnviarCadastroEmpresa{
+    display: flex;
+}
+
+a{
+    text-decoration: none;
+    padding-right:  var(--marginForms);
+}
