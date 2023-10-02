@@ -14,7 +14,7 @@
   --verdeClaro:#34B132;
   /* FONTES-GERAIS */
   --títulosGrande: 400 calc(20px + 2.5vw) "Noto Serif Bengali";
-  --botaoLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
+  --buttonLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
   --títulos: 400 20px "Noto Serif Bengali";
   --textos: 400 15px "Noto Serif Bengali";
   --textInput: 400 10px "Noto Serif Bengali";
