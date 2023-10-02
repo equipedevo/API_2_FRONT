@@ -1,0 +1,153 @@
+:root{
+    --tamanhoCheckbox:20px;
+    --larguraFormsLogin: 37vw;
+    /* BORDAS */
+    --borderRadiusForms: 1.25rem;
+    /* PADDINGS */
+    --paddingSeparacao: 20px;
+    --paddingForms: calc(10px + 1vw);
+    /* GAP */
+    --gapForms: 4vw;
+}
+
+/* FUNDO */
+.fundoLogin {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.divLogin, .divTrocaTelaLogin {
+    flex: 1;
+}
+.divLogin{
+    background-color: var(--vermelho);
+}
+
+.fundoLogin > div, .imagemRaio{
+    height: 100vh;
+}
+
+/* TÍTULO */
+.divLogin h1{
+    color: var(--branco);
+    font: var(--títulosGrande);
+    text-align: center;
+}
+
+/* FORMS */
+.formTelaLogin{
+    background-color: var(--cinzaClaro);
+    border-radius: var(--borderRadiusForms);
+    padding: var(--paddingForms);
+    position: absolute;
+    width: var(--larguraFormsLogin);
+}
+.formTelaLogin form{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+    gap: 4vw;
+    justify-content: center;
+    margin-bottom: 4vw;
+}
+
+.formTelaLogin form span{
+    align-items: center;
+    background-color: var(--branco);
+    border-radius: 0.625rem;
+    display: flex;
+    margin: 0 auto;
+    gap: 2px;
+    padding: 10px;
+    width: 90%;
+
+}
+
+.formTelaLogin form > span > img{
+    max-height: 30px;
+}
+
+.formTelaLogin form input{
+    border: 0;
+    width: 90%;
+}
+
+/* OLHO */
+.imagemOlho{
+    cursor: pointer;
+}
+
+/* CHECKBOX */
+.checkboxFormLogin {
+    align-items: center;
+    background-color: inherit;
+    cursor: pointer;
+    display: flex;
+    gap: 0.625rem;
+}
+
+.checkboxFormLogin input[type="checkbox"] {
+    appearance: none;
+    background: var(--cinzaEscuro);
+    cursor: pointer;
+    height: var(--tamanhoCheckbox);
+    width: var(--tamanhoCheckbox);
+}
+
+.checkboxFormLogin input[type="checkbox"]:checked{
+    background: var(--vermelho);
+}
+
+/* Botões */
+.divButtonFormLogin{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.divButtonFormLogin > *{
+    border-radius: 20px;
+    border-width: 2px;
+    border-style: solid;
+    margin: auto;
+    width: 100px;
+}
+
+.buttonLogin{
+    border-color: var(--vermelho)
+}
+
+.buttonLogin:hover{
+    background-color: var(--vermelho)
+}
+
+.buttonCadastroEmpresa{
+    border-color: var(--verdeClaro)
+}
+
+.buttonCadastroEmpresa:hover{
+    background-color: var(--verdeClaro)
+}
+
+
+.divTrocaTelaLogin{
+    display: flex;
+}
+.divTrocaTelaLogin button{
+    margin: auto;
+    font: var(--buttonLogin);
+    border: var(--vermelho) solid 2px;
+    border-radius: 20px;
+    padding: 5px;
+    width: 25vw;
+}
+.divTrocaTelaLogin button:hover{
+    background-color: var(--vermelho);
+}
+.loginCliente{
+    right: 10px;
+}
+
+.loginEmpresa{
+    left: 10px;
+}
