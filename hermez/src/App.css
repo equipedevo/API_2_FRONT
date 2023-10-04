@@ -32,3 +32,9 @@ body{
   background-color: var(--branco);
   width: 100%;
 }
+
+a,
+button,
+input[type="button"]{
+  cursor: pointer;
+}
