@@ -106,6 +106,8 @@
     gap: 30px;
 }
 .divButtonFormLogin > *{
+    text-decoration: none;
+    text-align: center;
     border-radius: 20px;
     border-width: 2px;
     border-style: solid;
@@ -133,15 +135,17 @@
 .divTrocaTelaLogin{
     display: flex;
 }
-.divTrocaTelaLogin button{
+.divTrocaTelaLogin *{
     margin: auto;
+    text-align: center;
+    text-decoration: none;
     font: var(--buttonLogin);
     border: var(--vermelho) solid 2px;
     border-radius: 20px;
     padding: 5px;
     width: 25vw;
 }
-.divTrocaTelaLogin button:hover{
+.divTrocaTelaLogin *:hover{
     background-color: var(--vermelho);
 }
 .loginCliente{
