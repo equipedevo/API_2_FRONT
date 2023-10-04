@@ -1,3 +1,17 @@
-header{
-    background-color: blue;
+.hearderPadrão{
+    background-color: var(--vermelho);
+    display: flex;
+}
+.hearderPadrão div{
+    margin: auto;
+    display: flex;
+    gap: 20px;
+    padding: 5px 0;
+    margin-right: 10px;
+}
+.hearderPadrão div > *{
+    text-decoration: none;
+    color: var(--branco);
+    display: flex;
+    align-items: center;
 }
