@@ -1,14 +1,19 @@
 import './css/CadastroEmpresa.css';
-
+import { Link } from 'react-router-dom';
+import Footer from '../components/Footer';
+import Header from '../components/Header';
+import sair from '../img/sair.png';
 export default function CadastroEmpresa(){
-    function trocarURL(novaURL) {
-        window.location.href = novaURL;
-    }
     return (
         <>
             <body className='bodyCadastro'>
-                <header>
-                   <a onClick={() => trocarURL('/')}>Voltar</a>
+                <header className='hearderPadrão'>
+                    <div>
+                        <Link to="/">
+                            <img src={sair}/>
+                            Voltar
+                        </Link>
+                    </div>
                 </header>
                 <form className='formEmpresaCadastro'>
                     <h1> Cadastre sua Empresa</h1>
@@ -31,6 +36,7 @@ export default function CadastroEmpresa(){
                     </div>
                 </form>
             </body>
+            <Footer/>
         </>
     );
 }
