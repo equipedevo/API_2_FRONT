@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './css/Login.css';
+import { Link } from 'react-router-dom';
 
 /* IMAGEM */
 import cadeado from '../img/cadeado.png';
@@ -19,18 +20,15 @@ export default function Login(){
     const mudaStatusCheckbox= () => {
         setStatusCheckbox(!statusCheckbox)
     }
-    function trocarURL(novaURL) {
-        window.location.href = novaURL;
-    }
     return (
         <>
             <body>
                 <div className="fundoLogin">
                     <div className="divTrocaTelaLogin">
-                        <button 
-                            onClick={() => trocarURL('/empresa')}>
+                        <Link
+                            to="/empresa">
                             Entrar como Empresa
-                        </button>
+                        </Link>
                     </div>
                     <img
                         className="imagemRaio"
@@ -73,7 +71,11 @@ export default function Login(){
                                 </div>
                             </form>
                             <div className='divButtonFormLogin'>
-                                <button className='buttonLogin'>Entrar</button>
+                                <Link
+                                    className='buttonLogin'
+                                    to="/base">
+                                    Entrar
+                                </Link>
                             </div>
                         </div>
                     </div>

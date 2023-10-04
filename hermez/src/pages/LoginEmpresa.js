@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Login.css';
 
 /* IMAGEM */
@@ -19,10 +20,6 @@ export default function Login(){
     const [statusCheckbox, setStatusCheckbox] = useState(false);
     const mudaStatusCheckbox = () => {
         setStatusCheckbox(!statusCheckbox)
-    }
-    /* FUNÇÃO DE TROCA DE URL */
-    const trocarURL = (novaURL) => {
-        window.location.href = novaURL;
     }
     return (
         <>
@@ -65,12 +62,16 @@ export default function Login(){
                                 </div>
                             </form>
                             <div className='divButtonFormLogin'>
-                                <button className='buttonLogin'>Entrar</button>
-                                <button
+                                <Link
+                                    className='buttonLogin'
+                                    to="/base">
+                                    Entrar
+                                </Link>
+                                <Link
                                     className='buttonCadastroEmpresa'
-                                    onClick={() => trocarURL('cadastroEmpresa')}>
+                                    to="/cadastroEmpresa">
                                     Cadastrar
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -79,10 +80,10 @@ export default function Login(){
                         src={esquerda}
                     />
                     <div className="divTrocaTelaLogin">
-                        <button 
-                            onClick={() => trocarURL('/usuario')}>
+                        <Link
+                            to="/usuario">
                             Entrar como Usuário
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </body>
