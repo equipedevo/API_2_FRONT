@@ -1,3 +1,7 @@
-footer{
-    background-color: green;
+.footerGeral *{
+    text-align: center;
+    color: var(--cinzaEscuro);
+}
+.footerGeral a:hover{
+    color: var(--preto);
 }
