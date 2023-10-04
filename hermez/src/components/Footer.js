@@ -3,8 +3,8 @@ import './css/Footer.css'
 export default function Footer(){
     return (
         <>
-            <footer>
-                <h1>FOOTER</h1>
+            <footer className="footerGeral">
+                <h1>DESENVOLVIDO POR <a href="https://github.com/equipedevo" target="_blank">DEVO</a></h1>
             </footer>
         </>
     );
