@@ -7,6 +7,7 @@ import Cadastro from './pages/Cadastro';
 import LoginEmpresa from './pages/LoginEmpresa';
 import LoginUsuario from './pages/LoginUsuario';
 import CadastroEmpresa from './pages/CadastroEmpresa';
+import CadastroChamado from './pages/CadastroChamado';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="cadastroEmpresa" element={<CadastroEmpresa />} />
         <Route path="/base" element={<Base />}>
           <Route index element={<Home />} />
+          <Route path="chamado" element={< CadastroChamado />} />
           <Route path="cadastro" element={<LoginEmpresa />} />
           <Route path="cadastro" element={<Cadastro />} />
           {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
