@@ -1,0 +1,64 @@
+body{
+    font: var(--textos);
+}
+
+/*formulário*/
+.formAbrirChamado{
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+    padding: 50px;
+    background-color: var(--cinzaClaro);
+    border-radius: 20px;
+}
+
+.formAbrirChamado h1{
+    font: var(--títulos);
+    text-align: center;
+}
+
+.formAbrirChamado img{
+    width: 35px 35px;
+    align-self: flex-end;
+}
+
+.formAbrirChamado div{
+    margin:50px 0;
+}
+
+
+/*campos*/
+.linha, .coluna, .coluna div{
+    display: flex;
+}
+
+.coluna{
+    justify-content: space-between;
+}
+
+.coluna div{
+    flex-direction: column;
+}
+
+.linha {
+    flex-direction: column;
+}
+
+
+/*inputs*/
+input[type='file']{
+    display: none;
+}
+
+.arquivo label{
+    width: 450px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    padding: 10px;
+    text-align: left;
+    color: var(--cinzaEscuro);
+}
+
+.arquivo label:hover{
+    cursor: pointer;
+}

@@ -1,62 +1,77 @@
-
+import './css/AbrirChamado.css';
+import fechar from '../img/fechar.svg';
+import './js/mudarNome.js'
 export default function AbrirChamado(){
     return(
         <>
             <body>
-                <forms className='formAbrirChamado' action='#'>
-                    <img />
+                <form className='formAbrirChamado' action='#'>
+                    <img src={fechar}/>
                     <h1>Nos conte seu problema</h1>
 
-                    <div className='linha'>
-                        <span for='nome'>NOME</span>
-                        <input 
-                            type='text'
-                            placeholder="Nome"
-                            id='nome'
-                            name="nome"
-                            required
-                        />
+                    <div className='coluna'>
+                        <div>
+                            <label for='nome'>NOME</label>
+                            <input 
+                                type='text'
+                                placeholder="Nome"
+                                id='nome'
+                                name="nome"
+                                required
+                            />
+                        </div>
 
-                        <span for='titulo'>TÍTULO</span>
+                        <div>
+                            <label for='titulo'>TÍTULO</label>
+                            <input 
+                                type='text'
+                                placeholder='Título'
+                                id='titulo'
+                                name='titulo'
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <div className='linha'>
+                        <label for='local'>LOCALIZAÇÃO DO APARELHO <span>(Opcional)</span>
+                        </label>
                         <input 
                             type='text'
-                            placeholder='Título'
-                            id='titulo'
-                            name='titulo'
+                            placeholder='Localização'
+                            id='local'
+                            name='local'
+                        />
+                    </div>
+
+                    <div className='coluna'>
+                        <div>
+                            <label for='tipo'>TIPO</label>
+                            <select form='formAbrirChamado' name="tipo" required>
+                                <option value='select'>Selecione</option>
+                                <option value='1'>Hardware</option>
+                                <option value='2'>Software</option>
+                            </select>
+                        </div>
+                        
+                        <div className='arquivo'>
+                            <label for='arquivo' className='nomeArquivo'>Escolha o seu arquivo</label>
+                            <input type="file" id='arquivo' name='meuArquivo'/>
+                        </div>
+                    </div>
+
+                    <div className='linha'>
+                        <label for='mensagem'>MENSAGEM</label>
+                        <textarea 
+                            placeholder="Mensagem"
+                            id="mensagem"
+                            name="mensagem"
                             required
                         />
                     </div>
 
-                    <span for='local'>LOCALIZAÇÃO DO APARELHO<p>(Opcional)</p>
-                    </span>
-                    <input 
-                        type='text'
-                        placeholder='Localização'
-                        id='local'
-                        name='local'
-                    />
-
-                    <div className='linha'>
-                        <span for='tipo'>TIPO</span>
-                        <select form='formAbrirChamado' name="tipo" selected='Selecione' required>
-                            <option value='select'>Selecione</option>
-                            <option value='1'>Hardware</option>
-                            <option value='2'>Software</option>
-                        </select>
-
-                        <input type="file" id='arquivo' name='meuArquivo'/>
-                    </div>
-
-                    <span for='mensagem'>MENSAGEM</span>
-                    <textarea 
-                        placeholder="Mensagem"
-                        id="mensagem"
-                        name="mensagem"
-                        required
-                    />
-
-                    <input type='submit' value='Enviar' />
-                </forms>
+                    <input className='enviar' type='submit' value='Enviar' />
+                </form>
             </body>
         </>
     )
