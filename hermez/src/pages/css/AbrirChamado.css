@@ -1,6 +1,13 @@
+:root{
+    --border: 10px;
+    --tamanhoInput: 450px;
+}
+
 body{
     font: var(--textos);
 }
+
+
 
 /*formulário*/
 .formAbrirChamado{
@@ -27,6 +34,8 @@ body{
 }
 
 
+
+
 /*campos*/
 .linha, .coluna, .coluna div{
     display: flex;
@@ -45,15 +54,17 @@ body{
 }
 
 
+
+
 /*inputs*/
 input[type='file']{
     display: none;
 }
 
 .arquivo label{
-    width: 450px;
+    width: var(--tamanhoInput);
     background-color: var(--branco);
-    border-radius: 10px;
+    border-radius: var(--border);
     padding: 10px;
     text-align: left;
     color: var(--cinzaEscuro);
@@ -61,4 +72,33 @@ input[type='file']{
 
 .arquivo label:hover{
     cursor: pointer;
+}
+
+input[type='text']{
+    width: var(--tamanhoInput);
+    padding: 10px;
+    background-color: var(--branco);
+    border: none;
+    border-radius: var(--border);
+}
+
+#local{
+    width: auto;
+}
+
+textarea{
+    height: 215px;
+    padding: 10px;
+    resize: none;
+    border: none;
+    border-radius: var(--border);
+}
+
+
+
+
+/*select*/
+select {
+    width: var(--tamanhoInput);
+    border: none;
 }

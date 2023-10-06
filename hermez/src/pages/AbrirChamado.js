@@ -1,12 +1,13 @@
 import './css/AbrirChamado.css';
 import fechar from '../img/fechar.svg';
 import './js/mudarNome.js'
+
 export default function AbrirChamado(){
     return(
         <>
             <body>
                 <form className='formAbrirChamado' action='#'>
-                    <img src={fechar}/>
+                    <img src={fechar} alt='X'/>
                     <h1>Nos conte seu problema</h1>
 
                     <div className='coluna'>
@@ -47,7 +48,7 @@ export default function AbrirChamado(){
                     <div className='coluna'>
                         <div>
                             <label for='tipo'>TIPO</label>
-                            <select form='formAbrirChamado' name="tipo" required>
+                            <select form='formAbrirChamado' id="tipo" required>
                                 <option value='select'>Selecione</option>
                                 <option value='1'>Hardware</option>
                                 <option value='2'>Software</option>
@@ -55,17 +56,17 @@ export default function AbrirChamado(){
                         </div>
                         
                         <div className='arquivo'>
-                            <label for='arquivo' className='nomeArquivo'>Escolha o seu arquivo</label>
+                            <label for='arquivo' className='nomeArquivo'>Anexe o seu arquivo</label>
                             <input type="file" id='arquivo' name='meuArquivo'/>
                         </div>
                     </div>
 
                     <div className='linha'>
-                        <label for='mensagem'>MENSAGEM</label>
+                        <label for='descricao'>DESCRIÇÃO</label>
                         <textarea 
-                            placeholder="Mensagem"
-                            id="mensagem"
-                            name="mensagem"
+                            placeholder="Descrição"
+                            id="descricao"
+                            name="descricao"
                             required
                         />
                     </div>
