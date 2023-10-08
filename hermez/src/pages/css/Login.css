@@ -89,7 +89,7 @@
 
 .checkboxFormLogin input[type="checkbox"] {
     appearance: none;
-    background: var(--cinzaEscuro);
+    background: var(--cinzaPadrao);
     cursor: pointer;
     height: var(--tamanhoCheckbox);
     width: var(--tamanhoCheckbox);

@@ -36,7 +36,7 @@
 
 .formEmpresaCadastro input{
     background-color: var(--branco);
-    color: var(--cinzaEscuro);
+    color: var(--cinzaPadrao);
     width: calc(100% - var(--paddingInput));
     border: 0;
     padding: var(--paddingInput);

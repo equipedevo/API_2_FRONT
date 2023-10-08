@@ -8,7 +8,7 @@ export default function CadastroEmpresa(){
             <body className='bodyCadastro'>
                 <header className='hearderPadrão'>
                     <div>
-                        <Link to="/">
+                        <Link to="/" className='linkHearderPadrão'>
                             <img src={sair}/>
                             Voltar
                         </Link>
