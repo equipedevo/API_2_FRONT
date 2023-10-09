@@ -57,23 +57,6 @@ body{
 
 
 /*inputs*/
-input[type='file']{
-    display: none;
-}
-
-.arquivo label{
-    width: var(--tamanhoInput);
-    background-color: var(--branco);
-    border-radius: var(--border);
-    padding: 10px;
-    text-align: left;
-    color: var(--cinzaEscuro);
-}
-
-.arquivo label:hover{
-    cursor: pointer;
-}
-
 input[type='text']{
     width: var(--tamanhoInput);
     padding: 10px;
