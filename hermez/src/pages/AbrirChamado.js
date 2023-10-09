@@ -18,7 +18,7 @@ export default function AbrirChamado(){
     return(
         <>
             <body>
-                <form className='formAbrirChamado' action='#'>
+                <form className='formAbrirChamado' >
                     <img src={fechar} alt='Fechar formulário'/>
                     <h1>Nos conte seu problema</h1>
 
@@ -32,7 +32,7 @@ export default function AbrirChamado(){
                                 name="nome"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
-                                
+                                required
                             />
                         </div>
 
@@ -43,7 +43,7 @@ export default function AbrirChamado(){
                                 placeholder='Título'
                                 id='titulo'
                                 name='titulo'
-                                
+                                required
                             />
                         </div>
                     </div>
@@ -62,14 +62,14 @@ export default function AbrirChamado(){
                     <div className='coluna'>
                         <div>
                             <label for='tipo'>TIPO</label>
-                            <select id="tipo" name="tipo" >
+                            <select id="tipo" name="tipo" required>
                                 <option selected style={{display: 'none'}}>Selecione</option>
                                 <option value='1'>Hardware</option>
                                 <option value='2'>Software</option>
                             </select>
                         </div>
                         
-                        <div className='arquivo'>
+                        <div className='file'>
                             <UploadArquivo 
                                 onFileSelect={(file) => setSelectedFile(file)}    
                             />
@@ -82,11 +82,12 @@ export default function AbrirChamado(){
                             placeholder="Descrição"
                             id="descricao"
                             name="descricao"
-                            
+                            required
                         />
                     </div>
 
-                    <button 
+                    <button
+                        type='submit'
                         className='enviar' 
                         onClick={submitForm}    
                     >
