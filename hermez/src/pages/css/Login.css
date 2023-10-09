@@ -84,19 +84,27 @@
     background-color: inherit;
     cursor: pointer;
     display: flex;
-    gap: 0.625rem;
 }
 
+.checkboxFormLogin input[type="checkbox"], .checkboxFormLogin img{
+    height: var(--tamanhoCheckbox);
+    width: var(--tamanhoCheckbox);
+    cursor: pointer;
+    margin-right: 0.625rem;
+}
 .checkboxFormLogin input[type="checkbox"] {
     appearance: none;
     background: var(--cinzaPadrao);
-    cursor: pointer;
-    height: var(--tamanhoCheckbox);
-    width: var(--tamanhoCheckbox);
+}
+.checkboxFormLogin img{
+    display: none;
 }
 
-.checkboxFormLogin input[type="checkbox"]:checked{
-    background: var(--vermelho);
+.checkboxFormLogin input[type="checkbox"]:checked + label img {
+    display: block;
+}
+.checkboxFormLogin input[type="checkbox"]:checked {
+    display: none;
 }
 
 /* Botões */

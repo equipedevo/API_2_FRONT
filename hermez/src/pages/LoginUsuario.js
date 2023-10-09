@@ -8,6 +8,7 @@ import direita from '../img/direita.png';
 import olho from '../img/olho.png';
 import olhoCortado from '../img/olhoCortado.png';
 import perfil from '../img/perfil.png';
+import check from '../img/check.png';
 
 export default function Login(){
     /* MOSTRAR SENHA */
@@ -66,7 +67,10 @@ export default function Login(){
                                         type="checkbox"
                                         checked={statusCheckbox}
                                         onChange={() => setStatusCheckbox(!statusCheckbox)}
-                                    />
+                                        />
+                                    <label>
+                                        <img src={check}/>
+                                    </label>
                                     Lembrar de mim
                                 </div>
                             </form>
