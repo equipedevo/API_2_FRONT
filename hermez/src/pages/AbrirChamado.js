@@ -5,14 +5,30 @@ import UploadArquivo from '../components/UploadArquivo';
 
 
 export default function AbrirChamado(){
-    const [name, setName] = useState("");
+    const [nome, setNome] = useState("");
+    const [titulo, setTitulo] = useState("");
+    const [local, setLocal] = useState("");
+    const [descricao, setDescricao] = useState("");
+    
     const [selectedFile, setSelectedFile] = useState(null);
+
 
     const submitForm = () => {
         const formData =new FormData();
-        formData.append("name", name);
+        formData.append("nome", nome);
+        formData.append("titulo", titulo);
+        formData.append("local", local);
+        formData.append("descricao", descricao);
+
         formData.append("file", selectedFile);
-    }
+
+        // axios
+        //     .post("url", formData)
+        //     .then((res) => {
+        //         alert("File upload success");
+        //     })
+        //     .catch((err) => alert("File upload error"));
+    //    }
 
 
     return(
@@ -30,8 +46,8 @@ export default function AbrirChamado(){
                                 placeholder="Nome"
                                 id='nome'
                                 name="nome"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={nome}
+                                onChange={(e) => setNome(e.target.value)}
                                 required
                             />
                         </div>
@@ -43,6 +59,8 @@ export default function AbrirChamado(){
                                 placeholder='Título'
                                 id='titulo'
                                 name='titulo'
+                                value={titulo}
+                                onChange={(e) => setTitulo(e.target.value)}
                                 required
                             />
                         </div>
@@ -56,6 +74,8 @@ export default function AbrirChamado(){
                             placeholder='Localização'
                             id='local'
                             name='local'
+                            value={local}
+                            onChange={(e) => setLocal(e.target.value)}
                         />
                     </div>
 
@@ -82,6 +102,8 @@ export default function AbrirChamado(){
                             placeholder="Descrição"
                             id="descricao"
                             name="descricao"
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
                             required
                         />
                     </div>
