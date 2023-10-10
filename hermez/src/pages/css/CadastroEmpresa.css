@@ -56,7 +56,7 @@
     margin-right: calc(var(--marginSenha) + var(--paddingInput));
 }
 
-.formEmpresaCadastro input[type="button"]{
+.formEmpresaCadastro input[type="submit"]{
     background-color: var(--vermelho);
     border-radius: var(--bordaInputButton);
     color: var(--branco);
