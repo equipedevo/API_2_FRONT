@@ -7,6 +7,7 @@ import Cadastro from './pages/Cadastro';
 import LoginEmpresa from './pages/LoginEmpresa';
 import LoginUsuario from './pages/LoginUsuario';
 import CadastroEmpresa from './pages/CadastroEmpresa';
+import CadastroUser from './pages/CadastroUser';
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="/" element={<LoginEmpresa />}/>
         <Route path="empresa" element={<LoginEmpresa />}/>
         <Route path="usuario" element={<LoginUsuario />}/>
-        <Route path="cadastroEmpresa" element={<CadastroEmpresa />} />
+        <Route path="cadastroEmpresa" element={<CadastroEmpresa />}/>
+        <Route path="cadastroUser" element={<CadastroUser />}/>
         <Route path="/base" element={<Base />}>
           <Route index element={<Home />} />
           <Route path="cadastro" element={<LoginEmpresa />} />
