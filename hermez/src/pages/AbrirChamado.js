@@ -28,7 +28,7 @@ export default function AbrirChamado(){
         //         alert("File upload success");
         //     })
         //     .catch((err) => alert("File upload error"));
-    //    }
+    }
 
 
     return(
