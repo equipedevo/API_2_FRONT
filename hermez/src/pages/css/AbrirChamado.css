@@ -29,7 +29,9 @@ body{
     align-self: flex-end;
 }
 
-.formAbrirChamado div{
+.formAbrirChamado .campo{
+    display: flex;
+    flex-direction: column;
     margin:50px 0;
 }
 
@@ -53,7 +55,9 @@ body{
     flex-direction: column;
 }
 
-
+.file{
+    align-self: flex-end;
+}
 
 
 /*inputs*/
@@ -75,13 +79,19 @@ textarea{
     resize: none;
     border: none;
     border-radius: var(--border);
+    background-color: var(--branco);
 }
 
+.enviar{
+    width: 80px;
+    height: 45px;
+    padding: 5px;
+    align-self: center;
 
+    color: var(--branco);
+    background-color: var(--vermelho);
 
-
-/*select*/
-select {
-    width: var(--tamanhoInput);
     border: none;
+    border-radius: var(--border);
 }
+

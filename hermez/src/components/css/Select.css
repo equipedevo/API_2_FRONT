@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#category-select{
+    display: block;
+}
+
+#select-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 450px;
+    height: 45px;
+    margin-top: 0;
+    padding: 5px;
+
+    border-radius: 10px;
+    background-color: var(--branco);
+}
+
+#selected-value {
+    color: var(--cinzaEscuro);
+}
+
+
+#arrows .up{
+    display: none;
+}
+
+
+/*eventos*/
+#tipo:focus + #select-button,
+#tipo:checked + #selected-button {
+    outline: 1px solid var(--preto);
+}
+
+#tipo:checked + #select-button #arrows .down{
+    display: none;
+}
+
+#tipo:checked + #select-button #arrows .up{
+    display: block;
+}
+
+
+/*tirando a caixinha de checkbox*/
+#category-select {
+    position: relative;
+}
+
+#tipo{
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+
+/*lista de opções*/
+#options{
+    background-color: var(--branco);
+    display: none;
+}
+
+.option{
+    padding: 10px;
+
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--cinzaEscuro);
+
+    position: relative;
+}
+
+.option:hover{
+    background-color: #f7f7f7;
+}
+
+.option:has(input:checked),
+.option:has(input:focus){
+    background-color: #feebed;
+    border-bottom: 2px solid var(--vermelho);
+}
+
+.option:has(input:checked) .label{
+    color: var(--vermelho);
+    font-weight: 600;
+}
+
+/*tirando a bolinha do input radio*/
+.option input[type="radio"]{
+    all: unset;
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+}
+
+
+/*aparecer a lista ao clicar*/
+#category-select:has(#tipo:checked) + #options{
+    display: block;
+}
+
+.select:has(.option input:checked) #selected-value{
+    color: #000;
+}
