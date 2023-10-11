@@ -46,21 +46,20 @@ export default function CadastroEmpresa() {
         }
         else {
             setErroSenha('');
-            /* 
-            const respostaCadastro = fetch("http://localhost:3001/empresa/cadastro", {
+            fetch("https://hermezapi-back.vercel.app/empresa/cadastro?dev=true", {
                 method:'POST',
                 body: JSON.stringify({
-                    nome:razaoSocial,
+                    razaoSocial:razaoSocial,
                     cnpj:cnpj,
                     email:email,
                     senha:senha
                 }),
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
-            })
-            prompt(respostaCadastro)
-            */
+                },
+                mode: 'cors'
+            }).then(response => response.json()).then(data => console.log(data))
         }
     }
 
