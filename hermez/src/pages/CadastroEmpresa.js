@@ -10,7 +10,8 @@ export default function CadastroEmpresa() {
     const [cnpj, setCnpj] = useState('');
     const [senha, setSenha] = useState('');
     const [senhaConfirmada, setSenhaConfirmada] = useState('');
-    const [erroSenha, setErroSenha] = useState('');
+    const [erroSenha, setErro] = useState('');
+    const [cadastroSucesso, setCadastroSucesso] = useState(false); 
 
     // Função para formatar CNPJ
     function formatCnpj(cnpj) {
@@ -38,32 +39,45 @@ export default function CadastroEmpresa() {
 
     function handleSubmit(event) {
         event.preventDefault();
+        const criterioDeAceitacao = (
+            senha.length >= 8 &&
+            /[A-Z]/.test(senha) &&
+            /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(senha) &&
+            /\d/.test(senha)
+        );
         if (senha !== senhaConfirmada) {
-            setErroSenha('As senhas não coincidem.');
+            setErro('As senhas não coincidem.');
         }
-        else if(senha.length < 8 || !/[A-Z]/.test(senha) || !/[!@#$%^&*()_+{}\[\]:;<>,.?~\\-]/.test(senha) || !/\d/.test(senha)){
-            setErroSenha(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
+        else if(criterioDeAceitacao){
+            setErro(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
         }
         else {
-            setErroSenha('');
-            /* 
-            const respostaCadastro = fetch("http://localhost:3001/empresa/cadastro", {
+            setErro('');
+            fetch("https://hermezapi-back.vercel.app/empresa/cadastro?dev=true", {
                 method:'POST',
                 body: JSON.stringify({
-                    nome:razaoSocial,
+                    razaoSocial:razaoSocial,
                     cnpj:cnpj,
                     email:email,
                     senha:senha
                 }),
                 headers: {
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json'
+                },
+                mode: 'cors'
+            }).then(response => {
+                if(response.status === 200) {
+                    setCadastroSucesso(true);
                 }
-            })
-            prompt(respostaCadastro)
-            */
+                else {
+                    (response.json()).then(data => {
+                        setErro(data.msg)
+                    });
+                }
+            });
         }
-    }
-
+    };
     return (
         <>
             <body className='bodyCadastro'>
@@ -148,8 +162,16 @@ export default function CadastroEmpresa() {
                             type='submit'
                         />
                     </div>
-                    {erroSenha && <p className="erroSenha">{erroSenha}</p>}
+                    {erroSenha && <p className="erro">{erroSenha}</p>}
                 </form>
+                {cadastroSucesso && (
+                <div className="popUpCadastro">
+                    <div>
+                        <span className="fechar" onClick={() => setCadastroSucesso(false)}>&times;</span> 
+                        <p>Cadastro realizado com sucesso!</p>
+                    </div>
+                </div>
+                )}
             </body>
             <Footer />
         </>
