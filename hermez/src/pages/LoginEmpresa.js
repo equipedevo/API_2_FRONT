@@ -12,8 +12,10 @@ import check from '../img/check.png';
 
 export default function Login(){
     /* MOSTRAR SENHA */
+    const [email, setEmail] = useState('');
     const [mostraSenha, setmostraSenha] = useState(false);
     const [senha, setSenha] = useState('');
+    const [erroLogin, setErroLogin] = useState('');
     const deixarSenhaVisivel = () => {
         setmostraSenha(!mostraSenha);
     };
@@ -21,7 +23,41 @@ export default function Login(){
     const [statusCheckbox, setStatusCheckbox] = useState(false);
     const mudaStatusCheckbox = () => {
         setStatusCheckbox(!statusCheckbox)
-    }
+    };
+    function handleEmailChange(event) {
+        const email = event.target.value;
+        setEmail(email);
+    };
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (email !== '' && senha !== ''){
+            fetch("https://hermezapi-back.vercel.app/empresa/login?dev=true", {
+                method:'POST',
+                body: JSON.stringify({
+                    email:email,
+                    senha:senha
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors'
+            })
+            .then(response =>{
+                if(response.status === 200) {
+                    window.location.href = '/base';
+                }
+                else {
+                    (response.json()).then(data => {
+                        setErroLogin(data.msg)
+                    });
+                }
+            });
+        }
+        else {
+            setErroLogin('Preencha os campos E-mail e Senha');
+        }
+    };
     return (
         <>
             <head>
@@ -31,16 +67,18 @@ export default function Login(){
                     <div className="divLogin">
                         <h1>HERMEZ</h1>
                         <div className='formTelaLogin loginEmpresa'>
-                            <form >
+                            <form onSubmit={handleSubmit}>
                                 <span>
-                                    <img src={perfil}/>
+                                    <img src={perfil} alt="perfil"/>
                                     <input
                                         type='email'
+                                        onChange={handleEmailChange}
                                         placeholder="Email da Empresa"
-                                        />
+                                        value={email}
+                                    />
                                 </span>
                                 <span>
-                                    <img src={cadeado}/>
+                                    <img src={cadeado} alt='cadeado'/>
                                     <input
                                         type={mostraSenha ? 'text' : 'password'}
                                         placeholder="Senha"
@@ -51,7 +89,8 @@ export default function Login(){
                                         src = {mostraSenha ? olho : olhoCortado}
                                         className = "imagemOlho"
                                         onClick = {deixarSenhaVisivel}
-                                        />
+                                        alt='olho'
+                                    />
                                 </span>
                                 <div
                                     className="checkboxFormLogin"
@@ -60,30 +99,32 @@ export default function Login(){
                                         type="checkbox"
                                         checked={statusCheckbox}
                                         onChange={() => setStatusCheckbox(!statusCheckbox)}
-                                        />
+                                    />
                                     <label>
-                                        <img src={check}/>
+                                        <img src={check} alt='check'/>
                                     </label>
                                     Lembrar de mim
                                 </div>
+                                <div className='divButtonFormLogin'>
+                                    <input
+                                        className='buttonLogin'
+                                        value='Entrar'
+                                        type='submit'
+                                    />
+                                    <Link
+                                        className='buttonCadastroEmpresa'
+                                        to="/cadastroEmpresa">
+                                        Cadastrar
+                                    </Link>
+                                </div>
                             </form>
-                            <div className='divButtonFormLogin'>
-                                <Link
-                                    className='buttonLogin'
-                                    to="/base">
-                                    Entrar
-                                </Link>
-                                <Link
-                                    className='buttonCadastroEmpresa'
-                                    to="/cadastroEmpresa">
-                                    Cadastrar
-                                </Link>
-                            </div>
+                            {erroLogin && <p className="erro">{erroLogin}</p>}
                         </div>
                     </div>
                     <img
                         className="imagemRaio"
                         src={esquerda}
+                        alt='imagemRaio'
                     />
                     <div className="divTrocaTelaLogin">
                         <Link

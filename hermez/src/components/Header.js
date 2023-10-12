@@ -15,6 +15,12 @@ export default function Header(){
     function fechaDropdown(a) {
         const elementA = document.getElementById(a);
         const dropdownElement = document.getElementById(`dropdown${a}`);
+        if (a==='Funcoes') {
+            document.getElementById('Chamados').style.display = "none";
+            document.getElementById('GerenciarUsuarios').style.display = "none";
+            document.getElementById('dropdownGerenciarUsuarios').style.transform = 'rotate(0)';
+            document.getElementById('dropdownChamados').style.transform = 'rotate(0)';
+        }
         if (elementA && elementA.style.display === "flex") {
             elementA.style.display = "none";
             if (dropdownElement) {
@@ -92,9 +98,9 @@ export default function Header(){
                 <div/>
                 <p>
                     <h1>Olá, Administrador!</h1>
-                    <h2>Acesse suas funções de uma maneira e fácil!</h2>
+                    <h2>Acesse suas funções de uma maneira rápida e fácil!</h2>
                 </p>
             </div>
         </>
     );
-}
+}   

@@ -18,6 +18,7 @@
   --buttonLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
   --títulos: 400 20px "Noto Serif Bengali";
   --textos: 400 15px "Noto Serif Bengali";
+  --textErro: 800 10px "Noto Serif Bengali";
   --textInput: 400 10px "Noto Serif Bengali";
 }
 
@@ -38,4 +39,10 @@ a,
 button,
 input[type="button"]{
   cursor: pointer;
+}
+
+.erro{
+  font: var(--textErro);
+  text-align: center;
+  color: var(--vermelho);
 }
