@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import './css/Login.css';
 
 /* IMAGEM */
-import cadeado from '../img/cadeado.png';
-import esquerda from '../img/esquerda.png';
-import olho from '../img/olho.png';
-import olhoCortado from '../img/olhoCortado.png';
-import perfil from '../img/perfil.png';
-import check from '../img/check.png';
+import cadeado from '../img/login/cadeado.png';
+import esquerda from '../img/login/esquerda.png';
+import olho from '../img/login/olho.png';
+import olhoCortado from '../img/login/olhoCortado.png';
+import perfil from '../img/login/perfil.png';
+import check from '../img/login/check.png';
 
 export default function Login(){
     /* MOSTRAR SENHA */
@@ -60,8 +60,6 @@ export default function Login(){
     };
     return (
         <>
-            <head>
-            </head>
             <body>
                 <div className="fundoLogin">
                     <div className="divLogin">

@@ -2,7 +2,7 @@ import './css/CadastroEmpresa.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import sair from '../img/sair.png';
+import sair from '../img/menu/sair.png';
 
 export default function CadastroEmpresa() {
     const [razaoSocial, setRazaoSocial] = useState('');

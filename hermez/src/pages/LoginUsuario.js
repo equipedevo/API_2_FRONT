@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import './css/Login.css';
 
 /* IMAGEM */
-import cadeado from '../img/cadeado.png';
-import direita from '../img/direita.png';
-import olho from '../img/olho.png';
-import olhoCortado from '../img/olhoCortado.png';
-import perfil from '../img/perfil.png';
-import check from '../img/check.png';
+import cadeado from '../img/login/cadeado.png';
+import direita from '../img/login/direita.png';
+import olho from '../img/login/olho.png';
+import olhoCortado from '../img/login/olhoCortado.png';
+import perfil from '../img/login/perfil.png';
+import check from '../img/login/check.png';
 
 export default function Login(){
     /* MOSTRAR SENHA */
