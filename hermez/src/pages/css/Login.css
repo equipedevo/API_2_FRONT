@@ -61,11 +61,10 @@
     gap: 2px;
     padding: 10px;
     width: 90%;
-
 }
 
 .formTelaLogin form > span > img{
-    max-height: 30px;
+    max-width: 20px;
 }
 
 .formTelaLogin form input{
@@ -113,7 +112,7 @@
     flex-wrap: wrap;
     gap: 30px;
 }
-.divButtonFormLogin > *{
+.divButtonFormLogin *, .divButtonFormLogin input[type="submit"]{
     text-decoration: none;
     text-align: center;
     border-radius: 20px;
@@ -123,11 +122,11 @@
     width: 100px;
 }
 
-.buttonLogin{
+.divButtonFormLogin input[type="submit"]{
     border-color: var(--vermelho)
 }
 
-.buttonLogin:hover{
+.divButtonFormLogin input[type="submit"]:hover{
     background-color: var(--vermelho)
 }
 
