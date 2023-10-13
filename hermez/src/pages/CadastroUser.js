@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import sair from '../img/sair.png';
+import './CadastroEmpresa';
 
 export default function CadastroUser() {
     const [senha, setSenha] = useState('');
@@ -13,7 +14,7 @@ export default function CadastroUser() {
     const [telefone, setTelefone] = useState('');    
     const [celular, setCelular] = useState('');    
     const [setor, setSetor] = useState('');    
-    const [classificacao, setClassificacao] = useState('');
+    const [cargo, setCargo] = useState('');
     const [nomeCompleto, setNomeCompleto] = useState('');
     const [cadastroSucesso, setCadastroSucesso] = useState(false); 
 
@@ -21,6 +22,41 @@ export default function CadastroUser() {
     function handleEmailChange(event) {
         const email = event.target.value;
         setEmail(email);
+    }
+
+
+    function handleVinculoChange(event) {
+        const vinculo = event.target.value;
+        setVinculo(vinculo);
+    }
+
+
+    function handleTelefoneChange(event) {
+        const telefone = event.target.value;
+        setTelefone(telefone);
+    }
+
+
+    function handleCelularChange(event) {
+        const celular = event.target.value;
+        setCelular(celular);
+    }
+
+
+    function handleSetorChange(event) {
+        const setor = event.target.value;
+        setSetor(setor);
+    }
+
+
+    function handleCargoChange(event) {
+        const cargo = event.target.value;
+        setCargo(cargo);
+    }
+
+    function handleNomeChange(event) {
+        const nome = event.target.value;
+        setNomeCompleto(nome);
     }
 
         function handleSubmit(event) {
@@ -39,15 +75,15 @@ export default function CadastroUser() {
         }
         else {
             setErro('');
-            fetch("https://hermezapi-back.vercel.app/empresa/cadastro?dev=true", {
+            fetch("https:hermezapi-backvercelappfuncionariocadastro", {
                 method:'POST',
                 body: JSON.stringify({
                     nome: nomeCompleto,
                     email: email,
                     celular: celular,
                     senha: senha,
-                    // car_cod: cargo,
-                    // emp_cod: empresa,
+                    cargo: cargo,
+                    // emp_cod: razaoSocial,
                     // funcao: funcao                                      
                 }),
                 headers: {
@@ -91,6 +127,7 @@ export default function CadastroUser() {
                                 id='nomeCompleto'
                                 name='nomeCompleto'
                                 value={nomeCompleto}
+                                onChange={handleNomeChange}
                                 placeholder='Nome' 
                                 required
                                 type="text" 
@@ -147,6 +184,7 @@ export default function CadastroUser() {
                                 id="vinculo"
                                 name='vinculo'
                                 value={vinculo}
+                                onChange={handleVinculoChange}
                                 placeholder='Vínculo' 
                                 required
                                 type="text" 
@@ -164,9 +202,10 @@ export default function CadastroUser() {
                                 id="telefone" 
                                 name='telefone'
                                 value={telefone}
+                                onChange={handleTelefoneChange}
                                 placeholder='Telefone' 
                                 required
-                                type="string"
+                                type="text"
                             />
                         </div>
 
@@ -175,10 +214,11 @@ export default function CadastroUser() {
                             <input 
                             id="celular"
                             name='celular'
-                            value={telefone} 
+                            value={celular} 
+                            onChange={handleCelularChange}
                             placeholder='Celular' 
                             required
-                            type="number" 
+                            type="text" 
                         />
                         </div>
 
@@ -194,6 +234,7 @@ export default function CadastroUser() {
                             id="setor" 
                             name='setor'
                             value={setor}
+                            onChange={handleSetorChange}
                             placeholder='Setor' 
                             required
                             type="text" 
@@ -203,18 +244,23 @@ export default function CadastroUser() {
                         <div class='dropdownUser'>
                             <button onclick="myFunction()" class='dropbtn'>CLASSIFICAÇÃO</button>
                             <div>
-                                <input 
+                                <select 
                                     class='dropdown-content'
                                     id='dropUser'
                                     name='dropUser'
-                                    value={classificacao}
-                                    placeholder='Classificação'
-                                    required
-                                    type='button'
-                                />
-                                <p>Administrador</p>
+                                    value={cargo}
+                                    onChange={handleCargoChange}
+                                    placeholder='Cargo'
+                                    // required
+                                    // type='button'
+                                >
+                                    <option value='Administrador'>Administrador</option>
+                                    <option value='Funcionario'>Funcionário</option>
+                                    <option value='Tecnico'>Técnico</option>
+                                {/* <p>Administrador</p>
                                 <p>Funcionário</p>
-                                <p>Técnico</p>
+                                <p>Técnico</p> */}
+                                </select>
                             </div>
                         </div>
 
@@ -223,17 +269,17 @@ export default function CadastroUser() {
                     </div>
 
 
-
-
-                    <div className='divEnviarCadastroUser'>
-                        <input
+                    <div className='divBotaoEnviar'>
+                        <button
                             id="cadastrandoUser"
-                            value='Enviar'
+                            placeholder='Enviar'
                             type='submit'
-                        />
+                        >
+                            Cadastrar</button>
                     </div>
 
                     {erroSenha && <p className="erro">{erroSenha}</p>}
+
                 </form>
 
 

@@ -66,6 +66,7 @@
     width: auto;
 }
 
-.divEnviarCadastroUser{
-    display: flex;
+.divBotaoEnviar{
+    display: center;
+    padding-left: 48%;
 }
