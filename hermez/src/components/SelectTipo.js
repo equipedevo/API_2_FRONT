@@ -3,17 +3,16 @@ import './css/Select.css';
 import down from '../img/arrow-down.png';
 import up from '../img/arrow-up.png';
 
-export default function Select() {
-    let select = document.querySelector('.select'),
-        selectedValue = document.getElementById('selected-value'),
-        tipo = document.getElementById('tipo'),
+export default function SelectTipo() {
+    let selectedValue = document.getElementById('selected-value'),
         inputsOptions = document.querySelectorAll('.option input');
 
-    inputsOptions.forEach(input => {
-        input.addEventListener('click', (e) => {
-            selectedValue.textContent = input.dataset.label        
+    if (inputsOptions.name == 'category'){
+        inputsOptions.addEventListener('click', () => {
+            selectedValue.textContent = inputsOptions.dataset.label
+            console.log('*** input', inputsOptions.value)
         })
-    });
+    }
 
 
 

@@ -1,8 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom'
 import './css/AbrirChamado.css';
 import fechar from '../img/fechar.svg';
 import UploadArquivo from '../components/UploadArquivo';
-import Select from '../components/Select';
 
 
 export default function AbrirChamado() {
@@ -10,33 +10,55 @@ export default function AbrirChamado() {
     const [titulo, setTitulo] = useState("");
     const [local, setLocal] = useState("");
     const [descricao, setDescricao] = useState("");
-
+    const [tipo, setTipo] = useState(0)
     const [selectedFile, setSelectedFile] = useState(null);
 
 
-    const submitForm = () => {
-        const formData = new FormData();
-        formData.append("nome", nome);
-        formData.append("titulo", titulo);
-        formData.append("local", local);
-        formData.append("descricao", descricao);
+    
+    const submitForm = (e) => {
+        e.preventDefault();
+        
+        console.log('dados formulario:  ', descricao)
 
-        formData.append("file", selectedFile);
+        fetch("https://hermezapi-back.vercel.app/chamado/cadastro?dev=true", {
+            method:'POST',
+            body: JSON.stringify({
+                desc: descricao,
+                local: local,
+                titulo: titulo,
+                codFun: 1,
+                codEmp: 1
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        }).then(response => {
+            if(response.status === 200){
+                alert('Chamado feito com sucesso')
+                setNome('')
+                setTitulo('')
+                setLocal('')
+                setDescricao('')
 
-        // axios
-        //     .post("url", formData)
-        //     .then((res) => {
-        //         alert("File upload success");
-        //     })
-        //     .catch((err) => alert("File upload error"));
+            }
+            else{
+                (response.json()).then(data => {
+                    console.log(data.msg)
+                })
+            }
+        })
     }
 
 
     return (
         <>
             <body>
-                <form className='formAbrirChamado' >
-                    <img src={fechar} alt='Fechar formulário' />
+                <form className='formAbrirChamado' onSubmit={submitForm}>
+                    <Link to='/' className='img'>
+                        <img src={fechar} alt='Fechar formulário' />
+                    </Link>
                     <h1>Nos conte seu problema</h1>
 
                     <div className='coluna'>
@@ -84,7 +106,12 @@ export default function AbrirChamado() {
 
                     <div className='coluna component'>
                         <div className='select campo'>
-                            <Select></Select>
+                            <label>TIPO:</label>
+                            <select className='tipo' value={tipo} onChange={(e) => setTipo(e.target.value)} required>
+                                <option value={''} selected hidden>Selecione</option>
+                                <option value={'Hardware'}>Hardware</option>
+                                <option value={'Sofware'}>Software</option>
+                            </select>
                         </div>
 
                         <div className='file campo'>
@@ -111,7 +138,6 @@ export default function AbrirChamado() {
                     <button
                         type='submit'
                         className='enviar'
-                        onClick={submitForm}
                     >
                         Enviar
                     </button>

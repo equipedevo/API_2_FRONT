@@ -24,7 +24,7 @@ body{
     text-align: center;
 }
 
-.formAbrirChamado img{
+.formAbrirChamado .img{
     width: 35px 35px;
     align-self: flex-end;
 }
@@ -61,7 +61,7 @@ body{
 
 
 /*inputs*/
-input[type='text']{
+input[type='text'], select{
     width: var(--tamanhoInput);
     padding: 10px;
     background-color: var(--branco);
