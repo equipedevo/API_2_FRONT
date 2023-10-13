@@ -15,7 +15,7 @@ export default function Home(){
                         <img src={balaoChat}/>
                         <h1> Visualizar chamados</h1>
                     </div>
-                </Link>''
+                </Link>
                 <Link>
                     <div>
                         <img src={gerenciarUsuario}/>
