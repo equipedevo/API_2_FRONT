@@ -43,14 +43,25 @@ export default function Login(){
                 },
                 mode: 'cors'
             })
-            .then(response =>{
-                if(response.status === 200) {
-                    window.location.href = '/base';
+            .then(response => response.json().then(
+                dados =>(
+                {
+                    status: response.status,
+                    resposta: dados,
+                })
+            )).then(dados => {
+                if (dados.status===200){
+                    localStorage.setItem("fun_cod", dados.resposta.fun_cod)
+                    localStorage.setItem("nome", dados.resposta.nome)
+                    localStorage.setItem("emal", dados.resposta.email)
+                    localStorage.setItem("celular", dados.resposta.celular)
+                    localStorage.setItem("funcao", dados.resposta.funcao)
+                    localStorage.setItem("car_cod", dados.resposta.car_cod)
+                    localStorage.setItem("emp_cod", dados.resposta.emp_cod)
+                    window.location.href = '/base'
                 }
                 else {
-                    (response.json()).then(data => {
-                        setErroLogin(data.msg)
-                    });
+                    setErroLogin(dados.resposta.msg);
                 }
             });
         }
