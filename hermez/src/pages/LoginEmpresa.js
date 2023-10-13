@@ -42,15 +42,20 @@ export default function Login(){
                     'Content-Type': 'application/json'
                 },
                 mode: 'cors'
-            })
-            .then(response =>{
-                if(response.status === 200) {
-                    window.location.href = '/base';
-                }
-                else {
-                    (response.json()).then(data => {
-                        setErroLogin(data.msg)
-                    });
+            }).then(response => response.json().then(
+                dados =>({
+                    status: response.status,
+                    resposta: dados,
+                })
+            )).then(dados => {
+                if (dados.status===200) {
+                    localStorage.setItem("emp_cod", dados.resposta.emp_cod)
+                    localStorage.setItem("nome", dados.resposta.nome)
+                    localStorage.setItem("cnpj", dados.resposta.cnpj)
+                    localStorage.setItem("email", dados.resposta.email)
+                    window.location.href = '/base'
+                } else {
+                    setErroLogin(dados.resposta.msg);
                 }
             });
         }
