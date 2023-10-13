@@ -11,6 +11,10 @@ import foneAtendimento from '../img/menu/foneAtendimento.png';
 import papelComLapis from '../img/menu/papelComLapis.png';
 
 export default function Header(){
+    function logout(){
+        localStorage.clear();
+        window.location.href = '/'
+    }
     /* MOSTRAR dropdown */
     function fechaDropdown(a) {
         const elementA = document.getElementById(a);
@@ -88,7 +92,10 @@ export default function Header(){
                         <img src={perfil}/>
                         Perfil
                     </Link>
-                    <Link to="/" className='linkHearderPadrão'>
+                    <Link
+                        className='linkHearderPadrão'
+                        onClick={() => logout()}
+                    >
                         <img src={sair}/>
                         Sair
                     </Link>
