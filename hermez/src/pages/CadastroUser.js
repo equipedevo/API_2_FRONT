@@ -2,7 +2,7 @@ import './css/CadastroUser.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import sair from '../img/sair.png';
+import sair from '../img/menu/sair.png';
 import './CadastroEmpresa';
 
 export default function CadastroUser() {
@@ -116,48 +116,20 @@ export default function CadastroUser() {
                 </header>
 
 
-                <form className='formUserCadastro' onSubmit={handleSubmit}>
-
+                <form className='formUserCadastro'>
                     <h1> Cadastrar novo usuário</h1>
-
-                    
-                    <div>
-                        <span htmlFor="nomeCompleto">NOME COMPLETO</span>
-                            <input 
-                                id='nomeCompleto'
-                                name='nomeCompleto'
-                                value={nomeCompleto}
-                                onChange={handleNomeChange}
-                                placeholder='Nome' 
-                                required
-                                type="text" 
-                        />
-                    </div>
-                    
+                    <span for="nomeCompleto">NOME COMPLETO</span>
+                    <input type="text" placeholder='Nome' id="nomeCompleto" required/>
                     <div className='div2ColunasFormCadastro'>
-                    <div>
-                            <span htmlFor="senha">SENHA</span>
-                            <input
-                                id="senha"
-                                name='senha'
-                                onChange={(e) => setSenha(e.target.value)}
-                                value={senha}
-                                placeholder='Senha'
-                                required
-                                type="password"
-                            />
-                        </div>
+
                         <div>
-                            <span htmlFor="senhaConfirmada">CONFIRMAR SENHA</span>
-                            <input
-                                id="senhaConfirmada"
-                                name='senhaConfirmada'
-                                onChange={(e) => setSenhaConfirmada(e.target.value)}
-                                value={senhaConfirmada}
-                                placeholder='Senha'
-                                required
-                                type="password"
-                            />
+                            <span for="senha">SENHA</span>
+                            <input type="password" placeholder='Senha' id="senha" required/>
+                        </div>
+
+                        <div>
+                            <span for="senha">CONFIRMAR SENHA</span>
+                            <input type="password" placeholder='Confirmar Senha' id="senhaConfirmada" required/>
                         </div>
                     </div>
 
@@ -166,29 +138,13 @@ export default function CadastroUser() {
 
                         <div>
                             <span for="email">E-MAIL</span>
-                            <input
-                                id="email"
-                                name='email'
-                                value={email}
-                                onChange={handleEmailChange}
-                                placeholder='E-mail'
-                                required
-                                type="email"
-                            />                        
+                            <input type="email" placeholder='e-mail' id="email" required/>
                         </div>
 
                         <div>
                             {/* opcional  */}
                             <span for="vinculo">VÍNCULO COM A EMPRESA</span> 
-                            <input 
-                                id="vinculo"
-                                name='vinculo'
-                                value={vinculo}
-                                onChange={handleVinculoChange}
-                                placeholder='Vínculo' 
-                                required
-                                type="text" 
-                            />
+                            <input type="text" placeholder='Vínculo' id="vinculo" required/>
                         </div>
 
                     </div>
@@ -198,28 +154,12 @@ export default function CadastroUser() {
 
                         <div>
                             <span for="telefone">TELEFONE</span>
-                            <input 
-                                id="telefone" 
-                                name='telefone'
-                                value={telefone}
-                                onChange={handleTelefoneChange}
-                                placeholder='Telefone' 
-                                required
-                                type="text"
-                            />
+                            <input type="number" placeholder='Telefone' id="telefone" required/>
                         </div>
 
                         <div>
                             <span for="celular">CELULAR</span>
-                            <input 
-                            id="celular"
-                            name='celular'
-                            value={celular} 
-                            onChange={handleCelularChange}
-                            placeholder='Celular' 
-                            required
-                            type="text" 
-                        />
+                            <input type="number" placeholder='Celular' id="celular" required/>
                         </div>
 
                     </div>  
@@ -230,37 +170,15 @@ export default function CadastroUser() {
                         <div>
                             {/* opcional */}
                             <span for="setor">SETOR</span>
-                            <input 
-                            id="setor" 
-                            name='setor'
-                            value={setor}
-                            onChange={handleSetorChange}
-                            placeholder='Setor' 
-                            required
-                            type="text" 
-                            />
+                            <input type="text" placeholder='Setor' id="setor" required/>
                         </div>
 
                         <div class='dropdownUser'>
                             <button onclick="myFunction()" class='dropbtn'>CLASSIFICAÇÃO</button>
-                            <div>
-                                <select 
-                                    class='dropdown-content'
-                                    id='dropUser'
-                                    name='dropUser'
-                                    value={cargo}
-                                    onChange={handleCargoChange}
-                                    placeholder='Cargo'
-                                    // required
-                                    // type='button'
-                                >
-                                    <option value='Administrador'>Administrador</option>
-                                    <option value='Funcionario'>Funcionário</option>
-                                    <option value='Tecnico'>Técnico</option>
-                                {/* <p>Administrador</p>
+                            <div id='dropUser'class='dropdown-content'>
+                                <p>Administrador</p>
                                 <p>Funcionário</p>
-                                <p>Técnico</p> */}
-                                </select>
+                                <p>Técnico</p>
                             </div>
                         </div>
 
@@ -269,30 +187,12 @@ export default function CadastroUser() {
                     </div>
 
 
-                    <div className='divBotaoEnviar'>
-                        <button
-                            id="cadastrandoUser"
-                            placeholder='Enviar'
-                            type='submit'
-                        >
-                            Cadastrar</button>
+                    <div className='divEnviarCadastroUser'>
+                        <input type='button' value='Cadastrar'/>
                     </div>
-
-                    {erroSenha && <p className="erro">{erroSenha}</p>}
-
-                </form>
-
-
-                {cadastroSucesso && (
-                <div className="popUpCadastro">
-                    <div>
-                        <span className="fechar" onClick={() => setCadastroSucesso(false)}>&times;</span> 
-                        <p>Cadastro realizado com sucesso!</p>
-                    </div>
-                </div>
-                )}
 
                     
+                </form>
             </body>
             <Footer/>
         </>

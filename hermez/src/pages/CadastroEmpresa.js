@@ -2,7 +2,7 @@ import './css/CadastroEmpresa.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
-import sair from '../img/sair.png';
+import sair from '../img/menu/sair.png';
 
 export default function CadastroEmpresa() {
     const [razaoSocial, setRazaoSocial] = useState('');
@@ -11,7 +11,6 @@ export default function CadastroEmpresa() {
     const [senha, setSenha] = useState('');
     const [senhaConfirmada, setSenhaConfirmada] = useState('');
     const [erroSenha, setErro] = useState('');
-    const [cadastroSucesso, setCadastroSucesso] = useState(false); 
 
     // Função para formatar CNPJ
     function formatCnpj(cnpj) {
@@ -48,7 +47,7 @@ export default function CadastroEmpresa() {
         if (senha !== senhaConfirmada) {
             setErro('As senhas não coincidem.');
         }
-        else if(criterioDeAceitacao){
+        else if(!criterioDeAceitacao){
             setErro(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
         }
         else {
@@ -68,7 +67,8 @@ export default function CadastroEmpresa() {
                 mode: 'cors'
             }).then(response => {
                 if(response.status === 200) {
-                    setCadastroSucesso(true);
+                    localStorage.setItem("novoCadastro", 'novo cadastro');
+                    window.location.href = '/'
                 }
                 else {
                     (response.json()).then(data => {
@@ -164,14 +164,6 @@ export default function CadastroEmpresa() {
                     </div>
                     {erroSenha && <p className="erro">{erroSenha}</p>}
                 </form>
-                {cadastroSucesso && (
-                <div className="popUpCadastro">
-                    <div>
-                        <span className="fechar" onClick={() => setCadastroSucesso(false)}>&times;</span> 
-                        <p>Cadastro realizado com sucesso!</p>
-                    </div>
-                </div>
-                )}
             </body>
             <Footer />
         </>

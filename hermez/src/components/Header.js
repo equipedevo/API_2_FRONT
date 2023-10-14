@@ -1,16 +1,20 @@
 import { Link } from 'react-router-dom';
 import './css/Header.css';
 
-import sair from '../img/sair.png';
-import perfil from '../img/perfilHeader.png';
-import home from '../img/home.png';
+import sair from '../img/menu/sair.png';
+import perfil from '../img/menu/perfilHeader.png';
+import home from '../img/menu/home.png';
 import dropdown from '../img/dropdown.png';
-import balaoChat from '../img/balaoChat.png';
-import gerenciarUsuario from '../img/gerenciarUsuario.png';
-import foneAtendimento from '../img/foneAtendimento.png';
-import papelComLapis from '../img/papelComLapis.png';
+import balaoChat from '../img/menu/balaoChat.png';
+import gerenciarUsuario from '../img/menu/gerenciarUsuario.png';
+import foneAtendimento from '../img/menu/foneAtendimento.png';
+import papelComLapis from '../img/menu/papelComLapis.png';
 
 export default function Header(){
+    function logout(){
+        localStorage.clear();
+        window.location.href = '/'
+    }
     /* MOSTRAR dropdown */
     function fechaDropdown(a) {
         const elementA = document.getElementById(a);
@@ -88,7 +92,10 @@ export default function Header(){
                         <img src={perfil}/>
                         Perfil
                     </Link>
-                    <Link to="/" className='linkHearderPadrão'>
+                    <Link
+                        className='linkHearderPadrão'
+                        onClick={() => logout()}
+                    >
                         <img src={sair}/>
                         Sair
                     </Link>

@@ -1,0 +1,55 @@
+:root{
+    --marginTopBotoesHome: 30px;
+    --tamanhoImagensBotoesHome: 12vw;
+    --tamanhoTextoBotoesHome: 18vw;
+    --borderRadiusBotoesHome: 5vw;
+}
+
+.botoesHomePrincipal{
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: var(--marginTopBotoesHome);
+}
+.botoesHomePrincipal > a{
+    background-color: var(--cinzaPadrao);
+    border-radius: var(--borderRadiusBotoesHome);
+    display: flex;
+    margin: auto;
+    padding: 2px;
+    height: var(--tamanhoBotoesHome);
+    width: var(--tamanhoBotoesHome);
+    text-decoration: none;
+}
+.botoesHomePrincipal > a > div{
+    margin: auto;
+    text-align: center;
+}
+
+.botoesHomePrincipal > a > div img{
+    width: var(--tamanhoImagensBotoesHome);
+}
+
+.botoesHomePrincipal > a > div h1{
+    color: var(--branco);
+    font: var(--texto);
+    width: var(--tamanhoTextoBotoesHome);
+}
+
+.botoesHomePrincipal > a:hover{
+    background-color: var(--cinzaEscuro);
+}
+
+@media (max-width: 649px){
+    :root{
+        --tamanhoBotoesHome: 40vw;
+    }
+    .botoesHomePrincipal{
+        gap: 30px;
+    }
+}
+
+@media (min-width: 650px){
+    :root{
+        --tamanhoBotoesHome: 20vw;
+    }
+}
