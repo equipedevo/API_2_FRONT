@@ -8,7 +8,8 @@
   /* CORES */
   --branco:#FBFBFB;
   --cinzaClaro: #F2F2F2;
-  --cinzaEscuro: #7D7D7D;
+  --cinzaPadrao: #7D7D7D;
+  --cinzaEscuro: #4B4B55;
   --preto:#000000;
   --vermelho:#F4324A;
   --verdeClaro:#34B132;
@@ -17,6 +18,7 @@
   --buttonLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
   --títulos: 400 20px "Noto Serif Bengali";
   --textos: 400 15px "Noto Serif Bengali";
+  --textErro: 800 10px "Noto Serif Bengali";
   --textInput: 400 10px "Noto Serif Bengali";
 }
 
@@ -37,4 +39,10 @@ a,
 button,
 input[type="button"]{
   cursor: pointer;
+}
+
+.erro{
+  font: var(--textErro);
+  text-align: center;
+  color: var(--vermelho);
 }
