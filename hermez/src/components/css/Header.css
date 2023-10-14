@@ -18,7 +18,7 @@
     text-decoration: none;
 }
 
-.linkHearderPadrão:nth-child(3), .dropdownHeader{
+.dropdownHeader{
     display: none;
 }
 
