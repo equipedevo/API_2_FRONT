@@ -2,7 +2,7 @@ import './css/CadastroUser.css';
 import { Link } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import sair from '../img/sair.png';
+import sair from '../img/menu/sair.png';
 export default function CadastroUser(){
     return (
         <>
