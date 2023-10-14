@@ -2,20 +2,102 @@
     background-color: var(--vermelho);
     display: flex;
 }
-.hearderPadrão div{
+
+.hearderPadrão > div{
     margin: auto;
+    margin-right: 10px;
     display: flex;
     gap: 20px;
     padding: 5px 0;
-    margin-right: 10px;
 }
-.hearderPadrão div > *{
-    text-decoration: none;
+
+.linkHearderPadrão{
+    align-items: center;
     color: var(--branco);
     display: flex;
+    text-decoration: none;
+}
+
+.linkHearderPadrão:nth-child(3), .dropdownHeader{
+    display: none;
+}
+
+.dropdownHeader{
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownHeader div *{
+    font: var(--textInput);
+}
+
+.dropdownHeader > div{
+    background-color: var(--branco);
+    border-radius: 5px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: space-between;
+    margin-top: 35px;
+    padding: 5px;
+    position: absolute;
+}
+
+.alignCenter{
     align-items: center;
 }
 
-.hearderPadrão div > *:nth-child(2){
-    display: none;
+.dropdownHeader button, .dropdownHeader a{
+    align-items: center;
+    background: inherit;
+    color: var(--preto);
+    display: flex;
+    gap: 5px;
+}
+
+.dropdownHeader a{
+    text-decoration: none;
+}
+
+.dropdownHeader button {
+    border: none;
+}
+
+
+.dropdownHeader img:first-child{
+    width: 20px;
+}
+.dropdownHeader img:last-child{
+    width: 15px;
+}
+
+.dropdownHeader > button{
+    color: var(--branco);
+}
+
+.cabecalhoHeader{
+    background-color: var(--cinzaEscuro);
+    display: flex;
+    padding: 5px;
+}
+
+.cabecalhoHeader div{
+    width: 5px;
+    margin-left: 6vw;
+    margin-right: 6px;
+    background-color: var(--vermelho);
+}
+
+.cabecalhoHeader h1{
+    font: var(--buttonLogin);
+    color: var(--branco);
+}
+
+.cabecalhoHeader h1,
+.cabecalhoHeader h2{
+    margin-bottom: 5px;
+}
+
+.cabecalhoHeader h2{
+    color: var(--cinzaClaro);
 }
