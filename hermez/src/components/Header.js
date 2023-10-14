@@ -57,10 +57,10 @@ export default function Header(){
                                 <img src={dropdown} id='dropdownChamados'/>
                             </button>
                             <div className="dropdownHeader" id='Chamados'>
-                                <Link to='/relatorio'>
+                                <Link>
                                     Relatório
                                 </Link>
-                                <Link to='/meusChamados'>
+                                <Link>
                                     Meus Chamados
                                 </Link>
                             </div>
@@ -74,7 +74,7 @@ export default function Header(){
                                 <Link to='cadastro'>
                                     Cadastrar
                                 </Link>
-                                <Link to='/meusChamados'>
+                                <Link>
                                     Alterar Dados
                                 </Link>
                             </div>
@@ -88,7 +88,7 @@ export default function Header(){
                             </Link>
                         </div>
                     </div>
-                    <Link to="perfil" className='linkHearderPadrão'>
+                    <Link className='linkHearderPadrão'>
                         <img src={perfil}/>
                         Perfil
                     </Link>
