@@ -8,33 +8,20 @@ export default function CadastroUser() {
     const [senhaConfirmada, setSenhaConfirmada] = useState('');
     const [email, setEmail] = useState('');
     const [vinculo, setVinculo] = useState('');
-    const [telefone, setTelefone] = useState('');
     const [celular, setCelular] = useState('');
-    const [setor, setSetor] = useState('');
     const [cargo, setCargo] = useState(0);
     const [erroSenha, setErro] = useState('');
 
     // Função para formatar telefone
     function formatPhoneNumber(phone, id) {
         phone = phone.replace(/\D/g, '');
-        if (document.getElementById(id).maxLength === 10) {
-            phone = phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-        }
-        else if (document.getElementById(id).maxLength === 11) {
-            phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        }
+        phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         return phone;
-    }
-
-    function handleTelefoneChange(event) {
-        const inputTelefone = event.target.value;
-        const formattedTelefone = formatPhoneNumber(inputTelefone, "telefoneCadastro");
-        setTelefone(formattedTelefone);
     }
 
     function handleCelularChange(event) {
         const inputCelular = event.target.value;
-        const formattedCelular = formatPhoneNumber(inputCelular, "celularCadastro");
+        const formattedCelular = formatPhoneNumber(inputCelular);
         setCelular(formattedCelular);
     }
 
@@ -53,10 +40,6 @@ export default function CadastroUser() {
         setVinculo(vinculo);
     }
 
-    function handleSetorChange(event) {
-        const setor = event.target.value;
-        setSetor(setor);
-    }
 
     function handleCargoChange(event) {
         const selectedCargo = parseInt(event.target.value);
@@ -77,9 +60,6 @@ export default function CadastroUser() {
         else if (!criterioDeAceitacao) {
             setErro(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
         }
-        else if (telefone.length !== 14) {
-            setErro('O número de telefone inserido está incorreto.');
-        }
         else if (celular.length !== 15) {
             setErro('O número de celular inserido está incorreto.');
         }
@@ -88,16 +68,16 @@ export default function CadastroUser() {
         }
         else {
             setErro(``);
-            fetch("https:hermezapi-backvercelappfuncionariocadastro", {
+            fetch("https://hermezapi-back.vercel.app/funcionario/cadastro?dev=true", {
                 method:'POST',
                 body: JSON.stringify({
                     nome: nomeCompleto,
                     email: email,
                     celular: celular,
                     senha: senha,
-                    cargo: cargo,
-                    // emp_cod: razaoSocial,
-                    // funcao: funcao                                      
+                    car_cod: cargo,                                  
+                    emp_cod: localStorage.getItem("emp_cod"),
+                    função: vinculo
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -106,11 +86,12 @@ export default function CadastroUser() {
                 mode: 'cors'
             }).then(response => {
                 if(response.status === 200) {
-                    console.log('Sucesso')
+                    localStorage.setItem("novoCadastro", 'novo cadastro');
+                    window.location.href = './'
                 }
                 else {
                     (response.json()).then(data => {
-                        console.log(data.msg)
+                        setErro(data.msg)
                     });
                 }
             });
@@ -189,20 +170,6 @@ export default function CadastroUser() {
 
                     <div className='div2ColunasFormCadastro'>
                         <div>
-                            <span htmlFor="telefone">TELEFONE</span>
-                            <input
-                                autoComplete="off"
-                                id="telefoneCadastro"
-                                maxLength="10"
-                                name='telefoneCadastro'
-                                onChange={handleTelefoneChange}
-                                value={telefone}
-                                placeholder='Telefone'
-                                required
-                                type="text"
-                            />
-                        </div>
-                        <div>
                             <span htmlFor="celular">CELULAR</span>
                             <input
                                 autoComplete="off"
@@ -213,23 +180,6 @@ export default function CadastroUser() {
                                 value={celular}
                                 placeholder='Celular'
                                 required
-                                type="text"
-                            />
-                        </div>
-                    </div>
-
-                    <div className='div2ColunasFormCadastro'>
-                        <div>
-                            <span htmlFor="setor">
-                                SETOR
-                                <span className='opcional'> (Opcional)</span>
-                            </span>
-                            <input
-                                id="setorCadastro"
-                                name='setor'
-                                value={setor}
-                                onChange={handleSetorChange}
-                                placeholder='Setor'
                                 type="text"
                             />
                         </div>
