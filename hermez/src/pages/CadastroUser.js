@@ -11,31 +11,30 @@ export default function CadastroUser() {
     const [telefone, setTelefone] = useState('');
     const [celular, setCelular] = useState('');
     const [setor, setSetor] = useState('');
-    const [cargo, setCargo] = useState('');
+    const [cargo, setCargo] = useState(0);
+    const [erroSenha, setErro] = useState('');
 
     // Função para formatar telefone
     function formatPhoneNumber(phone, id) {
         phone = phone.replace(/\D/g, '');
-    
         if (document.getElementById(id).maxLength === 10) {
             phone = phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
         }
         else if (document.getElementById(id).maxLength === 11) {
             phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         }
-    
         return phone;
     }
-    
+
     function handleTelefoneChange(event) {
         const inputTelefone = event.target.value;
-        const formattedTelefone = formatPhoneNumber(inputTelefone, "telefoneCadastro")
-        setTelefone (formattedTelefone);
+        const formattedTelefone = formatPhoneNumber(inputTelefone, "telefoneCadastro");
+        setTelefone(formattedTelefone);
     }
 
     function handleCelularChange(event) {
         const inputCelular = event.target.value;
-        const formattedCelular = formatPhoneNumber(inputCelular, "celularCadastro")
+        const formattedCelular = formatPhoneNumber(inputCelular, "celularCadastro");
         setCelular(formattedCelular);
     }
 
@@ -43,7 +42,7 @@ export default function CadastroUser() {
         const nome = event.target.value;
         setNomeCompleto(nome);
     }
-    
+
     function handleEmailChange(event) {
         const email = event.target.value;
         setEmail(email);
@@ -60,8 +59,8 @@ export default function CadastroUser() {
     }
 
     function handleCargoChange(event) {
-        const cargo = event.target.value;
-        setCargo(cargo);
+        const selectedCargo = parseInt(event.target.value);
+        setCargo(selectedCargo);
     }
 
     function handleSubmit(event) {
@@ -75,11 +74,20 @@ export default function CadastroUser() {
         if (senha !== senhaConfirmada) {
             setErro('As senhas não coincidem.');
         }
-        else if(!criterioDeAceitacao){
+        else if (!criterioDeAceitacao) {
             setErro(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
         }
+        else if (telefone.length !== 14) {
+            setErro('O número de telefone inserido está incorreto.');
+        }
+        else if (celular.length !== 15) {
+            setErro('O número de celular inserido está incorreto.');
+        }
+        else if (cargo === 0) {
+            setErro('Escolha um cargo.');
+        }
         else {
-            setErro('');
+            setErro(``);
             fetch("https:hermezapi-backvercelappfuncionariocadastro", {
                 method:'POST',
                 body: JSON.stringify({
@@ -111,7 +119,7 @@ export default function CadastroUser() {
     return (
         <>
             <body className='bodyCadastro'>
-                <form className='formUserCadastro'>
+                <form className='formUserCadastro' onSubmit={handleSubmit}>
                     <h1> Cadastrar novo usuário</h1>
                     <span htmlFor="nomeCompleto">NOME COMPLETO</span>
                     <input
@@ -150,11 +158,9 @@ export default function CadastroUser() {
                         </div>
                     </div>
 
-
                     <div className='div2ColunasFormCadastro'>
-
                         <div>
-                            <span for="email">E-MAIL</span>
+                            <span htmlFor="email">E-MAIL</span>
                             <input
                                 id="email"
                                 name='email'
@@ -165,7 +171,6 @@ export default function CadastroUser() {
                                 type="email"
                             />
                         </div>
-
                         <div>
                             <span htmlFor="vinculo">
                                 VÍNCULO COM A EMPRESA
@@ -177,50 +182,43 @@ export default function CadastroUser() {
                                 value={vinculo}
                                 onChange={handleVinculoChange}
                                 placeholder='Vínculo'
+                                type="text"
+                            />
+                        </div>
+                    </div>
+
+                    <div className='div2ColunasFormCadastro'>
+                        <div>
+                            <span htmlFor="telefone">TELEFONE</span>
+                            <input
+                                autoComplete="off"
+                                id="telefoneCadastro"
+                                maxLength="10"
+                                name='telefoneCadastro'
+                                onChange={handleTelefoneChange}
+                                value={telefone}
+                                placeholder='Telefone'
+                                required
+                                type="text"
+                            />
+                        </div>
+                        <div>
+                            <span htmlFor="celular">CELULAR</span>
+                            <input
+                                autoComplete="off"
+                                id="celularCadastro"
+                                maxLength="11"
+                                name='celularCadastro'
+                                onChange={handleCelularChange}
+                                value={celular}
+                                placeholder='Celular'
                                 required
                                 type="text"
                             />
                         </div>
                     </div>
 
-
                     <div className='div2ColunasFormCadastro'>
-
-                    <div>
-                        <span htmlFor="telefone">TELEFONE</span>
-                        <input
-                            autoComplete="off"
-                            id="telefoneCadastro"
-                            maxLength="10"
-                            name='telefoneCadastro'
-                            onChange={handleTelefoneChange}
-                            value={telefone}
-                            placeholder='Telefone'
-                            required
-                            type="text"
-                        />
-                    </div>
-
-                    <div>
-                        <span htmlFor="celular">CELULAR</span>
-                        <input
-                            autoComplete="off"
-                            id="celularCadastro"
-                            maxLength="11"
-                            name='celularCadastro'
-                            onChange={handleCelularChange}
-                            value={celular}
-                            placeholder='Celular'
-                            required
-                            type="text"
-                        />
-                    </div>
-
-                </div>  
-
-                    
-                    <div className='div2ColunasFormCadastro'>
-
                         <div>
                             <span htmlFor="setor">
                                 SETOR
@@ -235,14 +233,13 @@ export default function CadastroUser() {
                                 type="text"
                             />
                         </div>
-                        
                         <div>
                             <span htmlFor="cargo">CARGO</span>
-                            <select id="cargoCadastro" name='cargo'>
-                                <option value="Funcionário">Cargo</option>
-                                <option value="Funcionário">Funcionário</option>
-                                <option value="Técnico">Técnico</option>
-                                <option value="Administrador">Administrador</option>
+                            <select id="cargoCadastro" name='cargo' onChange={handleCargoChange}>
+                                <option value="0">Cargo</option>
+                                <option value="1">Funcionário</option>
+                                <option value="2">Técnico</option>
+                                <option value="3">Administrador</option>
                             </select>
                         </div>
                     </div>
@@ -253,6 +250,7 @@ export default function CadastroUser() {
                             type='submit'
                         />
                     </div>
+                    {erroSenha &&    <p className="erro">{erroSenha}</p>}
                 </form>
             </body>
         </>
