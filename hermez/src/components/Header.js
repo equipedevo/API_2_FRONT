@@ -78,11 +78,11 @@ export default function Header(){
                                     Alterar Dados
                                 </Link>
                             </div>
-                            <Link to="atenderChamados">
+                            <Link to="dashboard-chamado">
                                 <img src={foneAtendimento}/>
                                 Atender Chamados
                             </Link>
-                            <Link to="novoChamado">
+                            <Link to="chamado">
                                 <img src={papelComLapis}/>
                                 Novo Chamado
                             </Link>
