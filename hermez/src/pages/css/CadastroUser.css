@@ -70,7 +70,6 @@
     width: auto;
 }
 
-.divBotaoEnviar{
-    display: center;
-    margin-left: (100% width)/2;
+.divEnviarCadastro{
+    display: flex;
 }
