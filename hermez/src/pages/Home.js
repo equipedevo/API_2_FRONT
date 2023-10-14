@@ -9,6 +9,13 @@ import papelComLapis from '../img/home/papelComLapis.png';
 export default function Home(){
     return (
         <>
+            <div className='cabecalhoHeader'>
+                <div/>
+                <p>
+                    <h1>Olá, Administrador!</h1>
+                    <h2>Acesse suas funções de uma maneira rápida e fácil!</h2>
+                </p>
+            </div>
             <div className='botoesHomePrincipal'>
                 <Link>
                     <div>

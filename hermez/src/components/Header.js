@@ -43,7 +43,7 @@ export default function Header(){
         <>
             <header className='hearderPadrão'>
                 <div>
-                    <Link to="/home" className='linkHearderPadrão'>
+                    <Link to="./" className='linkHearderPadrão'>
                     <img src={home} />
                         Início
                     </Link>
@@ -71,24 +71,24 @@ export default function Header(){
                                 <img src={dropdown} id='dropdownGerenciarUsuarios'/>
                             </button>
                             <div className="dropdownHeader" id='GerenciarUsuarios'>
-                                <Link to='/relatorio'>
+                                <Link to='cadastro'>
                                     Cadastrar
                                 </Link>
                                 <Link to='/meusChamados'>
                                     Alterar Dados
                                 </Link>
                             </div>
-                            <Link to="/perfil">
+                            <Link to="atenderChamados">
                                 <img src={foneAtendimento}/>
                                 Atender Chamados
                             </Link>
-                            <Link to="/perfil">
+                            <Link to="novoChamado">
                                 <img src={papelComLapis}/>
                                 Novo Chamado
                             </Link>
                         </div>
                     </div>
-                    <Link to="/perfil" className='linkHearderPadrão'>
+                    <Link to="perfil" className='linkHearderPadrão'>
                         <img src={perfil}/>
                         Perfil
                     </Link>
@@ -101,13 +101,6 @@ export default function Header(){
                     </Link>
                 </div>
             </header>
-            <div className='cabecalhoHeader'>
-                <div/>
-                <p>
-                    <h1>Olá, Administrador!</h1>
-                    <h2>Acesse suas funções de uma maneira rápida e fácil!</h2>
-                </p>
-            </div>
         </>
     );
 }   
