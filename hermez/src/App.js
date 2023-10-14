@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Base from './pages/Base'
 import Home from './pages/Home';
 import './App.css';
-import Cadastro from './pages/Cadastro';
 import LoginEmpresa from './pages/LoginEmpresa';
 import LoginUsuario from './pages/LoginUsuario';
 import CadastroEmpresa from './pages/CadastroEmpresa';
@@ -20,8 +19,7 @@ function App() {
         <Route path="cadastroUser" element={<CadastroUser />}/>
         <Route path="/base" element={<Base />}>
           <Route index element={<Home />} />
-          <Route path="cadastro" element={<LoginEmpresa />} />
-          <Route path="cadastro" element={<Cadastro />} />
+          <Route path="cadastro" element={<CadastroUser />} />
           {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
           <Route path="*" element={<LoginUsuario />} />
         </Route>
