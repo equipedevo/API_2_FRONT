@@ -30,20 +30,24 @@
     margin-bottom: var(--marginSpanInput);
 }
 
-.formUserCadastro input, .formUserCadastro{
+.formUserCadastro input, .formUserCadastro select, .formUserCadastro{
     margin-bottom: var(--marginForms);
 }
 
-.formUserCadastro input{
+.formUserCadastro input, .formUserCadastro select{
     background-color: var(--branco);
     color: var(--cinzaPadrao);
-    width: calc(100% - var(--paddingInput));
     border: 0;
     padding: var(--paddingInput);
     border-radius: var(--bordaInput);
     font-size: var(--textInput);
 }
-
+.formUserCadastro input{
+    width: calc(100% - var(--paddingInput));
+}
+.formUserCadastro select{
+    width: calc(100% + var(--paddingInput) - 1.2px)
+}
 .div2ColunasFormCadastro{
     display: flex;
 }
