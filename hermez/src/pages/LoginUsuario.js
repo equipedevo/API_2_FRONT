@@ -31,7 +31,7 @@ export default function Login(){
     function handleSubmit(event) {
         event.preventDefault();
         if (email !== '' && senha !== ''){
-            fetch("https://hermezapi-back.vercel.app/usuario/login?dev=true", {
+            fetch("https://hermezapi-back.vercel.app/funcionario/login?dev=true", {
                 method:'POST',
                 body: JSON.stringify({
                     email:email,
@@ -42,15 +42,13 @@ export default function Login(){
                     'Content-Type': 'application/json'
                 },
                 mode: 'cors'
-            })
-            .then(response => response.json().then(
-                dados =>(
-                {
+            }).then(response => response.json().then(
+                dados =>({
                     status: response.status,
                     resposta: dados,
                 })
             )).then(dados => {
-                if (dados.status===200){
+                if (dados.status===200) {
                     localStorage.setItem("fun_cod", dados.resposta.fun_cod)
                     localStorage.setItem("nome", dados.resposta.nome)
                     localStorage.setItem("emal", dados.resposta.email)
