@@ -7,7 +7,7 @@ export default function CadastroUser() {
     const [senha, setSenha] = useState('');
     const [senhaConfirmada, setSenhaConfirmada] = useState('');
     const [email, setEmail] = useState('');
-    const [vinculo, setVinculo] = useState('');
+    const [funcao, setFuncao] = useState('');
     const [celular, setCelular] = useState('');
     const [cargo, setCargo] = useState(0);
     const [erroSenha, setErro] = useState('');
@@ -35,9 +35,9 @@ export default function CadastroUser() {
         setEmail(email);
     }
 
-    function handleVinculoChange(event) {
-        const vinculo = event.target.value;
-        setVinculo(vinculo);
+    function handleFuncaoChange(event) {
+        const funcao = event.target.value;
+        setFuncao(funcao);
     }
 
 
@@ -77,7 +77,7 @@ export default function CadastroUser() {
                     senha: senha,
                     car_cod: cargo,                                  
                     emp_cod: localStorage.getItem("emp_cod"),
-                    função: vinculo
+                    funcao: funcao
                 }),
                 headers: {
                     'Accept': 'application/json',
@@ -153,16 +153,16 @@ export default function CadastroUser() {
                             />
                         </div>
                         <div>
-                            <span htmlFor="vinculo">
-                                VÍNCULO COM A EMPRESA
-                                <span className='opcional'> (Opcional)</span>
+                            <span htmlFor="funcao">
+                                FUNÇÃO
                             </span>
                             <input
-                                id="vinculoCadastro"
-                                name='vinculo'
-                                value={vinculo}
-                                onChange={handleVinculoChange}
-                                placeholder='Vínculo'
+                                id="funcaoCadastro"
+                                name='funcao'
+                                value={funcao}
+                                required
+                                onChange={handleFuncaoChange}
+                                placeholder='Função'
                                 type="text"
                             />
                         </div>
@@ -186,7 +186,7 @@ export default function CadastroUser() {
                         <div>
                             <span htmlFor="cargo">CARGO</span>
                             <select id="cargoCadastro" name='cargo' onChange={handleCargoChange}>
-                                <option value="0">Cargo</option>
+                                <option value="0" selected style={{display: 'none'}}>Cargo</option>
                                 <option value="1">Funcionário</option>
                                 <option value="2">Técnico</option>
                                 <option value="3">Administrador</option>
