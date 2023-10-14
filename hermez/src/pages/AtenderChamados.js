@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom';
 import './css/AtenderChamado.css';
 
 export default function AtenderChamado() {
-    const items = [
-        {id: 1, prioridade: 'Urgente', data: '22/12/2023', cliente: 'Anakin', titulo: 'A intenet inteira caiu', status: 'EM ANDAMENTO', tipo: 'Hardware', descricao: 'Descrição do problema que eu gostaria de solucionar. Eu tenho muito medo de acontecer algo aqui, e não dar tempo de entrga me ajuda pelo amor de deus!!!!'},
-        {id: 2, prioridade: 'Alta', data: '22/12/2023', cliente: 'Anakin', titulo: 'Meu computador quebrou muitas vezes aaaa', status: 'ABERTO', tipo: 'Hardware', descricao: 'Descrição do problema que eu gostaria de solucionar. Eu tenho muito medo de acontecer algo aqui, e não dar tempo de entrga me ajuda pelo amor de deus!!!!'},
-        {id: 3, prioridade: 'Média', data: '22/12/2023', cliente: 'Anakin', titulo: 'Meu computador quebrou muitas vezes aaaa', status: 'FECHADO', tipo: 'Hardware', descricao: 'Descrição do problema que eu gostaria de solucionar. Eu tenho muito medo de acontecer algo aqui, e não dar tempo de entrga me ajuda pelo amor de deus!!!!'},
-        {id: 4, prioridade: 'Baixa', data: '22/12/2023', cliente: 'Anakin', titulo: 'Meu computador quebrou muitas vezes aaaa', status: 'ABERTO', tipo: 'Hardware', descricao: 'Descrição do problema que eu gostaria de solucionar. Eu tenho muito medo de acontecer algo aqui, e não dar tempo de entrga me ajuda pelo amor de deus!!!!'}
-    ]
-
     const [database, setDatabase] = useState([]);
 
     useEffect(() => {
@@ -83,9 +76,9 @@ export default function AtenderChamado() {
                                     <p className="id">#{ i.cha_cod }</p>
                                     <p className="prioridade">{ i.cha_prioridade}</p>
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
-                                    <p className="cliente">{ i.fun_cod }</p>
+                                    <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
-                                    <p className="status">{ i.sta_cod }</p>
+                                    <p className="status">{ i.sta_nome }</p>
                                     <p className="tipo">Hardware</p>
                                 </summary>
                                 <div className="descricao">
