@@ -1,65 +1,70 @@
 import './css/CadastroUser.css';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Footer from '../components/Footer';
-import sair from '../img/menu/sair.png';
 import './CadastroEmpresa';
 
 export default function CadastroUser() {
-    const [senha, setSenha] = useState('');
-    const [senhaConfirmada, setSenhaConfirmada] = useState('');    
-    const [erroSenha, setErro] = useState('');    
-    const [email, setEmail] = useState('');    
-    const [vinculo, setVinculo] = useState('');    
-    const [telefone, setTelefone] = useState('');    
-    const [celular, setCelular] = useState('');    
-    const [setor, setSetor] = useState('');    
-    const [cargo, setCargo] = useState('');
     const [nomeCompleto, setNomeCompleto] = useState('');
-    const [cadastroSucesso, setCadastroSucesso] = useState(false); 
+    const [senha, setSenha] = useState('');
+    const [senhaConfirmada, setSenhaConfirmada] = useState('');
+    const [email, setEmail] = useState('');
+    const [vinculo, setVinculo] = useState('');
+    const [telefone, setTelefone] = useState('');
+    const [celular, setCelular] = useState('');
+    const [setor, setSetor] = useState('');
+    const [cargo, setCargo] = useState('');
 
+    // Função para formatar telefone
+    function formatPhoneNumber(phone, id) {
+        phone = phone.replace(/\D/g, '');
+    
+        if (document.getElementById(id).maxLength === 10) {
+            phone = phone.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+        }
+        else if (document.getElementById(id).maxLength === 11) {
+            phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        }
+    
+        return phone;
+    }
+    
+    function handleTelefoneChange(event) {
+        const inputTelefone = event.target.value;
+        const formattedTelefone = formatPhoneNumber(inputTelefone, "telefoneCadastro")
+        setTelefone (formattedTelefone);
+    }
 
+    function handleCelularChange(event) {
+        const inputCelular = event.target.value;
+        const formattedCelular = formatPhoneNumber(inputCelular, "celularCadastro")
+        setCelular(formattedCelular);
+    }
+
+    function handleNomeCompletoChange(event) {
+        const nome = event.target.value;
+        setNomeCompleto(nome);
+    }
+    
     function handleEmailChange(event) {
         const email = event.target.value;
         setEmail(email);
     }
-
 
     function handleVinculoChange(event) {
         const vinculo = event.target.value;
         setVinculo(vinculo);
     }
 
-
-    function handleTelefoneChange(event) {
-        const telefone = event.target.value;
-        setTelefone(telefone);
-    }
-
-
-    function handleCelularChange(event) {
-        const celular = event.target.value;
-        setCelular(celular);
-    }
-
-
     function handleSetorChange(event) {
         const setor = event.target.value;
         setSetor(setor);
     }
-
 
     function handleCargoChange(event) {
         const cargo = event.target.value;
         setCargo(cargo);
     }
 
-    function handleNomeChange(event) {
-        const nome = event.target.value;
-        setNomeCompleto(nome);
-    }
-
-        function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
         const criterioDeAceitacao = (
             senha.length >= 8 &&
@@ -70,7 +75,7 @@ export default function CadastroUser() {
         if (senha !== senhaConfirmada) {
             setErro('As senhas não coincidem.');
         }
-        else if(criterioDeAceitacao){
+        else if(!criterioDeAceitacao){
             setErro(`Crie uma senha com no mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial;`);
         }
         else {
@@ -93,43 +98,55 @@ export default function CadastroUser() {
                 mode: 'cors'
             }).then(response => {
                 if(response.status === 200) {
-                    setCadastroSucesso(true);
+                    console.log('Sucesso')
                 }
                 else {
                     (response.json()).then(data => {
-                        setErro(data.msg)
+                        console.log(data.msg)
                     });
                 }
             });
         }
     };
-        return (
+    return (
         <>
             <body className='bodyCadastro'>
-                <header className='hearderPadrão'>
-                    <div>
-                        <Link to="/">
-                            <img src={sair}alt="VOLTAR"/> 
-                            Voltar
-                        </Link>
-                    </div>
-                </header>
-
-
                 <form className='formUserCadastro'>
                     <h1> Cadastrar novo usuário</h1>
-                    <span for="nomeCompleto">NOME COMPLETO</span>
-                    <input type="text" placeholder='Nome' id="nomeCompleto" required/>
+                    <span htmlFor="nomeCompleto">NOME COMPLETO</span>
+                    <input
+                        id="nomeCompleto"
+                        name='nomeCompleto'
+                        onChange={handleNomeCompletoChange}
+                        value={nomeCompleto}
+                        placeholder='Nome'
+                        required
+                        type="text"
+                    />
                     <div className='div2ColunasFormCadastro'>
-
                         <div>
-                            <span for="senha">SENHA</span>
-                            <input type="password" placeholder='Senha' id="senha" required/>
+                            <span htmlFor="senha">SENHA</span>
+                            <input
+                                id="senha"
+                                name='senha'
+                                onChange={(e) => setSenha(e.target.value)}
+                                value={senha}
+                                placeholder='Senha'
+                                required
+                                type="password"
+                            />
                         </div>
-
                         <div>
-                            <span for="senha">CONFIRMAR SENHA</span>
-                            <input type="password" placeholder='Confirmar Senha' id="senhaConfirmada" required/>
+                            <span htmlFor="senhaConfirmada">CONFIRMAR SENHA</span>
+                            <input
+                                id="senhaConfirmada"
+                                name='senhaConfirmada'
+                                onChange={(e) => setSenhaConfirmada(e.target.value)}
+                                value={senhaConfirmada}
+                                placeholder='Senha'
+                                required
+                                type="password"
+                            />
                         </div>
                     </div>
 
@@ -138,63 +155,106 @@ export default function CadastroUser() {
 
                         <div>
                             <span for="email">E-MAIL</span>
-                            <input type="email" placeholder='e-mail' id="email" required/>
+                            <input
+                                id="email"
+                                name='email'
+                                value={email}
+                                onChange={handleEmailChange}
+                                placeholder='E-mail'
+                                required
+                                type="email"
+                            />
                         </div>
 
                         <div>
-                            {/* opcional  */}
-                            <span for="vinculo">VÍNCULO COM A EMPRESA</span> 
-                            <input type="text" placeholder='Vínculo' id="vinculo" required/>
+                            <span htmlFor="vinculo">
+                                VÍNCULO COM A EMPRESA
+                                <span className='opcional'> (Opcional)</span>
+                            </span>
+                            <input
+                                id="vinculoCadastro"
+                                name='vinculo'
+                                value={vinculo}
+                                onChange={handleVinculoChange}
+                                placeholder='Vínculo'
+                                required
+                                type="text"
+                            />
                         </div>
-
                     </div>
 
 
                     <div className='div2ColunasFormCadastro'>
 
-                        <div>
-                            <span for="telefone">TELEFONE</span>
-                            <input type="number" placeholder='Telefone' id="telefone" required/>
-                        </div>
+                    <div>
+                        <span htmlFor="telefone">TELEFONE</span>
+                        <input
+                            autoComplete="off"
+                            id="telefoneCadastro"
+                            maxLength="10"
+                            name='telefoneCadastro'
+                            onChange={handleTelefoneChange}
+                            value={telefone}
+                            placeholder='Telefone'
+                            required
+                            type="text"
+                        />
+                    </div>
 
-                        <div>
-                            <span for="celular">CELULAR</span>
-                            <input type="number" placeholder='Celular' id="celular" required/>
-                        </div>
+                    <div>
+                        <span htmlFor="celular">CELULAR</span>
+                        <input
+                            autoComplete="off"
+                            id="celularCadastro"
+                            maxLength="11"
+                            name='celularCadastro'
+                            onChange={handleCelularChange}
+                            value={celular}
+                            placeholder='Celular'
+                            required
+                            type="text"
+                        />
+                    </div>
 
-                    </div>  
+                </div>  
 
                     
                     <div className='div2ColunasFormCadastro'>
 
                         <div>
-                            {/* opcional */}
-                            <span for="setor">SETOR</span>
-                            <input type="text" placeholder='Setor' id="setor" required/>
+                            <span htmlFor="setor">
+                                SETOR
+                                <span className='opcional'> (Opcional)</span>
+                            </span>
+                            <input
+                                id="setorCadastro"
+                                name='setor'
+                                value={setor}
+                                onChange={handleSetorChange}
+                                placeholder='Setor'
+                                type="text"
+                            />
                         </div>
-
-                        <div class='dropdownUser'>
-                            <button onclick="myFunction()" class='dropbtn'>CLASSIFICAÇÃO</button>
-                            <div id='dropUser'class='dropdown-content'>
-                                <p>Administrador</p>
-                                <p>Funcionário</p>
-                                <p>Técnico</p>
-                            </div>
-                        </div>
-
                         
-
+                        <div>
+                            <span htmlFor="cargo">CARGO</span>
+                            <select id="cargoCadastro" name='cargo'>
+                                <option value="Funcionário">Cargo</option>
+                                <option value="Funcionário">Funcionário</option>
+                                <option value="Técnico">Técnico</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
+                        </div>
                     </div>
-
-
-                    <div className='divEnviarCadastroUser'>
-                        <input type='button' value='Cadastrar'/>
+                    <div className='divEnviarCadastro'>
+                        <input
+                            id="cadastrandoFuncionario"
+                            value='Cadastrar'
+                            type='submit'
+                        />
                     </div>
-
-                    
                 </form>
             </body>
-            <Footer/>
         </>
     );
 }
