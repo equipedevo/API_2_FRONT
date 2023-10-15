@@ -1,11 +1,16 @@
 .hearderPadrão{
     background-color: var(--vermelho);
     display: flex;
+    gap: 20px;
 }
 
+.linkHearderPadrão:first-child{
+    margin-left: auto;
+}
+.linkHearderPadrão:last-child{
+    margin-right: 20px;
+}
 .hearderPadrão > div{
-    margin: auto;
-    margin-right: 10px;
     display: flex;
     gap: 20px;
     padding: 5px 0;
