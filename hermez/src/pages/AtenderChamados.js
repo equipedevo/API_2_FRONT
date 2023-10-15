@@ -5,6 +5,12 @@ import './css/AtenderChamado.css';
 export default function AtenderChamado() {
     const [database, setDatabase] = useState([]);
 
+    const prioridades = [
+        {id: 1, nome: 'Alta'},
+        {id: 2, nome: 'Média'},
+        {id: 3, nome: 'Baixa'}
+    ];
+
     useEffect(() => {
         fetch('https://hermezapi-back.vercel.app/chamado/getTodos?dev=true', {
             method: 'GET',
@@ -71,10 +77,14 @@ export default function AtenderChamado() {
                         </div>
 
                         { database.map( i => 
-                            <details>
+                            <details key={i.cha_cod}>
                                 <summary>
                                     <p className="id">#{ i.cha_cod }</p>
-                                    <p className="prioridade">{ i.cha_prioridade}</p>
+                                    
+                                    
+                                    <p className="prioridade">{ i.cha_prioridade }</p>
+                                    
+
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
                                     <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
@@ -85,7 +95,7 @@ export default function AtenderChamado() {
                                     <p>{ i.cha_desc }</p>
 
                                     <div className="botoes">
-                                        <Link to='/'>
+                                        <Link to='/base'>
                                             <button className="iniciar">Iniciar</button>
                                         </Link>
                                         <Link to='/'>
@@ -94,6 +104,7 @@ export default function AtenderChamado() {
                                     </div>
                                 </div>
                             </details>
+
                         ) }
                     </section>
                 </div>

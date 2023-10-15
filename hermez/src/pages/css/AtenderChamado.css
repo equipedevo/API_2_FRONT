@@ -46,12 +46,17 @@ h1{
 .header{
     display: flex;
     justify-content: space-between;
+    height: 50px;
+
+    background-color: var(--cinzaHover);
 }
 
 .header p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     font-weight: 700;
-    text-align: center;
-    border: 1px solid var(--preto);
 }
 
 
@@ -59,13 +64,18 @@ h1{
 
 summary{
     display: flex;
+    height: 50px;
 }
 
 summary p{
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--preto);
+
+}
+
+details:nth-child(odd){
+    background-color: var(--cinzaHover);
 }
 
 .id{
