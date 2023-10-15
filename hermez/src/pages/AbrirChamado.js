@@ -6,7 +6,7 @@ import UploadArquivo from '../components/UploadArquivo';
 
 
 export default function AbrirChamado() {
-    const [nome, setNome] = useState("");
+    const [nome, setNome] = useState(localStorage.getItem("nome"));
     const [titulo, setTitulo] = useState("");
     const [local, setLocal] = useState("");
     const [descricao, setDescricao] = useState("");
@@ -17,17 +17,18 @@ export default function AbrirChamado() {
     
     const submitForm = (e) => {
         e.preventDefault();
-        
         console.log('dados formulario:  ', descricao)
 
         fetch("https://hermezapi-back.vercel.app/chamado/cadastro?dev=true", {
             method:'POST',
             body: JSON.stringify({
+                nome: nome,
                 desc: descricao,
                 local: local,
                 titulo: titulo,
-                codFun: 1,
-                codEmp: 1
+                codFun: localStorage.getItem("fun_cod"),
+                codEmp: localStorage.getItem("emp_cod")
+                //imagem: img
             }),
             headers: {
                 'Accept': 'application/json',
@@ -37,10 +38,7 @@ export default function AbrirChamado() {
         }).then(response => {
             if(response.status === 200){
                 alert('Chamado feito com sucesso')
-                setNome('')
-                setTitulo('')
-                setLocal('')
-                setDescricao('')
+                window.location.href = '../funcionario'
             }
             else{
                 (response.json()).then(data => {
@@ -69,8 +67,8 @@ export default function AbrirChamado() {
                                 id='nome'
                                 name="nome"
                                 value={nome}
-                                onChange={(e) => setNome(e.target.value)}
                                 required
+                                disabled
                             />
                         </div>
 
