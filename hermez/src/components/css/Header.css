@@ -1,19 +1,34 @@
+:root{
+    --espacamentoItemsHeaderPadrao:20px;
+    --paddingItemsHeaderPadrao: 5px;
+    --espacamentoItemsFuncao:5px;
+    --marginTopDivItemsFuncao:35px;
+    --paddingTopDivItemsFuncao:10px;
+    --borderRadiusTopDivItemsFuncao:10px;
+    --widthImgsMenu:20px;
+    --marginLeftImgsMenu:2px;
+    --widthImgDropdown:15px;
+    --widthLinhaCabecalho: 5px;
+    --paddingCabecalho:10px;
+    --marginLeftCabecalho: 6vw;
+    --marginRightCabecalho: 10px;
+    --marginBottomTextosCabecalho: 5px;
+}
 .hearderPadrão{
     background-color: var(--vermelho);
     display: flex;
-    gap: 20px;
+    gap: var(--espacamentoItemsHeaderPadrao)
 }
-
-.linkHearderPadrão:first-child{
+.hearderPadrão > *:first-child {
     margin-left: auto;
 }
 .linkHearderPadrão:last-child{
-    margin-right: 20px;
+    margin-right: var(--espacamentoItemsHeaderPadrao)
 }
 .hearderPadrão > div{
     display: flex;
-    gap: 20px;
-    padding: 5px 0;
+    gap: var(--espacamentoItemsHeaderPadrao);
+    padding: var(--paddingItemsHeaderPadrao) 0;
 }
 
 .linkHearderPadrão{
@@ -38,13 +53,12 @@
 
 .dropdownHeader > div{
     background-color: var(--branco);
-    border-radius: 5px;
+    border-radius: var(--borderRadiusTopDivItemsFuncao);
     display: none;
     flex-direction: column;
-    gap: 5px;
-    justify-content: space-between;
-    margin-top: 35px;
-    padding: 5px;
+    gap: var(--espacamentoItemsFuncao);
+    margin-top: var(--marginTopDivItemsFuncao);
+    padding: var(--paddingTopDivItemsFuncao);
     position: absolute;
 }
 
@@ -57,7 +71,11 @@
     background: inherit;
     color: var(--preto);
     display: flex;
-    gap: 5px;
+    gap: var(--espacamentoItemsFuncao);
+}
+
+.dropdownHeader + img:nth-child(1) ~ .dropdownHeader a, .dropdownHeader button{
+    justify-content: space-between;
 }
 
 .dropdownHeader a{
@@ -70,11 +88,11 @@
 
 
 .linkHearderPadrão img, .dropdownHeader img:first-child{
-    width: 20px;
-    margin-right: 2px;
+    width: var(--widthImgsMenu);
+    margin-right: var(--marginLeftImgsMenu);;
 }
 .dropdownHeader img:last-child{
-    width: 15px;
+    width: var(--widthImgDropdown)
 }
 
 .dropdownHeader > button{
@@ -84,13 +102,13 @@
 .cabecalhoHeader{
     background-color: var(--cinzaEscuro);
     display: flex;
-    padding: 5px;
+    padding: var(--paddingCabecalho)
 }
 
 .cabecalhoHeader div{
-    width: 5px;
-    margin-left: 6vw;
-    margin-right: 6px;
+    width: var(--widthLinhaCabecalho);
+    margin-left: var(--marginLeftCabecalho);
+    margin-right: var(--marginRightCabecalho);
     background-color: var(--vermelho);
 }
 
@@ -101,7 +119,7 @@
 
 .cabecalhoHeader h1,
 .cabecalhoHeader h2{
-    margin-bottom: 5px;
+    margin-bottom: var(--marginBottomTextosCabecalho);
 }
 
 .cabecalhoHeader h2{
