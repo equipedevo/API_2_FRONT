@@ -62,7 +62,7 @@ export default function Login(){
                     localStorage.setItem("nome", dados.resposta.nome)
                     localStorage.setItem("cnpj", dados.resposta.cnpj)
                     localStorage.setItem("email", dados.resposta.email)
-                    window.location.href = '/base'
+                    window.location.href = '/empresa'
                 }
                 else {
                     setErroLogin(dados.resposta.msg);
