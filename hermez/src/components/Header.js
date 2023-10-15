@@ -61,7 +61,7 @@ function DropdownAdms() {
                 id="GerenciarUsuarios"
                 style={{ display: gerenciarUsuariosVisible ? 'flex' : 'none' }}
             >
-                <Link to="cadastro">Cadastrar</Link>
+                <Link to="cadastrar-usuario">Cadastrar</Link>
                 <Link>Alterar Dados</Link>
             </div>
         </>
@@ -101,13 +101,13 @@ export default function Header() {
                 )}
                 {cargo !== '1' && (
                 <>
-                    <Link to="dashboard-chamado">
+                    <Link to="atender-chamados">
                         <img src={foneAtendimento} alt="Atender Chamados" />
                         Atender Chamados
                     </Link>
                 </>
                 )}
-                <Link to="chamado">
+                <Link to="realizar-chamado">
                     <img src={papelComLapis} alt="Novo Chamado" />
                     Novo Chamado
                 </Link>

@@ -67,6 +67,8 @@ export default function AbrirChamado() {
                                 id='nome'
                                 name="nome"
                                 value={nome}
+                                onChange={(e) => setNome(e.target.value)}
+                                className='input'
                                 required
                                 disabled
                             />
@@ -81,33 +83,33 @@ export default function AbrirChamado() {
                                 name='titulo'
                                 value={titulo}
                                 onChange={(e) => setTitulo(e.target.value)}
+                                className='input'
                                 required
                             />
                         </div>
                     </div>
 
                     <div className='linha'>
-                        <div className='campo'>
-                            <label for='local'>LOCALIZAÇÃO DO APARELHO <span>(Opcional)</span>
-                            </label>
-                            <input
-                                type='text'
-                                placeholder='Localização'
-                                id='local'
-                                name='local'
-                                value={local}
-                                onChange={(e) => setLocal(e.target.value)}
-                            />
-                        </div>
+                        <label for='local'>LOCALIZAÇÃO DO APARELHO <span>(Opcional)</span>
+                        </label>
+                        <input 
+                            type='text'
+                            placeholder='Localização'
+                            id='local'
+                            name='local'
+                            value={local}
+                            onChange={(e) => setLocal(e.target.value)}
+                            className='input'
+                        />
                     </div>
 
-                    <div className='coluna component'>
-                        <div className='select campo'>
-                            <label>TIPO:</label>
-                            <select className='tipo' value={tipo} onChange={(e) => setTipo(e.target.value)} required>
-                                <option value={''} selected hidden>Selecione</option>
-                                <option value={'Hardware'}>Hardware</option>
-                                <option value={'Sofware'}>Software</option>
+                    <div className='coluna'>
+                        <div>
+                            <label for='tipo'>TIPO</label>
+                            <select id="tipo" name="tipo" className='input' required>
+                                <option selected style={{display: 'none'}}>Selecione</option>
+                                <option value='1'>Hardware</option>
+                                <option value='2'>Software</option>
                             </select>
                         </div>
 
@@ -119,17 +121,16 @@ export default function AbrirChamado() {
                     </div>
 
                     <div className='linha'>
-                        <div className='campo'>
-                            <label for='descricao'>DESCRIÇÃO</label>
-                            <textarea
-                                placeholder="Descrição"
-                                id="descricao"
-                                name="descricao"
-                                value={descricao}
-                                onChange={(e) => setDescricao(e.target.value)}
-                                required
-                            />
-                        </div>
+                        <label for='descricao'>DESCRIÇÃO</label>
+                        <textarea 
+                            placeholder="Descrição"
+                            id="descricao"
+                            name="descricao"
+                            value={descricao}
+                            onChange={(e) => setDescricao(e.target.value)}
+                            className='texto'
+                            required
+                        />
                     </div>
 
                     <button

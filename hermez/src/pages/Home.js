@@ -49,7 +49,7 @@ function BotoesAdm() {
         </Link>
       ) : (
         <div className='botoesPequenoHome' id='GerenciarUsuariosItens'>
-          <Link className='botoesHome pequeno' to="cadastro">
+          <Link className='botoesHome pequeno' to="cadastrar-usuario">
             <div>
               <h1>Cadastrar usuários</h1>
             </div>
@@ -99,14 +99,14 @@ export default function Home() {
             </div>
           </Link>
         )}
-        <Link className='botoesHome grande' to="dashboard-chamado">
+        <Link className='botoesHome grande' to="realizar-chamado">
           <div>
             <img src={papelComLapis} alt="PapelComLapis" />
             <h1>Iniciar um novo chamado</h1>
           </div>
         </Link>
         {cargo !== '1' ? (
-          <Link className='botoesHome grande' to="chamado">
+          <Link className='botoesHome grande' to="atender-chamados">
             <div>
               <img src={foneAtendimento} alt="FoneAtendimento" />
               <h1>Atender chamados</h1>

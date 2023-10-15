@@ -45,6 +45,7 @@ body{
 
 .coluna{
     justify-content: space-between;
+    align-items: center;
 }
 
 .coluna div{
@@ -61,7 +62,7 @@ body{
 
 
 /*inputs*/
-input[type='text'], select{
+.input{
     width: var(--tamanhoInput);
     padding: 10px;
     background-color: var(--branco);
@@ -73,7 +74,7 @@ input[type='text'], select{
     width: auto;
 }
 
-textarea{
+.texto{
     height: 215px;
     padding: 10px;
     resize: none;
@@ -83,14 +84,12 @@ textarea{
 }
 
 .enviar{
-    width: 80px;
-    height: 45px;
-    padding: 5px;
     align-self: center;
-
+    width: 100px;
+    height: 50px;
+    border: none;
     color: var(--branco);
     background-color: var(--vermelho);
-
     border: none;
     border-radius: var(--border);
 }
