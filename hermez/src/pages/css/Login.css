@@ -1,13 +1,32 @@
 :root{
     --tamanhoCheckbox:20px;
-    --larguraFormsLogin: 37vw;
+    --larguraDivFormsLogin: 37vw;
     /* BORDAS */
-    --borderRadiusForms: 1.25rem;
+    --borderRadiusDivFormsLogin: 1.25rem;
     /* PADDINGS */
     --paddingSeparacao: 20px;
-    --paddingForms: calc(10px + 1vw);
+    --paddingDivFormsLogin: calc(10px + 0.5vw);
     /* GAP */
-    --gapForms: 4vw;
+    --EspacamentoItensDivFormsLogin: 4vw;
+    --marginDivFormsLogin: 10px;
+    --DistanciaCantoDaTelaDivFormsLogin: 10px;
+
+    --EspacamentoItensFormsLogin: 2px;
+    --widthFormsLogin: 90%;
+    --paddingFormsLogin: 10px;
+    --borderRadiusFormsLogin: 0.625rem;
+    --widthImgFormsLogin: calc(1vw + 20px);
+    --marginRightCheckboxLogin: 0.625rem;
+
+    --borderRadiusSubmitLogin: 20px;
+    --borderWidthSubmitLogin: 2px;
+    --widthSubmitLogin: 100px;
+    --gapBotoesLogin: 30px;
+
+    --borderWidthBotaoTrocaTelaLogin: 2px;
+    --borderRadiusBotaoTrocaTelaLogin: 20px;
+    --paddingBotaoTrocaTelaLogin: 5px;
+    --widthBotaoTrocaTelaLogin: 25vw;
 }
 
 /* FUNDO */
@@ -37,40 +56,39 @@
 /* FORMS */
 .formTelaLogin{
     background-color: var(--cinzaClaro);
-    border-radius: var(--borderRadiusForms);
-    padding: var(--paddingForms);
+    border-radius: var(--borderRadiusDivFormsLogin);
+    padding: var(--paddingDivFormsLogin);
     position: absolute;
-    width: var(--larguraFormsLogin);
+    width: var(--larguraDivFormsLogin);
 }
 .formTelaLogin form{
     align-items: center;
     display: flex;
     flex-direction: column;
-    margin: 0 10px;
-    gap: 4vw;
+    margin: 0 var(--marginDivFormsLogin);
+    gap: var(--EspacamentoItensDivFormsLogin);
     justify-content: center;
-    margin-bottom: 4vw;
+    margin-bottom: var(--EspacamentoItensDivFormsLogin);
 }
 
 .formTelaLogin form span{
     align-items: center;
     background-color: var(--branco);
-    border-radius: 0.625rem;
+    border-radius: var(--borderRadiusFormsLogin);
     display: flex;
     margin: 0 auto;
-    gap: 2px;
-    padding: 10px;
-    width: 90%;
-
+    gap: var(--EspacamentoItensFormsLogin);
+    padding: var(--paddingFormsLogin);
+    width: var(--widthFormsLogin);
 }
 
 .formTelaLogin form > span > img{
-    max-height: 30px;
+    width: var(--widthImgFormsLogin)
 }
 
 .formTelaLogin form input{
     border: 0;
-    width: 90%;
+    width: 100%;
 }
 
 /* OLHO */
@@ -84,42 +102,50 @@
     background-color: inherit;
     cursor: pointer;
     display: flex;
-    gap: 0.625rem;
 }
 
-.checkboxFormLogin input[type="checkbox"] {
-    appearance: none;
-    background: var(--cinzaEscuro);
-    cursor: pointer;
+.checkboxFormLogin input[type="checkbox"], .checkboxFormLogin img{
     height: var(--tamanhoCheckbox);
     width: var(--tamanhoCheckbox);
+    cursor: pointer;
+    margin-right: var(--marginRightCheckboxLogin);
+}
+.checkboxFormLogin input[type="checkbox"] {
+    appearance: none;
+    background: var(--cinzaPadrao);
+}
+.checkboxFormLogin img{
+    display: none;
 }
 
-.checkboxFormLogin input[type="checkbox"]:checked{
-    background: var(--vermelho);
+.checkboxFormLogin input[type="checkbox"]:checked + label img {
+    display: block;
+}
+.checkboxFormLogin input[type="checkbox"]:checked {
+    display: none;
 }
 
 /* Botões */
 .divButtonFormLogin{
     display: flex;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: var(--gapBotoesLogin)
 }
-.divButtonFormLogin > *{
+.divButtonFormLogin *, .divButtonFormLogin input[type="submit"]{
     text-decoration: none;
     text-align: center;
-    border-radius: 20px;
-    border-width: 2px;
+    border-radius: var(--borderRadiusSubmitLogin);
+    border-width: var(--borderWidthSubmitLogin);
     border-style: solid;
     margin: auto;
-    width: 100px;
+    width: var(--widthSubmitLogin);
 }
 
-.buttonLogin{
+.divButtonFormLogin input[type="submit"]{
     border-color: var(--vermelho)
 }
 
-.buttonLogin:hover{
+.divButtonFormLogin input[type="submit"]:hover{
     background-color: var(--vermelho)
 }
 
@@ -140,18 +166,18 @@
     text-align: center;
     text-decoration: none;
     font: var(--buttonLogin);
-    border: var(--vermelho) solid 2px;
-    border-radius: 20px;
-    padding: 5px;
-    width: 25vw;
+    border: var(--vermelho) solid var(--borderWidthBotaoTrocaTelaLogin);
+    border-radius: var(--borderRadiusBotaoTrocaTelaLogin);
+    padding: var(--paddingBotaoTrocaTelaLogin);
+    width: var(--widthBotaoTrocaTelaLogin);
 }
 .divTrocaTelaLogin *:hover{
     background-color: var(--vermelho);
 }
 .loginCliente{
-    right: 10px;
+    right: var(--DistanciaCantoDaTelaDivFormsLogin);
 }
 
 .loginEmpresa{
-    left: 10px;
+    left: var(--DistanciaCantoDaTelaDivFormsLogin);
 }

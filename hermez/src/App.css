@@ -8,16 +8,27 @@
   /* CORES */
   --branco:#FBFBFB;
   --cinzaClaro: #F2F2F2;
-  --cinzaEscuro: #7D7D7D;
+  --cinzaPadrao: #7D7D7D;
+  --cinzaEscuro: #4B4B55;
   --preto:#000000;
   --vermelho:#F4324A;
   --verdeClaro:#34B132;
   /* FONTES-GERAIS */
   --títulosGrande: 400 calc(20px + 2.5vw) "Noto Serif Bengali";
   --buttonLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
+  --fontFecharPopUpCadastro: 800 25px "Noto Serif Bengali";
   --títulos: 400 20px "Noto Serif Bengali";
   --textos: 400 15px "Noto Serif Bengali";
+  --textErro: 800 10px "Noto Serif Bengali";
   --textInput: 400 10px "Noto Serif Bengali";
+
+  /* POP-UP DE CADASTRO */
+  --topPopUpCadastroComSucesso: 5px;
+  --paddingPopUpCadastroComSucesso: 20px;
+  --borderRadiusPopUpCadastroComSucesso: 5px;
+  --borderWidthPopUpCadastroComSucesso: 0.2px;
+  --boxShadowPopUpCadastroComSucesso: 10px;
+  --marginFecharPopUpCadastro: 0 -10px -10px 0;
 }
 
 /* GERAL */
@@ -38,3 +49,43 @@ button,
 input[type="button"]{
   cursor: pointer;
 }
+
+.erro{
+  font: var(--textErro);
+  text-align: center;
+  color: var(--vermelho);
+}
+
+/* POP-UP DE CADASTRO */
+.popUpCadastroComSucesso {
+    position: fixed;
+    top:var(--topPopUpCadastroComSucesso);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.popUpCadastroComSucesso div {
+    background-color: var(--branco);
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding: var(--paddingPopUpCadastroComSucesso);
+    padding-top: 0;
+    border-radius: var(--borderRadiusPopUpCadastroComSucesso);
+    border: var(--cinzaPadrao) solid var(--borderWidthPopUpCadastroComSucesso);
+    text-align: center;
+    box-shadow: 0px 0px var(--boxShadowPopUpCadastroComSucesso) rgba(0, 0, 0, 0.2);
+}
+
+.popUpCadastroComSucesso div span {
+    cursor: pointer;
+    margin:var(--marginFecharPopUpCadastro);
+    font: var(--fontFecharPopUpCadastro);
+    color: var(--cinzaEscuro);
+}
+
+.popUpCadastroComSucesso div h1 {
+    color: var(--cinzaEscuro);
+}  

@@ -1,30 +1,34 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Base from './pages/Base'
+import Base from './pages/Base';
+import BaseEmpresa from './pages/BaseEmpresa';
 import Home from './pages/Home';
 import './App.css';
-import Cadastro from './pages/Cadastro';
 import LoginEmpresa from './pages/LoginEmpresa';
 import LoginUsuario from './pages/LoginUsuario';
 import CadastroEmpresa from './pages/CadastroEmpresa';
 import AbrirChamado from './pages/AbrirChamado';
+import AtenderChamado from './pages/AtenderChamados';
+import CadastroUser from './pages/CadastroUser';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginEmpresa />}/>
-        <Route path="empresa" element={<LoginEmpresa />}/>
-        <Route path="usuario" element={<LoginUsuario />}/>
-        <Route path="cadastroEmpresa" element={<CadastroEmpresa />} />
-        <Route path="/base" element={<Base />}>
+        <Route path="/" element={<LoginUsuario />}/>
+        <Route path="empresa/login" element={<LoginEmpresa />}/>
+        <Route path="empresa/cadastro" element={<CadastroEmpresa />}/>
+        <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
           <Route path="chamado" element={< AbrirChamado />} />
-          <Route path="cadastro" element={<LoginEmpresa />} />
-          <Route path="cadastro" element={<Cadastro />} />
-          {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
-          <Route path="*" element={<LoginUsuario />} />
+          <Route path="dashboard-chamado" element={<AtenderChamado />} />
+          <Route path="cadastro" element={<CadastroUser />} />
         </Route>
+        <Route path="/empresa" element={<BaseEmpresa />}>
+          <Route index element={<CadastroUser />} />
+        </Route>
+        {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
+        <Route path="*" element={<LoginUsuario />} />
       </Routes>
     </BrowserRouter>
   );

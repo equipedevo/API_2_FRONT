@@ -41,7 +41,6 @@ export default function AbrirChamado() {
                 setTitulo('')
                 setLocal('')
                 setDescricao('')
-
             }
             else{
                 (response.json()).then(data => {

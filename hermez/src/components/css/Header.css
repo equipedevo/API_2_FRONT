@@ -1,21 +1,127 @@
+:root{
+    --espacamentoItemsHeaderPadrao:20px;
+    --paddingItemsHeaderPadrao: 5px;
+    --espacamentoItemsFuncao:5px;
+    --marginTopDivItemsFuncao:35px;
+    --paddingTopDivItemsFuncao:10px;
+    --borderRadiusTopDivItemsFuncao:10px;
+    --widthImgsMenu:20px;
+    --marginLeftImgsMenu:2px;
+    --widthImgDropdown:15px;
+    --widthLinhaCabecalho: 5px;
+    --paddingCabecalho:10px;
+    --marginLeftCabecalho: 6vw;
+    --marginRightCabecalho: 10px;
+    --marginBottomTextosCabecalho: 5px;
+}
 .hearderPadrão{
     background-color: var(--vermelho);
     display: flex;
+    gap: var(--espacamentoItemsHeaderPadrao)
 }
-.hearderPadrão div{
-    margin: auto;
+.hearderPadrão > *:first-child {
+    margin-left: auto;
+}
+.linkHearderPadrão:last-child{
+    margin-right: var(--espacamentoItemsHeaderPadrao)
+}
+.hearderPadrão > div{
     display: flex;
-    gap: 20px;
-    padding: 5px 0;
-    margin-right: 10px;
+    gap: var(--espacamentoItemsHeaderPadrao);
+    padding: var(--paddingItemsHeaderPadrao) 0;
 }
-.hearderPadrão div > *{
-    text-decoration: none;
+
+.linkHearderPadrão{
+    align-items: center;
     color: var(--branco);
     display: flex;
+    text-decoration: none;
+}
+
+.dropdownHeader{
+    display: none;
+}
+
+.dropdownHeader{
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdownHeader div *{
+    font: var(--textInput);
+}
+
+.dropdownHeader > div{
+    background-color: var(--branco);
+    border-radius: var(--borderRadiusTopDivItemsFuncao);
+    display: none;
+    flex-direction: column;
+    gap: var(--espacamentoItemsFuncao);
+    margin-top: var(--marginTopDivItemsFuncao);
+    padding: var(--paddingTopDivItemsFuncao);
+    position: absolute;
+}
+
+.alignCenter{
     align-items: center;
 }
 
-.hearderPadrão div > *:nth-child(2){
-    display: none;
+.dropdownHeader button, .dropdownHeader a{
+    align-items: center;
+    background: inherit;
+    color: var(--preto);
+    display: flex;
+    gap: var(--espacamentoItemsFuncao);
+}
+
+.dropdownHeader + img:nth-child(1) ~ .dropdownHeader a, .dropdownHeader button{
+    justify-content: space-between;
+}
+
+.dropdownHeader a{
+    text-decoration: none;
+}
+
+.dropdownHeader button {
+    border: none;
+}
+
+
+.linkHearderPadrão img, .dropdownHeader img:first-child{
+    width: var(--widthImgsMenu);
+    margin-right: var(--marginLeftImgsMenu);;
+}
+.dropdownHeader img:last-child{
+    width: var(--widthImgDropdown)
+}
+
+.dropdownHeader > button{
+    color: var(--branco);
+}
+
+.cabecalhoHeader{
+    background-color: var(--cinzaEscuro);
+    display: flex;
+    padding: var(--paddingCabecalho)
+}
+
+.cabecalhoHeader div{
+    width: var(--widthLinhaCabecalho);
+    margin-left: var(--marginLeftCabecalho);
+    margin-right: var(--marginRightCabecalho);
+    background-color: var(--vermelho);
+}
+
+.cabecalhoHeader h1{
+    font: var(--buttonLogin);
+    color: var(--branco);
+}
+
+.cabecalhoHeader h1,
+.cabecalhoHeader h2{
+    margin-bottom: var(--marginBottomTextosCabecalho);
+}
+
+.cabecalhoHeader h2{
+    color: var(--cinzaClaro);
 }
