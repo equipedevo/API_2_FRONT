@@ -64,8 +64,9 @@
 }
 
 
-.dropdownHeader img:first-child{
+.linkHearderPadrão img, .dropdownHeader img:first-child{
     width: 20px;
+    margin-right: 2px;
 }
 .dropdownHeader img:last-child{
     width: 15px;
