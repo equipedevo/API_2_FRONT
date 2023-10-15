@@ -46,7 +46,8 @@
     width: calc(100% - var(--paddingInput));
 }
 .formUserCadastro select{
-    width: calc(100% + var(--paddingInput) - 1.2px)
+    width: calc(100% + var(--paddingInput));
+    appearance: none;
 }
 .div2ColunasFormCadastro{
     display: flex;
