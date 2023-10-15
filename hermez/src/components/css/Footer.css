@@ -1,5 +1,6 @@
 .footerGeral *{
     text-align: center;
+    font-size: var(--títulos);
     color: var(--cinzaPadrao);
 }
 .footerGeral a:hover{
