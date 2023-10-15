@@ -1,55 +1,77 @@
 :root{
-    --marginTopBotoesHome: 30px;
+    --marginBotoesHome: 30px;
     --tamanhoImagensBotoesHome: 12vw;
-    --tamanhoTextoBotoesHome: 18vw;
     --borderRadiusBotoesHome: 5vw;
+    --gapBotoesPequenosHome: 20px;
+    --paddingBotoesHome: 2px
 }
 
-.botoesHomePrincipal{
+.divbotoesHome{
     display: flex;
     flex-wrap: wrap;
-    margin-top: var(--marginTopBotoesHome);
+    margin: var(--marginBotoesHome) auto;
 }
-.botoesHomePrincipal > a{
+
+.botoesHome{
     background-color: var(--cinzaPadrao);
     border-radius: var(--borderRadiusBotoesHome);
     display: flex;
-    margin: auto;
-    padding: 2px;
-    height: var(--tamanhoBotoesHome);
-    width: var(--tamanhoBotoesHome);
     text-decoration: none;
+    width: var(--tamanhoBotoesHome);
+    padding: var(--paddingBotoesHome);
 }
-.botoesHomePrincipal > a > div{
+.grande{
+    height: var(--tamanhoBotoesHome);
+}
+.botoesHome div{
     margin: auto;
     text-align: center;
 }
 
-.botoesHomePrincipal > a > div img{
+.botoesHome img{
     width: var(--tamanhoImagensBotoesHome);
 }
 
-.botoesHomePrincipal > a > div h1{
-    color: var(--branco);
-    font: var(--texto);
-    width: var(--tamanhoTextoBotoesHome);
+.botoesPequenoHome{
+    display: flex;
+    flex-direction: column;
+    gap: var(--gapBotoesPequenosHome)
 }
 
-.botoesHomePrincipal > a:hover{
+.pequeno{
+    height: calc(var(--tamanhoBotoesHome) / 2 - var(--gapBotoesPequenosHome));
+}
+
+.botoesHome h1{
+    color: var(--branco);
+    font: var(--texto);
+}
+
+.botoesHome:hover{
     background-color: var(--cinzaEscuro);
 }
 
 @media (max-width: 649px){
     :root{
-        --tamanhoBotoesHome: 40vw;
+        --tamanhoBotoesHome: calc(15vw + 70px);
+        --gapBotoesHome: 30px;
     }
-    .botoesHomePrincipal{
-        gap: 30px;
+    .divbotoesHome{
+        gap: var(--gapBotoesHome);
+    }
+    .divbotoesHome >* {
+        margin: auto;
     }
 }
 
 @media (min-width: 650px){
     :root{
         --tamanhoBotoesHome: 20vw;
+    }
+    .botoesHome, .botoesPequenoHome{
+        margin-left: auto;
+    }
+    .botoesHome:last-child{
+        margin-right: auto;
     }
 }
