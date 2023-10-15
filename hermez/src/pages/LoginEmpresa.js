@@ -126,7 +126,7 @@ export default function Login(){
                                     />
                                     <Link
                                         className='buttonCadastroEmpresa'
-                                        to="../empresa/cadastrar-usuario">
+                                        to="../empresa/cadastro">
                                         Cadastrar
                                     </Link>
                                 </div>
