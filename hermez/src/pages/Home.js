@@ -56,7 +56,7 @@ export default function Home(){
                     </Link>
                 ):(
                     <div className='botoesPequenoHome' id='GerenciarUsuariosItens'>
-                        <Link className='botoesHome pequeno'>
+                        <Link className='botoesHome pequeno' to="cadastro">
                             <div>
                                 <h1>Cadastrar usuários</h1>
                             </div>
@@ -68,15 +68,15 @@ export default function Home(){
                         </Link>
                     </div>
                 )}
-                <Link className='botoesHome grande'>
+                <Link className='botoesHome grande' to="dashboard-chamado">
                     <div>
-                        <img src={foneAtendimento}/>
+                        <img src={papelComLapis}/>
                         <h1> Iniciar um novo chamados</h1>
                     </div>
                 </Link>
-                <Link className='botoesHome grande'>
+                <Link className='botoesHome grande' to="chamado">
                     <div>
-                        <img src={papelComLapis}/>
+                        <img src={foneAtendimento}/>
                         <h1> Atender chamados</h1>
                     </div>
                 </Link>
