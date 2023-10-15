@@ -1,6 +1,5 @@
 import './css/CadastroUser.css';
 import { useState } from 'react';
-import './CadastroEmpresa';
 
 export default function CadastroUser() {
     const [nomeCompleto, setNomeCompleto] = useState('');
@@ -87,7 +86,12 @@ export default function CadastroUser() {
             }).then(response => {
                 if(response.status === 200) {
                     localStorage.setItem("novoCadastro", 'novo cadastro');
-                    window.location.href = './'
+                    if (localStorage.getItem('fun_cod') === null){
+                        window.location.href = '../empresa'
+                    }
+                    else{
+                        window.location.href = '../funcionario'
+                    }
                 }
                 else {
                     (response.json()).then(data => {
@@ -189,7 +193,9 @@ export default function CadastroUser() {
                                 <option value="0" selected style={{display: 'none'}}>Cargo</option>
                                 <option value="1">Funcionário</option>
                                 <option value="2">Técnico</option>
-                                <option value="3">Administrador</option>
+                                {(localStorage.getItem('fun_cod') === null) ? (
+                                    <option value="3">Administrador</option>
+                                ):(null)}
                             </select>
                         </div>
                     </div>

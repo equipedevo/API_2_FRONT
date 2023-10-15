@@ -126,7 +126,7 @@ export default function Login(){
                                     />
                                     <Link
                                         className='buttonCadastroEmpresa'
-                                        to="/cadastroEmpresa">
+                                        to="../empresa/cadastro">
                                         Cadastrar
                                     </Link>
                                 </div>
@@ -140,8 +140,7 @@ export default function Login(){
                         alt='imagemRaio'
                     />
                     <div className="divTrocaTelaLogin">
-                        <Link
-                            to="/usuario">
+                        <Link to="/">
                             Entrar como Usuário
                         </Link>
                     </div>

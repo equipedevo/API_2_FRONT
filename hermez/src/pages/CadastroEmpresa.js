@@ -68,7 +68,7 @@ export default function CadastroEmpresa() {
             }).then(response => {
                 if(response.status === 200) {
                     localStorage.setItem("novoCadastro", 'novo cadastro');
-                    window.location.href = '/'
+                    window.location.href = '../empresa/login'
                 }
                 else {
                     (response.json()).then(data => {
@@ -83,7 +83,7 @@ export default function CadastroEmpresa() {
             <body className='bodyCadastro'>
                 <header className='hearderPadrão'>
                     <div>
-                        <Link to="/" className='linkHearderPadrão'>
+                        <Link to="../empresa/login" className='linkHearderPadrão'>
                             <img src={sair} alt="Sair" />
                             Voltar
                         </Link>

@@ -15,24 +15,20 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LoginEmpresa />}/>
-        <Route path="empresa" element={<LoginEmpresa />}/>
-        <Route path="usuario" element={<LoginUsuario />}/>
-        <Route path="cadastroEmpresa" element={<CadastroEmpresa />}/>
-        <Route path="cadastroUser" element={<CadastroUser />}/>
+        <Route path="/" element={<LoginUsuario />}/>
+        <Route path="empresa/login" element={<LoginEmpresa />}/>
+        <Route path="empresa/cadastro" element={<CadastroEmpresa />}/>
         <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
           <Route path="chamado" element={< AbrirChamado />} />
           <Route path="dashboard-chamado" element={<AtenderChamado />} />
           <Route path="cadastro" element={<CadastroUser />} />
-          {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
-          <Route path="*" element={<LoginUsuario />} />
         </Route>
         <Route path="/empresa" element={<BaseEmpresa />}>
           <Route index element={<CadastroUser />} />
-          {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
-          <Route path="*" element={<CadastroUser />} />
         </Route>
+        {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
+        <Route path="*" element={<LoginUsuario />} />
       </Routes>
     </BrowserRouter>
   );

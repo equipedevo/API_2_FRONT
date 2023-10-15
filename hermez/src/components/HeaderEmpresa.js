@@ -8,7 +8,7 @@ import sair from '../img/menu/sair.png';
 export default function Header(){
     function logout(){
         localStorage.clear();
-        window.location.href = '/'
+        window.location.href = '../empresa/login'
     }
     return (
         <>

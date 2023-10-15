@@ -72,8 +72,7 @@ export default function Login(){
             <body>
                 <div className="fundoLogin">
                     <div className="divTrocaTelaLogin">
-                        <Link
-                            to="/empresa">
+                        <Link to="empresa/login">
                             Entrar como Empresa
                         </Link>
                     </div>
