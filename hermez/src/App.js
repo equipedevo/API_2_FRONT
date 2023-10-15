@@ -20,9 +20,9 @@ function App() {
         <Route path="empresa/cadastro" element={<CadastroEmpresa />}/>
         <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
-          <Route path="chamado" element={< AbrirChamado />} />
-          <Route path="dashboard-chamado" element={<AtenderChamado />} />
-          <Route path="cadastro" element={<CadastroUser />} />
+          <Route path="realizar-chamado" element={< AbrirChamado />} />
+          <Route path="atender-chamados" element={<AtenderChamado />} />
+          <Route path="cadastrar-usuario" element={<CadastroUser />} />
         </Route>
         <Route path="/empresa" element={<BaseEmpresa />}>
           <Route index element={<CadastroUser />} />

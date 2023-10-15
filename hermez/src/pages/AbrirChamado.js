@@ -9,7 +9,6 @@ export default function AbrirChamado(){
     const [titulo, setTitulo] = useState("");
     const [local, setLocal] = useState("");
     const [descricao, setDescricao] = useState("");
-    
     const [selectedFile, setSelectedFile] = useState(null);
 
 
@@ -19,9 +18,7 @@ export default function AbrirChamado(){
         formData.append("titulo", titulo);
         formData.append("local", local);
         formData.append("descricao", descricao);
-
         formData.append("file", selectedFile);
-
         // axios
         //     .post("url", formData)
         //     .then((res) => {
