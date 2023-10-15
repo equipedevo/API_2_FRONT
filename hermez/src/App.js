@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Base from './pages/Base'
+import Base from './pages/Base';
+import BaseEmpresa from './pages/BaseEmpresa';
 import Home from './pages/Home';
 import './App.css';
 import LoginEmpresa from './pages/LoginEmpresa';
@@ -19,13 +20,18 @@ function App() {
         <Route path="usuario" element={<LoginUsuario />}/>
         <Route path="cadastroEmpresa" element={<CadastroEmpresa />}/>
         <Route path="cadastroUser" element={<CadastroUser />}/>
-        <Route path="/base" element={<Base />}>
+        <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
           <Route path="chamado" element={< AbrirChamado />} />
           <Route path="dashboard-chamado" element={<AtenderChamado />} />
           <Route path="cadastro" element={<CadastroUser />} />
           {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
           <Route path="*" element={<LoginUsuario />} />
+        </Route>
+        <Route path="/empresa" element={<BaseEmpresa />}>
+          <Route index element={<CadastroUser />} />
+          {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
+          <Route path="*" element={<CadastroUser />} />
         </Route>
       </Routes>
     </BrowserRouter>
