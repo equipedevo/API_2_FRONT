@@ -56,7 +56,7 @@ export default function Login(){
                     localStorage.setItem("funcao", dados.resposta.funcao)
                     localStorage.setItem("car_cod", dados.resposta.car_cod)
                     localStorage.setItem("emp_cod", dados.resposta.emp_cod)
-                    window.location.href = '/base'
+                    window.location.href = '/funcionario'
                 }
                 else {
                     setErroLogin(dados.resposta.msg);
@@ -72,8 +72,7 @@ export default function Login(){
             <body>
                 <div className="fundoLogin">
                     <div className="divTrocaTelaLogin">
-                        <Link
-                            to="/empresa">
+                        <Link to="empresa/login">
                             Entrar como Empresa
                         </Link>
                     </div>

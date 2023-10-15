@@ -62,7 +62,7 @@ export default function Login(){
                     localStorage.setItem("nome", dados.resposta.nome)
                     localStorage.setItem("cnpj", dados.resposta.cnpj)
                     localStorage.setItem("email", dados.resposta.email)
-                    window.location.href = '/base'
+                    window.location.href = '/empresa'
                 }
                 else {
                     setErroLogin(dados.resposta.msg);
@@ -126,7 +126,7 @@ export default function Login(){
                                     />
                                     <Link
                                         className='buttonCadastroEmpresa'
-                                        to="/cadastroEmpresa">
+                                        to="../empresa/cadastro">
                                         Cadastrar
                                     </Link>
                                 </div>
@@ -140,8 +140,7 @@ export default function Login(){
                         alt='imagemRaio'
                     />
                     <div className="divTrocaTelaLogin">
-                        <Link
-                            to="/usuario">
+                        <Link to="/">
                             Entrar como Usuário
                         </Link>
                     </div>
