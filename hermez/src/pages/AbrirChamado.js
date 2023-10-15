@@ -48,6 +48,7 @@ export default function AbrirChamado(){
                                 name="nome"
                                 value={nome}
                                 onChange={(e) => setNome(e.target.value)}
+                                className='input'
                                 required
                             />
                         </div>
@@ -61,6 +62,7 @@ export default function AbrirChamado(){
                                 name='titulo'
                                 value={titulo}
                                 onChange={(e) => setTitulo(e.target.value)}
+                                className='input'
                                 required
                             />
                         </div>
@@ -76,13 +78,14 @@ export default function AbrirChamado(){
                             name='local'
                             value={local}
                             onChange={(e) => setLocal(e.target.value)}
+                            className='input'
                         />
                     </div>
 
                     <div className='coluna'>
                         <div>
                             <label for='tipo'>TIPO</label>
-                            <select id="tipo" name="tipo" required>
+                            <select id="tipo" name="tipo" className='input' required>
                                 <option selected style={{display: 'none'}}>Selecione</option>
                                 <option value='1'>Hardware</option>
                                 <option value='2'>Software</option>
@@ -104,6 +107,7 @@ export default function AbrirChamado(){
                             name="descricao"
                             value={descricao}
                             onChange={(e) => setDescricao(e.target.value)}
+                            className='texto'
                             required
                         />
                     </div>
