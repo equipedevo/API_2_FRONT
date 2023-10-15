@@ -15,18 +15,18 @@ export default function Header(){
             <header className='hearderPadrão'>
                 <div>
                     <Link to='./' className='linkHearderPadrão'>
-                        <img src={alterarUsuario}/>
+                        <img src={cadastrarUsuario} alt='Cadastrar Dados'/>
                         Cadastrar
                     </Link>
                     <Link className='linkHearderPadrão'>
-                        <img src={cadastrarUsuario}/>
+                        <img src={alterarUsuario} alt='Alterar Dados'/>
                         Alterar Dados
                     </Link>
                     <Link
                         className='linkHearderPadrão'
                         onClick={() => logout()}
                     >
-                        <img src={sair}/>
+                        <img src={sair} alt='Sair'/>
                         Sair
                     </Link>
                 </div>
