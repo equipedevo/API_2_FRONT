@@ -31,7 +31,7 @@ export default function Login(){
     function handleSubmit(event) {
         event.preventDefault();
         if (email !== '' && senha !== ''){
-            fetch("https://hermezapi-back.vercel.app/funcionario/login?dev=true", {
+            fetch(process.env.REACT_APP_URL_FUNCIONARIO_LOGIN, {
                 method:'POST',
                 body: JSON.stringify({
                     email:email,

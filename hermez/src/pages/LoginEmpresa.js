@@ -40,7 +40,7 @@ export default function Login(){
     function handleSubmit(event) {
         event.preventDefault();
         if (email !== '' && senha !== ''){
-            fetch("https://hermezapi-back.vercel.app/empresa/login?dev=true", {
+            fetch(process.env.REACT_APP_URL_EMPRESA_LOGIN, {//"https://hermezapi-back.vercel.app/empresa/login?dev=true", {
                 method:'POST',
                 body: JSON.stringify({
                     email:email,

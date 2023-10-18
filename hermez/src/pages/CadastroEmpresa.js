@@ -52,7 +52,7 @@ export default function CadastroEmpresa() {
         }
         else {
             setErro('');
-            fetch("https://hermezapi-back.vercel.app/empresa/cadastro?dev=true", {
+            fetch(process.env.REACT_APP_URL_EMPRESA_CADASTRO, {
                 method:'POST',
                 body: JSON.stringify({
                     razaoSocial:razaoSocial,

@@ -19,7 +19,7 @@ export default function AbrirChamado() {
         e.preventDefault();
         console.log('dados formulario:  ', descricao)
 
-        fetch("https://hermezapi-back.vercel.app/chamado/cadastro?dev=true", {
+        fetch(process.env.REACT_APP_URL_CHAMADO_CADASTRO, {
             method:'POST',
             body: JSON.stringify({
                 nome: nome,

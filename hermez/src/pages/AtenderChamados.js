@@ -12,7 +12,7 @@ export default function AtenderChamado() {
     ];
 
     useEffect(() => {
-        fetch('https://hermezapi-back.vercel.app/chamado/getTodos?dev=true', {
+        fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',

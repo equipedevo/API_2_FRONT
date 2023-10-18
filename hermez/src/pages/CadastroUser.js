@@ -67,7 +67,7 @@ export default function CadastroUser() {
         }
         else {
             setErro(``);
-            fetch("https://hermezapi-back.vercel.app/funcionario/cadastro?dev=true", {
+            fetch(process.env.REACT_APP_URL_FUNCIONARIO_CADASTRO, {
                 method:'POST',
                 body: JSON.stringify({
                     nome: nomeCompleto,
