@@ -11,7 +11,7 @@
     background-color: var(--cinzaClaro);
 }
 
-h1{
+.dashboard h1{
     font: var(--títulos);
     margin-bottom: 5%;
 }
