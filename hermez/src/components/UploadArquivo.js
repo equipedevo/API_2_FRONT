@@ -6,24 +6,24 @@ export default function UploadArquivo({onFileSelect}){
 
     const handleFileInput = (e) => {
         const fileuploaded = e.target.files[0];
-        document.getElementById('arquivo').textContent = e.target.files[0].name;
+        document.getElementById('botaoInputArquivo').textContent = e.target.files[0].name;
         onFileSelect(fileuploaded)
     }
 
     return (
-        <div className="arquivo">
-            <input 
-                type='file' 
+        <div className="divInputArquivo">
+            <input
                 onChange={handleFileInput}
                 ref={fileInput}
+                
+                type='file' 
             />
 
             <label
-                id='arquivo'
-                for='arquivo'
-                className="botao-upload"
-                onClick={e => fileInput.current && fileInput.current.click()}
-        
+                id='botaoInputArquivo'
+                htmlFor='textoarquivo'
+                className="botaoInputArquivo"
+                onClick={e => fileInput.current && fileInput.current.click(e)}
             >
                 Anexe seu arquivo
             </label>

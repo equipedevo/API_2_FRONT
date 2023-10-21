@@ -1,183 +1,270 @@
 :root{
-    --tamanhoCheckbox:20px;
-    --larguraDivFormsLogin: 37vw;
-    /* BORDAS */
-    --borderRadiusDivFormsLogin: 1.25rem;
-    /* PADDINGS */
-    --paddingSeparacao: 20px;
-    --paddingDivFormsLogin: calc(10px + 0.5vw);
-    /* GAP */
-    --EspacamentoItensDivFormsLogin: 4vw;
-    --marginDivFormsLogin: 10px;
-    --DistanciaCantoDaTelaDivFormsLogin: 10px;
-
-    --EspacamentoItensFormsLogin: 2px;
-    --widthFormsLogin: 90%;
-    --paddingFormsLogin: 10px;
-    --borderRadiusFormsLogin: 0.625rem;
-    --widthImgFormsLogin: calc(1vw + 20px);
+    --margindivConteudoLogin: 40px;
     --marginRightCheckboxLogin: 0.625rem;
 
-    --borderRadiusSubmitLogin: 20px;
-    --borderWidthSubmitLogin: 2px;
-    --widthSubmitLogin: 100px;
-    --gapBotoesLogin: 30px;
+    --heightItensFormLogin: calc(1vw + 20px);
+    --minHeightBotãoDivTrocaLogin: calc(20px);
+    --minWidthBotãoDivTrocaLogin: calc(var(--minHeightBotãoDivTrocaLogin) * 4);
 
-    --borderWidthBotaoTrocaTelaLogin: 2px;
+    --gapFormsLogin: 40px;
+    --paddingFormsLogin: 20px;
+    --paddingInputFormsLogin: 10px;
+
     --borderRadiusBotaoTrocaTelaLogin: 20px;
-    --paddingBotaoTrocaTelaLogin: 5px;
-    --widthBotaoTrocaTelaLogin: 25vw;
+    --borderRadiusFormsLogin: 20px;
+    --borderRadiusSubmitLogin: 20px;
+    --borderRadiusInputFormsLogin: 20px;
+
+    --borderWidthSubmitLogin: 2px;
+    --borderDivTrocaLogin: 3px;
+
+    --EspacamentoItensFormsLogin: 3px;
+    --widthSubmitLogin: 100px;
+    --widthCheckboxFormLogin: calc(1vw + 20px);
 }
 
-/* FUNDO */
-.fundoLogin {
+/* DISPLAY FLEX */
+.botoesFormLogin > *,
+.flex,
+.divTrocaLogin,
+.FormsLogin > div{
     display: flex;
-    height: 100%;
-    width: 100%;
-}
-.divLogin, .divTrocaTelaLogin {
-    flex: 1;
-}
-.divLogin{
-    background-color: var(--vermelho);
-}
+}    
 
-.fundoLogin > div, .imagemRaio{
+/* DIVS PRINCIPAIS */
+.divConteudoLogin,
+.divTrocaLogin > *:hover{
+    background-color: var(--vermelho);
+}    
+
+.divLoginPadrão > *{
     height: 100vh;
-}
+}    
+
+.divTrocaLogin{
+    flex-direction: column;
+}    
+
+/* BOTÃO TROCA LOGIN */
+.divTrocaLogin *{
+    border-radius: var(--borderRadiusBotaoTrocaTelaLogin);
+    margin: auto;
+    text-decoration: none;
+    vertical-align: middle;
+}    
+
+.divTrocaLogin > *{
+    align-items: center;
+    border: var(--vermelho) solid var(--borderDivTrocaLogin);
+    font: var(--fontBotãoLogin);
+    min-height: var(--minHeightBotãoDivTrocaLogin);
+    min-width: var(--minWidthBotãoDivTrocaLogin);
+    padding: var(--minHeightBotãoDivTrocaLogin);
+    text-align: center;
+}    
 
 /* TÍTULO */
-.divLogin h1{
+.divConteudoLogin >  h1{
+    width: var(--widthTítuloDivTrocaLogin);
+    position: absolute;
     color: var(--branco);
     font: var(--títulosGrande);
     text-align: center;
-}
+}    
 
-/* FORMS */
-.formTelaLogin{
-    background-color: var(--cinzaClaro);
-    border-radius: var(--borderRadiusDivFormsLogin);
-    padding: var(--paddingDivFormsLogin);
-    position: absolute;
-    width: var(--larguraDivFormsLogin);
-}
-.formTelaLogin form{
+/* FORMS LOGIN */
+.FormsLogin{
     align-items: center;
-    display: flex;
     flex-direction: column;
-    margin: 0 var(--marginDivFormsLogin);
-    gap: var(--EspacamentoItensDivFormsLogin);
-    justify-content: center;
-    margin-bottom: var(--EspacamentoItensDivFormsLogin);
-}
-
-.formTelaLogin form span{
-    align-items: center;
-    background-color: var(--branco);
     border-radius: var(--borderRadiusFormsLogin);
-    display: flex;
-    margin: 0 auto;
-    gap: var(--EspacamentoItensFormsLogin);
     padding: var(--paddingFormsLogin);
-    width: var(--widthFormsLogin);
-}
+    row-gap: var(--gapFormsLogin);
+}    
 
-.formTelaLogin form > span > img{
-    width: var(--widthImgFormsLogin)
-}
+.divConteudoLogin > div{
+    margin-top: calc(var(--widthTítulosGrande) + var(--margindivConteudoLogin));
+    height: min-content;
+    background-color: var(--cinzaClaro);
+    border-radius: var(--borderRadiusFormsLogin);
+}    
 
-.formTelaLogin form input{
-    border: 0;
-    width: 100%;
-}
+/* INPUTS */
+.FormsLogin > div:not(:nth-child(3)):not(:nth-child(4)){
+    vertical-align: middle;
+    background-color: var(--branco);
+    border-radius: var(--borderRadiusInputFormsLogin);
+    margin: 0 auto;
+    padding: var(--paddingInputFormsLogin);
+    gap: var(--EspacamentoItensFormsLogin);
+    min-width: var(--widthInputFormLogin);
+    height: var(--heightItensFormLogin);
+}    
 
-/* OLHO */
-.imagemOlho{
-    cursor: pointer;
-}
+.InputLogin{
+    height: var(--heightItensFormLogin);
+    border: none;
+}    
+
+.FormsLogin img{
+    width: var(--heightItensFormLogin);
+}    
+
+.FormsLogin > div .InputLogin {
+    width: calc(var(--widthInputFormLogin) - var(--heightItensFormLogin));
+}    
+
+.FormsLogin > div:has(:nth-child(3)) .InputLogin{
+    width: calc(var(--widthInputFormLogin) - 2 * var(--heightItensFormLogin));
+}    
 
 /* CHECKBOX */
-.checkboxFormLogin {
+.checkboxFormLogin{
     align-items: center;
-    background-color: inherit;
-    cursor: pointer;
-    display: flex;
-}
+    margin: auto;
+}    
 
 .checkboxFormLogin input[type="checkbox"], .checkboxFormLogin img{
-    height: var(--tamanhoCheckbox);
-    width: var(--tamanhoCheckbox);
-    cursor: pointer;
+    height: var(--widthCheckboxFormLogin);
+    width: var(--widthCheckboxFormLogin);
     margin-right: var(--marginRightCheckboxLogin);
-}
+}    
+
 .checkboxFormLogin input[type="checkbox"] {
     appearance: none;
-    background: var(--cinzaPadrao);
-}
-.checkboxFormLogin img{
-    display: none;
-}
+    background: var(--branco);
+}    
 
 .checkboxFormLogin input[type="checkbox"]:checked + label img {
     display: block;
-}
+}    
+
+.checkboxFormLogin img,
 .checkboxFormLogin input[type="checkbox"]:checked {
     display: none;
-}
+}    
 
-/* Botões */
-.divButtonFormLogin{
-    display: flex;
+/* BOTÕES */
+.botoesFormLogin{
+    width: 100%;
     flex-wrap: wrap;
-    gap: var(--gapBotoesLogin)
-}
-.divButtonFormLogin *, .divButtonFormLogin input[type="submit"]{
-    text-decoration: none;
+    row-gap: 30px;
+}    
+.botoesFormLogin > *{
+    width: 50%;
+    margin: auto;
+    align-items: center;
+    min-width: 250px;
+}    
+.botaoLogin{
+    margin: auto;
     text-align: center;
+    text-decoration: none;
+    background-color: inherit;
     border-radius: var(--borderRadiusSubmitLogin);
     border-width: var(--borderWidthSubmitLogin);
     border-style: solid;
-    margin: auto;
     width: var(--widthSubmitLogin);
-}
+}    
 
-.divButtonFormLogin input[type="submit"]{
-    border-color: var(--vermelho)
-}
-
-.divButtonFormLogin input[type="submit"]:hover{
-    background-color: var(--vermelho)
-}
-
-.buttonCadastroEmpresa{
-    border-color: var(--verdeClaro)
-}
-
-.buttonCadastroEmpresa:hover{
-    background-color: var(--verdeClaro)
-}
-
-
-.divTrocaTelaLogin{
-    display: flex;
-}
-.divTrocaTelaLogin *{
-    margin: auto;
-    text-align: center;
-    text-decoration: none;
-    font: var(--buttonLogin);
-    border: var(--vermelho) solid var(--borderWidthBotaoTrocaTelaLogin);
-    border-radius: var(--borderRadiusBotaoTrocaTelaLogin);
-    padding: var(--paddingBotaoTrocaTelaLogin);
-    width: var(--widthBotaoTrocaTelaLogin);
-}
-.divTrocaTelaLogin *:hover{
+.vermelho{
+    border-color: var(--vermelho);
+}    
+.vermelho:hover{
     background-color: var(--vermelho);
-}
-.loginCliente{
-    right: var(--DistanciaCantoDaTelaDivFormsLogin);
+}    
+
+.verde{
+    border-color: var(--verdeClaro);
+}    
+.verde:hover{
+    background-color: var(--verdeClaro);
+}    
+h1.direita{
+    right: 0;
 }
 
-.loginEmpresa{
-    left: var(--DistanciaCantoDaTelaDivFormsLogin);
+h1.esquerda{
+    left: 0;
+}
+
+@media (max-width: 1000px){
+    :root{
+        --widthInputFormLogin: calc(50vw + 50px);
+        --widthTítuloDivTrocaLogin: 100vw;
+    }
+    .divTrocaLogin{
+        flex: 1;
+    }
+    .divConteudoLogin{
+        flex: 1.5;
+        width: calc(100% - 10px);
+    }
+    
+    .divTrocaLogin > *,
+    .divConteudoLogin > div
+    {
+        position: absolute;
+        left: 0;
+    }
+
+    .divConteudoLogin > h1{
+        color: black;
+    }
+
+    .divConteudoLogin > div {
+        margin-left: 10vw;
+        margin-right: 10vw;
+    }
+
+    .divTrocaLogin > *{
+        display: block;
+        width: 30vw;
+        margin-left: calc(30vw - 10vw);
+        margin-right: 30vw;
+        margin-top: 30px;
+        border: var(--verdeClaro) solid var(--borderDivTrocaLogin)
+    }
+
+    .divTrocaLogin > *:hover{
+        background-color: var(--verdeClaro);
+    }
+
+    .FormsLogin{
+        width: 70vw;
+    }
+
+    .Desktop{
+        display: none;
+    }
+}
+
+@media (min-width: 1001px){
+    :root{
+        --widthInputFormLogin: calc(25vw + 50px);
+        --widthTítuloDivTrocaLogin: calc(21.5vh + 50vw);
+    }
+    
+    .divLoginPadrão > div{
+        flex: 1;
+    }
+    .divTrocaLogin > *{
+        border: var(--vermelho) solid var(--borderDivTrocaLogin);
+    }
+    
+    .divTrocaLogin > *:hover{
+        background-color: var(--vermelho);
+    }
+    
+    
+    div.esquerda{
+        margin-left: var(--margindivConteudoLogin);
+    }
+    
+    div.direita{
+        margin-right: var(--margindivConteudoLogin);
+    }
+    .Mobile{
+        display: none;
+    }
+    
 }

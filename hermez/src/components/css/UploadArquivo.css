@@ -1,17 +1,13 @@
-input[type='file']{
+.divInputArquivo{
+    width: 100%;
+    display: flex;
+}
+
+.divInputArquivo input[type='file']{
     display: none;
 }
 
-.botao-upload{
-    width: 450px;
-    padding: 10px;
-    border: none;
-    border-radius: 10px;
-    text-align: left;
-    background-color: var(--branco);
-    color: var(--cinzaEscuro);
-}
-
-.botao-upload:hover{
-    cursor: pointer;
+.botaoInputArquivo{
+    display: flex;
+    align-items: center;
 }

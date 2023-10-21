@@ -1,5 +1,7 @@
-import './css/CadastroUser.css';
+import '../components/css/FormsPadrao.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import fechar from '../img/fechar.svg';
 
 export default function CadastroUser() {
     const [nomeCompleto, setNomeCompleto] = useState('');
@@ -22,27 +24,6 @@ export default function CadastroUser() {
         const inputCelular = event.target.value;
         const formattedCelular = formatPhoneNumber(inputCelular);
         setCelular(formattedCelular);
-    }
-
-    function handleNomeCompletoChange(event) {
-        const nome = event.target.value;
-        setNomeCompleto(nome);
-    }
-
-    function handleEmailChange(event) {
-        const email = event.target.value;
-        setEmail(email);
-    }
-
-    function handleFuncaoChange(event) {
-        const funcao = event.target.value;
-        setFuncao(funcao);
-    }
-
-
-    function handleCargoChange(event) {
-        const selectedCargo = parseInt(event.target.value);
-        setCargo(selectedCargo);
     }
 
     function handleSubmit(event) {
@@ -103,23 +84,30 @@ export default function CadastroUser() {
     };
     return (
         <>
-            <body className='bodyCadastro'>
-                <form className='formUserCadastro' onSubmit={handleSubmit}>
-                    <h1> Cadastrar novo usuário</h1>
-                    <span htmlFor="nomeCompleto">NOME COMPLETO</span>
-                    <input
-                        id="nomeCompleto"
-                        name='nomeCompleto'
-                        onChange={handleNomeCompletoChange}
-                        value={nomeCompleto}
-                        placeholder='Nome'
-                        required
-                        type="text"
-                    />
-                    <div className='div2ColunasFormCadastro'>
+            <div className='divFormPadrao'>
+                <form className='formPadrao'  onSubmit={handleSubmit}>
+                    <Link to='../' className='botaoFecharFormPadrao'>
+                        <img src={fechar} alt='Fechar formulário' />
+                    </Link>
+                    <h1>Cadastrar novo funcionário</h1>
+                    <div className='divUmaColunaFormPadrao'>
+                        <label htmlFor="nomeCompleto">NOME COMPLETO</label>
+                        <input
+                            className="inputFormPadrao"
+                            id="nomeCompleto"
+                            name='nomeCompleto'
+                            onChange={(e) => setNomeCompleto(e.target.value)}
+                            value={nomeCompleto}
+                            placeholder='Nome'
+                            required
+                            type="text"
+                        />
+                    </div>
+                    <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <span htmlFor="senha">SENHA</span>
+                            <label htmlFor='senha'>SENHA</label>
                             <input
+                                className="inputFormPadrao"
                                 id="senha"
                                 name='senha'
                                 onChange={(e) => setSenha(e.target.value)}
@@ -130,8 +118,9 @@ export default function CadastroUser() {
                             />
                         </div>
                         <div>
-                            <span htmlFor="senhaConfirmada">CONFIRMAR SENHA</span>
+                            <label htmlFor='senhaConfirmada'>CONFIRMAR SENHA</label>
                             <input
+                                className="inputFormPadrao"
                                 id="senhaConfirmada"
                                 name='senhaConfirmada'
                                 onChange={(e) => setSenhaConfirmada(e.target.value)}
@@ -142,41 +131,39 @@ export default function CadastroUser() {
                             />
                         </div>
                     </div>
-
-                    <div className='div2ColunasFormCadastro'>
+                    <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <span htmlFor="email">E-MAIL</span>
+                            <label htmlFor='email'> E-MAIL</label>
                             <input
+                                className="inputFormPadrao"
                                 id="email"
                                 name='email'
                                 value={email}
-                                onChange={handleEmailChange}
+                                onChange={(e) => setEmail(e.target.value)}
                                 placeholder='E-mail'
                                 required
                                 type="email"
                             />
                         </div>
                         <div>
-                            <span htmlFor="funcao">
-                                FUNÇÃO
-                            </span>
+                            <label htmlFor='cnpjCadastro'>FUNÇÃO</label>
                             <input
+                                className="inputFormPadrao"
                                 id="funcaoCadastro"
                                 name='funcao'
                                 value={funcao}
                                 required
-                                onChange={handleFuncaoChange}
+                                onChange={(e) => setFuncao(e.target.value)}
                                 placeholder='Função'
                                 type="text"
                             />
                         </div>
                     </div>
-
-                    <div className='div2ColunasFormCadastro'>
+                    <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <span htmlFor="celular">CELULAR</span>
+                            <label htmlFor="celular">CELULAR</label>
                             <input
-                                autoComplete="off"
+                                className="inputFormPadrao"
                                 id="celularCadastro"
                                 maxLength="11"
                                 name='celularCadastro'
@@ -188,18 +175,26 @@ export default function CadastroUser() {
                             />
                         </div>
                         <div>
-                            <span htmlFor="cargo">CARGO</span>
-                            <select id="cargoCadastro" name='cargo' onChange={handleCargoChange}>
-                                <option value="0" selected style={{display: 'none'}}>Cargo</option>
+                            <label htmlFor='cnpjCadastro'>CARGO</label>
+                            <select
+                                className="selectFormPadrao"
+                                id="cargoCadastro"
+                                name='cargo'
+                                onChange={(e) => setCargo(e.target.value)}
+                            >
+                                <option
+                                    value="0"
+                                    style={{display: 'none'}}
+                                >
+                                    Cargo
+                                </option>
                                 <option value="1">Funcionário</option>
                                 <option value="2">Técnico</option>
-                                {(localStorage.getItem('fun_cod') === null) ? (
-                                    <option value="3">Administrador</option>
-                                ):(null)}
+                                {(localStorage.getItem('fun_cod') === null) && <option value="3">Administrador</option>}
                             </select>
                         </div>
                     </div>
-                    <div className='divEnviarCadastro'>
+                    <div className='divBotaoEnviar'>
                         <input
                             id="cadastrandoFuncionario"
                             value='Cadastrar'
@@ -208,7 +203,7 @@ export default function CadastroUser() {
                     </div>
                     {erroSenha &&    <p className="erro">{erroSenha}</p>}
                 </form>
-            </body>
+            </div>
         </>
     );
 }

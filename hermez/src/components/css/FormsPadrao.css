@@ -1,0 +1,123 @@
+:root{
+    --borderRadiusBotaoEnviar: 30px;
+    --borderRadiusFormPadrao: 20px;
+    --borderRadiusInputSelectFormPadrao: 10px;
+
+    --espacamentoDivsDuasColunas: 30px;
+    --gapFormPadrao: 20px;
+
+    --paddingBotaoEnviar: 20px;
+    --paddingDivFormPadrao: 30px;
+    --paddingFormPadrao: 20px;
+    --paddingInputSelectFormPadrao: 5px;
+
+    --widthBotaoEnviar: 30px;
+    --widthBotaoFechar: 10px;
+    --widthDivsDuasColunas: calc((100% - var(--espacamentoDivsDuasColunas)) / 2);
+    --widthFormPadrao: 90%;
+    --widthInputFormPadrao: 30px;
+    --widthItensDivUmaColuna: calc(100% - 2 * var(--paddingInputSelectFormPadrao));
+}
+
+.divFormPadrao{
+    padding: var(--paddingDivFormPadrao);
+    width: calc(100% - 2 * var(--paddingDivFormPadrao));
+}
+
+/* DISPLAY FLEX */
+.divFormPadrao,
+.divFormPadrao div,
+.divFormPadrao form{
+    display: flex;
+}
+
+/* FLEX DIRECTION COLUMN */
+.formPadrao,
+.divUmaColunaFormPadrao,
+.divDuasColunasFormPadrao div{
+    flex-direction: column;
+}
+
+.selectFormPadrao,
+.inputFormPadrao,
+.textareaFormPadrao,
+.botaoInputArquivo{
+    background-color: var(--branco);    
+    border: none;
+    border-radius: var(--borderRadiusInputSelectFormPadrao);
+    font: var(--textos);
+    padding: 0 var(--paddingInputSelectFormPadrao);
+}
+
+.selectFormPadrao,
+.inputFormPadrao::placeholder,
+.inputFormPadrao:disabled,
+.botaoInputArquivo{
+    color: var(--cinzaEscuro);
+}
+
+.selectFormPadrao,
+.selectFormPadrao{
+    appearance: none;
+    height: calc(var(--widthInputFormPadrao) + 0.1px);
+}
+
+.formPadrao{
+    background-color: var(--cinzaClaro);
+    border-radius: var(--borderRadiusFormPadrao);
+    flex-direction: column;
+    gap: var(--gapFormPadrao);
+    margin: auto;
+    padding: var(--paddingFormPadrao);
+    width: var(--widthFormPadrao);
+}
+
+.formPadrao > h1{
+    font: var(--títulosforms);
+    text-align: center;
+}
+
+.divUmaColunaFormPadrao > *{
+    width: var(--widthItensDivUmaColuna);
+}
+.divDuasColunasFormPadrao > *,
+.divDuasColunasFormPadrao > .textareaFormPadrao,
+.divDuasColunasFormPadrao > .selectFormPadrao{
+    width: var(--widthDivsDuasColunas);
+}
+.divDuasColunasFormPadrao > div:first-of-type{
+    margin-right: var(--espacamentoDivsDuasColunas);
+}
+
+
+.inputFormPadrao,
+.botaoInputArquivo{
+    height: var(--widthInputFormPadrao);
+}
+
+.textareaFormPadrao{
+    resize: vertical;
+    min-height: var(--widthInputFormPadrao);
+}
+
+.divBotaoEnviar{
+    width: 100%;
+}
+
+.divBotaoEnviar > *{
+    background-color: var(--vermelho);
+    border: none;
+    border-radius: var(--borderRadiusBotaoEnviar);
+    color: var(--branco);
+    font: var(--textos);
+    margin: 0 auto;
+    padding: calc(var(--paddingBotaoEnviar) / 3) var(--paddingBotaoEnviar);
+    min-width: var(--widthBotaoEnviar);
+}
+
+.botaoFecharFormPadrao{
+    margin-left: auto;
+}
+.botaoFecharFormPadrao *{
+    width: var(--widthBotaoFechar);
+}

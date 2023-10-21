@@ -8,16 +8,19 @@
   /* CORES */
   --branco:#FBFBFB;
   --cinzaHover: #F7F7F7;
-  --cinzaClaro: #F2F2F2;
+  --cinzaClaro: #dbd9d9;
+  /* --cinzaClaro: #F2F2F2; */
   --cinzaPadrao: #7D7D7D;
   --cinzaEscuro: #4B4B55;
   --preto:#000000;
   --vermelho:#F4324A;
   --verdeClaro:#34B132;
   /* FONTES-GERAIS */
-  --títulosGrande: 400 calc(20px + 2.5vw) "Noto Serif Bengali";
-  --buttonLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
+  --widthTítulosGrande:calc(20px + 2.5vw);
+  --títulosGrande: 400 var(--widthTítulosGrande) "Noto Serif Bengali";
+  --fontBotãoLogin: 400 calc(20px + 0.5vw) "Noto Serif Bengali";
   --fontFecharPopUpCadastro: 800 25px "Noto Serif Bengali";
+  --títulosforms: 800 20px "Noto Serif Bengali";
   --títulos: 400 20px "Noto Serif Bengali";
   --textos: 400 15px "Noto Serif Bengali";
   --textErro: 800 10px "Noto Serif Bengali";
@@ -47,7 +50,10 @@ body{
 
 a,
 button,
-input[type="button"]{
+input[type="submit"],
+.botaoInputArquivo,
+.checkboxFormLogin,
+.checkboxFormLogin *{
   cursor: pointer;
 }
 
