@@ -75,7 +75,7 @@ export default function Login(){
                                 <input
                                     className='InputLogin'
                                     onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Email da Empresa"
+                                    placeholder="Email do Funcionário"
                                     type='email'
                                     value={email}
                                 />
@@ -115,13 +115,6 @@ export default function Login(){
                                         value='Entrar'
                                         type='submit'
                                     />
-                                </div>
-                                <div>
-                                    <Link
-                                        className='botaoLogin verde'
-                                        to="../empresa/cadastro">
-                                        Cadastrar
-                                    </Link>
                                 </div>
                             </div>
                             {erroLogin && 
