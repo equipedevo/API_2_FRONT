@@ -17,7 +17,6 @@
 }
 
 /*FILTROS*/
-
 .filtros{
     display: flex;
     justify-content: space-between;
@@ -59,22 +58,19 @@
     font-weight: 700;
 }
 
-
-
-
-summary{
+.dashboard summary{
     display: flex;
     height: 50px;
 }
 
-summary p{
+.dashboard summary p{
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
 
-details:nth-child(odd){
+.dashboard details:nth-child(odd){
     background-color: var(--cinzaHover);
 }
 
@@ -114,7 +110,7 @@ details:nth-child(odd){
     gap: 20px;
 }
 
-button{
+.dashboard button{
     padding: 5px;
     border-radius: 10px;
 }
