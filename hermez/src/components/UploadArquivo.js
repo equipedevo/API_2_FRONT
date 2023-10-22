@@ -1,4 +1,4 @@
-import React, {useRef} from "react"
+import {useRef} from "react"
 import './css/UploadArquivo.css'
 
 export default function UploadArquivo({onFileSelect}){

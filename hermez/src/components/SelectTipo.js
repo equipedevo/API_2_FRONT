@@ -1,4 +1,3 @@
-import React from "react";
 import './css/Select.css';
 import down from '../img/arrow-down.png';
 import up from '../img/arrow-up.png';
