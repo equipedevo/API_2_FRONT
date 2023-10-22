@@ -59,7 +59,7 @@ export default function CadastroEmpresa() {
                 mode: 'cors'
             }).then(response => {
                 if(response.status === 200) {
-                    localStorage.setItem("novoCadastro", 'novo cadastro');
+                    localStorage.setItem("novoPopup", 'Cadastro da empresa');
                     window.location.href = '../empresa/login'
                 }
                 else {

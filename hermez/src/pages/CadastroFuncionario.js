@@ -66,7 +66,7 @@ export default function CadastroUser() {
                 mode: 'cors'
             }).then(response => {
                 if(response.status === 200) {
-                    localStorage.setItem("novoCadastro", 'novo cadastro');
+                    localStorage.setItem("novoPopup", 'Cadastro do funcionário');
                     if (localStorage.getItem('fun_cod') === null){
                         window.location.href = '../empresa'
                     }
