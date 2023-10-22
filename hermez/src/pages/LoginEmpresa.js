@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
+import Popup from '../components/Popup';
 import { Link } from 'react-router-dom';
 import './css/Login.css';
 /* IMAGEM */
@@ -15,16 +16,7 @@ export default function Login(){
     const [mostraSenha, setmostraSenha] = useState(false);
     const [senha, setSenha] = useState('');
     const [erroLogin, setErroLogin] = useState('');
-    const [cadastroSucesso, setCadastroSucesso] = useState(false);
-    const novoCadastro = localStorage.getItem("novoCadastro")
     const [statusCheckbox, setStatusCheckbox] = useState(false);
-    useEffect(() => {if (novoCadastro === "novo cadastro") {
-        setCadastroSucesso(true);
-    }}, [novoCadastro]);
-    const fecharPopUpCadastroComSucesso = () => {   
-        localStorage.removeItem("novoCadastro");
-        setCadastroSucesso(false);
-    }
     function handleSubmit(event) {
         event.preventDefault();
         if (email !== '' && senha !== ''){
@@ -144,14 +136,7 @@ export default function Login(){
                     </Link>
                 </div>
             </div>
-            {cadastroSucesso &&
-                <div className="popUpCadastroComSucesso">
-                    <div>
-                        <span onClick={() => fecharPopUpCadastroComSucesso()}>&times;</span> 
-                        <p>Cadastro realizado com sucesso!</p>
-                    </div>
-                </div>
-            }
+            <Popup/>
         </>
     );
 }

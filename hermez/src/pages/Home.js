@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PopUp from '../components/Popup';
 
 import './css/Home.css';
 import balaoChat from '../img/home/balaoChat.png';
@@ -116,6 +117,7 @@ export default function Home() {
           null
         )}
       </div>
+      <PopUp/>
     </>
   );
 }
