@@ -12,7 +12,7 @@
     --paddingInputSelectFormPadrao: 5px;
 
     --widthBotaoEnviar: 30px;
-    --widthBotaoFechar: 10px;
+    --widthBotaoFechar: 30px;
     --widthDivsDuasColunas: calc((100% - var(--espacamentoDivsDuasColunas)) / 2);
     --widthFormPadrao: 90%;
     --widthInputFormPadrao: 30px;
