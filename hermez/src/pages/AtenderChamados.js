@@ -13,7 +13,10 @@ export default function AtenderChamado() {
 
     useEffect(() => {
         fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
-            method: 'GET',
+            method: 'POST',
+            body: JSON.stringify({
+                codEmp: localStorage.getItem('emp_cod')
+            }),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -81,24 +84,27 @@ export default function AtenderChamado() {
                                 <summary>
                                     <p className="id">#{ i.cha_cod }</p>
                                     
+                                    { prioridades.map( p =>
+                                        (i.cha_prioridade === p.id) && 
+                                        <div className="prioridade">
+                                            <p className={`prioridade ${p.nome.toLowerCase()}`}>{ p.nome }</p>
+                                        </div>
+                                    )}
                                     
-                                    <p className="prioridade">{ i.cha_prioridade }</p>
-                                    
-
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
                                     <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
-                                    <p className="status">{ i.sta_nome }</p>
+                                    <p className="status">{ i.sta_nome.toUpperCase() }</p>
                                     <p className="tipo">Hardware</p>
                                 </summary>
                                 <div className="descricao">
                                     <p>{ i.cha_desc }</p>
 
                                     <div className="botoes">
-                                        <Link to='/base'>
+                                        <Link to='/funcionario'>
                                             <button className="iniciar">Iniciar</button>
                                         </Link>
-                                        <Link to='/'>
+                                        <Link to='/funcionario'>
                                             <button className="cancelar">Cancelar</button>
                                         </Link>
                                     </div>
