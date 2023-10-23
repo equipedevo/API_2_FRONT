@@ -30,7 +30,7 @@ function BotoesAdm() {
               <h1>Gerar relatórios</h1>
             </div>
           </Link>
-          <Link className='botoesHome pequeno'>
+          <Link className='botoesHome pequeno' to="visualizar-chamado">
             <div>
               <h1>Histórico meus chamados</h1>
             </div>

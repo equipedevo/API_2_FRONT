@@ -10,6 +10,7 @@ import CadastroEmpresa from './pages/CadastroEmpresa';
 import AbrirChamado from './pages/AbrirChamado';
 import AtenderChamado from './pages/AtenderChamados';
 import CadastroFuncionario from './pages/CadastroFuncionario';
+import VisualizarChamado from './pages/VisualizarChamado';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="empresa/cadastro" element={<CadastroEmpresa />}/>
         <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
+          <Route path="visualizar-chamado" element={< VisualizarChamado/>} />
           <Route path="realizar-chamado" element={< AbrirChamado />} />
           <Route path="atender-chamados" element={<AtenderChamado />} />
           <Route path="cadastrar-usuario" element={<CadastroFuncionario />} />
