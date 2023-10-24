@@ -62,7 +62,7 @@ function DropdownAdms() {
                 style={{ display: gerenciarUsuariosVisible ? 'flex' : 'none' }}
             >
                 <Link to="cadastrar-usuario">Cadastrar</Link>
-                <Link>Alterar Dados</Link>
+                <Link to="lista-funcionarios">Alterar Dados</Link>
             </div>
         </>
     );

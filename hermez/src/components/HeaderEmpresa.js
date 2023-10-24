@@ -18,7 +18,7 @@ export default function Header(){
                         <img src={cadastrarUsuario} alt='Cadastrar Dados'/>
                         Cadastrar
                     </Link>
-                    <Link className='linkHearderPadrão'>
+                    <Link to="lista-funcionarios" className='linkHearderPadrão'>
                         <img src={alterarUsuario} alt='Alterar Dados'/>
                         Alterar Dados
                     </Link>

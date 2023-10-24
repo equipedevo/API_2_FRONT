@@ -55,7 +55,7 @@ function BotoesAdm() {
               <h1>Cadastrar usuários</h1>
             </div>
           </Link>
-          <Link className='botoesHome pequeno'>
+          <Link className='botoesHome pequeno' to="lista-funcionarios">
             <div>
               <h1>Alterar dados usuários</h1>
             </div>
