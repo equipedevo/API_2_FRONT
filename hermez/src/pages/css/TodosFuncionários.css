@@ -1,0 +1,103 @@
+
+.divTodosFuncionarios{
+    width: var(--widthDivTodosFuncionarios);
+    margin: var(--marginDivTodosFuncionarios) auto;
+    border-radius: var(--borderRadiusDivTodosFuncionarios);
+    padding: var(--paddingDivTodosFuncionarios);
+    min-height: 80vh;
+    background-color: var(--cinzaClaro);
+}
+
+.divPesquisarFuncionário{
+    background-color: var(--branco);
+    border: var(--cinzaEscuro) solid 0.5px;
+    border-radius: var(--borderRadiusPesquisarFuncionário);
+    display: flex;
+    width: var(--widthDivPesquisarFuncionário);
+    margin: 0 auto;
+    padding: var(--padingDivPesquisarFuncionário) calc(var(--padingDivPesquisarFuncionário) * 2);
+}
+.divPesquisarFuncionário input{
+    border: 0;
+    border-radius: var(--borderRadiusPesquisarFuncionário);
+    appearance: none;
+    padding: 0 var(--paddingInputPesquisarFuncionário);
+    margin: 0 var(--marginInputPesquisarFuncionário);
+    height: var(--widthImgPesquisarFuncionário);
+    width: var(--widthInputPesquisarFuncionário);
+}
+.divPesquisarFuncionário img{
+    margin-left: var(--marginLeftImgPesquisarFuncionário);
+    height: var(--widthImgPesquisarFuncionário);
+    transform: scaleX(-1);
+}
+
+.divTabelaFuncionario{
+    margin-top: 50px;
+    min-height: 50vh;
+}
+
+.divListaFuncionarios{
+    width: 100%;
+}
+
+.divListaFuncionarios:has(div:nth-child(11)){
+    height: 30vw;
+    overflow-y: scroll;
+}
+
+.divTituloTabelaFuncionarios{
+    height: 30px;
+    border-bottom: var(--cinzaEscuro) solid 2px;
+}
+
+.divTituloTabelaFuncionarios *{
+    font-weight: 700;
+}
+
+.divTituloTabelaFuncionarios,
+.divListaFuncionarios > div{
+    display: flex;
+    padding: 0 20px;
+    height: 30px;
+    align-items: center;
+}
+
+.divTituloTabelaFuncionarios > *:first-child,
+.divListaFuncionarios > div > *:first-child{
+    min-width: 280px;
+    width:70%
+}
+.divTituloTabelaFuncionarios > *:last-child,
+.divListaFuncionarios > div > *:last-child{
+    min-width: 120px;
+    width:30%
+}
+
+.divListaFuncionarios > div:nth-child(odd) {
+    background-color: var(--branco); /* Estilização para divs ímpares */
+  }
+
+.divListaFuncionarios > div:nth-child(even) {
+background-color: var(--cinzaClaro); /* Estilização para divs pares */
+}
+
+:root{
+    --marginLeftImgPesquisarFuncionário: calc((var(--widthImgPesquisarFuncionário) + 2px + var(--marginInputPesquisarFuncionário)) * -1);
+    --widthImgPesquisarFuncionário: 20px;
+
+    --widthInputPesquisarFuncionário: calc(var(--widthDivPesquisarFuncionário) - 2 * var(--marginInputPesquisarFuncionário) - var(--paddingInputPesquisarFuncionário));
+    --paddingInputPesquisarFuncionário: 10px;
+    --marginInputPesquisarFuncionário: 1px;
+    
+    --borderRadiusPesquisarFuncionário: 20px;
+   
+    --widthDivPesquisarFuncionário: 70vw;
+    --padingDivPesquisarFuncionário: 5px;
+
+
+    --marginDivTodosFuncionarios: 20px;
+    --borderRadiusDivTodosFuncionarios: 20px;
+    --paddingDivTodosFuncionarios: 20px;
+    --widthDivTodosFuncionarios: calc(80vw - var(--paddingDivTodosFuncionarios));
+}
