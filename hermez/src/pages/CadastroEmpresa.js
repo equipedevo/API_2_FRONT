@@ -90,6 +90,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="razaoSocial"
+                                    maxLength="20"
                                     name='razaoSocial'
                                     onChange={(e) => setRazaoSocial(e.target.value)}
                                     value={razaoSocial}
@@ -103,7 +104,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="cnpjCadastro"
-                                    maxLength="18"
+                                    maxLength="30"
                                     name='cnpjCadastro'
                                     onChange={handleCnpjChange}
                                     value={cnpj}
@@ -119,6 +120,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="senha"
+                                    maxLength="72"
                                     name='senha'
                                     onChange={(e) => setSenha(e.target.value)}
                                     value={senha}
@@ -132,6 +134,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="senhaConfirmada"
+                                    maxLength="72"
                                     name='senhaConfirmada'
                                     onChange={(e) => setSenhaConfirmada(e.target.value)}
                                     value={senhaConfirmada}
@@ -146,6 +149,7 @@ export default function CadastroEmpresa() {
                             <input
                                 className="inputFormPadrao"
                                 id="email"
+                                maxLength="48"
                                 name='email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

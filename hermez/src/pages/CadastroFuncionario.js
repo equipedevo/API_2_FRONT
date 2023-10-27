@@ -95,6 +95,7 @@ export default function CadastroUser() {
                         <input
                             className="inputFormPadrao"
                             id="nomeCompleto"
+                            maxLength="30"
                             name='nomeCompleto'
                             onChange={(e) => setNomeCompleto(e.target.value)}
                             value={nomeCompleto}
@@ -109,6 +110,7 @@ export default function CadastroUser() {
                             <input
                                 className="inputFormPadrao"
                                 id="senha"
+                                maxLength='9'
                                 name='senha'
                                 onChange={(e) => setSenha(e.target.value)}
                                 value={senha}
@@ -122,6 +124,7 @@ export default function CadastroUser() {
                             <input
                                 className="inputFormPadrao"
                                 id="senhaConfirmada"
+                                maxLength='9'
                                 name='senhaConfirmada'
                                 onChange={(e) => setSenhaConfirmada(e.target.value)}
                                 value={senhaConfirmada}
@@ -133,11 +136,12 @@ export default function CadastroUser() {
                     </div>
                     <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <label htmlFor='email'> E-MAIL</label>
+                            <label htmlFor='emailCadastro'> E-MAIL</label>
                             <input
                                 className="inputFormPadrao"
-                                id="email"
-                                name='email'
+                                id="emailCadastro"
+                                maxLength='30'
+                                name='emailCadastro'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder='E-mail'
@@ -146,11 +150,12 @@ export default function CadastroUser() {
                             />
                         </div>
                         <div>
-                            <label htmlFor='cnpjCadastro'>FUNÇÃO</label>
+                            <label htmlFor='funcaoCadastro'>FUNÇÃO</label>
                             <input
                                 className="inputFormPadrao"
                                 id="funcaoCadastro"
-                                name='funcao'
+                                maxLength='15'
+                                name='funcaoCadastro'
                                 value={funcao}
                                 required
                                 onChange={(e) => setFuncao(e.target.value)}
@@ -161,11 +166,11 @@ export default function CadastroUser() {
                     </div>
                     <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <label htmlFor="celular">CELULAR</label>
+                            <label htmlFor="celularCadastro">CELULAR</label>
                             <input
                                 className="inputFormPadrao"
                                 id="celularCadastro"
-                                maxLength="11"
+                                maxLength="16"
                                 name='celularCadastro'
                                 onChange={handleCelularChange}
                                 value={celular}
@@ -175,11 +180,11 @@ export default function CadastroUser() {
                             />
                         </div>
                         <div>
-                            <label htmlFor='cnpjCadastro'>CARGO</label>
+                            <label htmlFor='cargoCadastro'>CARGO</label>
                             <select
                                 className="selectFormPadrao"
                                 id="cargoCadastro"
-                                name='cargo'
+                                name='cargoCadastro'
                                 onChange={(e) => setCargo(e.target.value)}
                             >
                                 <option
