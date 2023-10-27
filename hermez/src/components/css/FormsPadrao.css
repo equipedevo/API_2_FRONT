@@ -92,7 +92,8 @@
 
 .inputFormPadrao,
 .botaoInputArquivo{
-    height: var(--widthInputFormPadrao);
+    min-height: var(--widthInputFormPadrao);
+    margin-top: auto;
 }
 
 .textareaFormPadrao{
