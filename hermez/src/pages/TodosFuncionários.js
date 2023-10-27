@@ -61,7 +61,7 @@ export default function Funcionarios() {
                     </div>
                     <form className="divListaFuncionarios" >
                         {localStorage.getItem('fun_cod') !== null ?(listaFuncionarios.map
-                            (funcionario => funcionario.car_cod !== null &&
+                            (funcionario => funcionario.car_cod !== 3 &&
                                 <div key={funcionario.fun_cod}>
                                     <p>{funcionario.fun_nome}</p>
                                     <select className="selectTabelaFuncionarios">
