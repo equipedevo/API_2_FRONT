@@ -60,6 +60,7 @@
     margin-top: var(--marginTopDivItemsFuncao);
     padding: var(--paddingTopDivItemsFuncao);
     position: absolute;
+    z-index: 2;
 }
 
 .alignCenter{
