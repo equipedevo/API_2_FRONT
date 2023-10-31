@@ -53,7 +53,7 @@ export default function Funcionarios() {
                     <img src={lupa} alt="lupa"/>
                 </div>
                 {erro && <p className="erro">{erro}</p>}
-                <div className="divTabelaFuncionario">
+                <div className="divTabelaFuncionarios">
                     <div className="divTituloTabelaFuncionarios">
                         <p>Nome do Usuário</p>
                         <p>Serviço</p>
@@ -63,7 +63,9 @@ export default function Funcionarios() {
                         {localStorage.getItem('fun_cod') !== null ?(listaFuncionarios.map
                             (funcionario => funcionario.car_cod !== 3 &&
                                 <div key={funcionario.fun_cod}>
-                                    <p>{funcionario.fun_nome}</p>
+                                    <div>
+                                        <p>{funcionario.fun_nome}</p>
+                                    </div>
                                     <select className="selectTabelaFuncionarios">
                                         <option value={funcionario.car_cod} style={{display: 'none'}}>{
                                             funcionario.car_cod === 1 ? 'Funcionário':
