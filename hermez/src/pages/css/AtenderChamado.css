@@ -1,11 +1,35 @@
+:root{
+    --borderRadiusBotaoEnviar: 30px;
+    --borderRadiusFormPadrao: 20px;
+    --borderRadiusInputSelectFormPadrao: 10px;
+
+    --espacamentoDivsDuasColunas: 30px;
+    --gapFormPadrao: 20px;
+
+    /* --paddingBotaoEnviar: 20px; */
+    --paddingDivFormPadrao: 30px;
+    --paddingFormPadrao: 20px;
+    /* --paddingInputSelectFormPadrao: 5px; */
+
+    /* --widthBotaoEnviar: 30px; */
+    /* --widthBotaoFechar: 10px; */
+    --widthDivsDuasColunas: calc((100% - var(--espacamentoDivsDuasColunas)) / 2);
+    --widthFormPadrao: 90%;
+    --widthInputFormPadrao: 30px;
+    /* --widthItensDivUmaColuna: calc(100% - 2 * var(--paddingInputSelectFormPadrao)); */
+}
+
 .dashboard{
     display: flex;
     flex-direction: column;
     align-items: center;
 
     width: 80%;
-    margin: 5% 10%;
-    padding: 2%;
+    /* margin: 5% 10%; */
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-left: 5%;
+    padding: 5%;
 
     border-radius: 20px;
     background-color: var(--cinzaClaro);
@@ -14,23 +38,26 @@
 .dashboard h1{
     font: var(--títulos);
     margin-bottom: 5%;
+    font-weight: bold;
 }
 
 /*FILTROS*/
-.filtros{
+.filtros_cima{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-left: 20%;
     margin-bottom: 5%;
+    margin-top: 50px;
 }
 
-.filtros div{
-    width: auto;
+.filtros_cima div{
+    width: 10%;
 }
 
-.filtro select{
-    width: 300px;
+.filtros_cima select{
+    width: 90px;
 }
 
 
@@ -72,6 +99,10 @@
 
 .dashboard details:nth-child(odd){
     background-color: var(--cinzaHover);
+}
+
+.dashboard label{
+    font-weight: bold;
 }
 
 .id{
