@@ -7,7 +7,7 @@ import './css/AtenderChamado.css';
 
 export default function AtenderChamado() {
     const [database, setDatabase] = useState([]);
-    const [prioridade, setPrioridade] = useState(0);
+    const [data, setData] = useState(0);
     // const [periodo, setPeriodo] = useState('');
     const [funcionario, setFuncionario] = useState('');
     const [status, setStatus] = useState(0);
@@ -16,7 +16,10 @@ export default function AtenderChamado() {
 
     useEffect(() => {
         fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
-            method: 'GET',
+            method: 'POST',
+            body: JSON.stringify({
+                codEmp: localStorage.getItem('emp_cod')
+            }),
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -30,6 +33,8 @@ export default function AtenderChamado() {
         .catch((error) => console.log(error));
 
     }, []);
+
+    console.log(database)
 
     // DateRangeComp(() => {
     //     fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
@@ -56,14 +61,14 @@ export default function AtenderChamado() {
 
                             <div className='divDuasColunasFormPadrao'>
 
-                                <div className="filtros" id='prioridade'>
-                                    <label>PRIORIDADE</label>
+                                <div className="filtros" id='data'>
+                                    <label>data</label>
 
                                         <select
-                                        id='selectPrioridade'
-                                        name='Prioridade'
-                                        value={prioridade}
-                                        onChange={(e) => setPrioridade(e.target.value)}
+                                        id='selectdata'
+                                        name='data'
+                                        value={data}
+                                        onChange={(e) => setData(e.target.value)}
                                         >
 
                                             <option
@@ -158,8 +163,7 @@ export default function AtenderChamado() {
                     <section className="tabela">
                         <div className="header">
                             <p className="id">ID</p>
-                            <p className="prioridade">PRIORIDADE</p>
-                            <p className="data">PERÍODO</p>
+                            <p className="data">DATA</p>
                             <p className="cliente">FUNCIONÁRIO</p>
                             <p className="titulo">TÍTULO</p>
                             <p className="status">STATUS</p>
@@ -172,7 +176,7 @@ export default function AtenderChamado() {
                                     <p className="id">#{ i.cha_cod }</p>
                                     
                                     
-                                    <p className="prioridade">{ i.cha_prioridade }</p>
+                                    <p className="data">{ i.cha_data }</p>
                                     
 
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
