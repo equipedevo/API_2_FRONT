@@ -118,3 +118,177 @@
 //         </>
 //     )
 // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// .dashboard{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+
+//     width: 80%;
+//     margin: 5% 10%;
+//     padding: 2%;
+
+//     border-radius: 20px;
+//     background-color: var(--cinzaClaro);
+// }
+
+// .dashboard h1{
+//     font: var(--títulos);
+//     margin-bottom: 5%;
+// }
+
+// /*FILTROS*/
+// .filtros{
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     width: 100%;
+//     margin-bottom: 5%;
+// }
+
+// .filtros div{
+//     width: auto;
+// }
+
+// .filtro select{
+//     width: 300px;
+// }
+
+
+
+// /*TABELA DE CHAMADOS*/
+// .tabela{
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+// }
+
+// .header{
+//     display: flex;
+//     justify-content: space-between;
+//     height: 50px;
+
+//     border-bottom: 0.5px solid var(--cinzaEscuro);
+// }
+
+// .header p{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+//     font-weight: 700;
+// }
+
+// .dashboard summary{
+//     display: flex;
+//     justify-content: space-between;
+//     height: 50px;
+// }
+
+// .dashboard summary p{
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+
+// }
+
+// .dashboard details:nth-child(even){
+//     background-color: var(--cinzaHover);
+// }
+
+// .id{
+//     width: 50px;
+// }
+
+// .data, .cliente {
+//     width: 140px;
+// }
+
+// .titulo{
+//     width: 300px;
+//     text-align: center;
+// }
+
+// .status, .tipo, .prioridade{
+//     width: 200px;
+// }
+
+// .prioridade{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// .prioridade p{
+//     width: auto;
+//     padding: 0 5%;
+//     border-radius: 10px;
+//     color: var(--branco);
+// }
+
+// .alta {
+//     background-color: var(--vermelho);
+// }
+
+// .média {
+//     background-color: #EF9A4C;
+// }
+
+// .baixa {
+//     background-color: #E5D123;
+// }
+
+// .descricao{
+//     padding: 10px;
+// }
+
+// .descricao p{
+//     margin-bottom: 2%;
+//     text-align: justify;
+
+// }
+
+
+
+
+
+// .botoes{
+//     display: flex;
+//     justify-content: center;
+//     gap: 20px;
+// }
+
+// .dashboard button{
+//     padding: 5px;
+//     border-radius: 10px;
+// }
+
+
+// .iniciar{
+//     border: 0.5px solid #EF9A4C;
+//     background-color: transparent;
+// }
+// .iniciar:hover{
+//     background-color: #EF9A4C;
+// }
+
+
+// .cancelar{
+//     border: 0.5px solid var(--vermelho);
+//     background-color: transparent;
+// }
+// .cancelar:hover{
+//     background-color: var(--vermelho);
+// }

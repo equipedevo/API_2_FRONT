@@ -7,11 +7,18 @@ import './css/AtenderChamado.css';
 
 export default function AtenderChamado() {
     const [database, setDatabase] = useState([]);
-    const [data, setData] = useState(0);
+    // const [data, setData] = useState(0);
+    const [prioridade, setPrioridade] = useState(0);
     // const [periodo, setPeriodo] = useState('');
     const [funcionario, setFuncionario] = useState('');
     const [status, setStatus] = useState(0);
     const [tipo, setTipo] = useState(0);
+
+    const prioridades = [
+        {id: 1, nome: 'Alta'},
+        {id: 2, nome: 'Média'},
+        {id: 3, nome: 'Baixa'}
+    ];
 
 
     useEffect(() => {
@@ -36,20 +43,6 @@ export default function AtenderChamado() {
 
     console.log(database)
 
-    // DateRangeComp(() => {
-    //     fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     .then((response) => response.json())
-    //     .catch((error) => console.log(error));
-    // }, []);
-
-    console.log(database)
-
     return (
         <>
                 <div className="dashboard">
@@ -61,14 +54,14 @@ export default function AtenderChamado() {
 
                             <div className='divDuasColunasFormPadrao'>
 
-                                <div className="filtros" id='data'>
-                                    <label>data</label>
+                                <div className="filtros" id='prioridade'>
+                                    <label>PRIORIDADE</label>
 
                                         <select
                                         id='selectdata'
                                         name='data'
-                                        value={data}
-                                        onChange={(e) => setData(e.target.value)}
+                                        value={prioridade}
+                                        onChange={(e) => setPrioridade(e.target.value)}
                                         >
 
                                             <option
@@ -163,6 +156,7 @@ export default function AtenderChamado() {
                     <section className="tabela">
                         <div className="header">
                             <p className="id">ID</p>
+                            <p className="prioridade">PRIORIDADE</p>
                             <p className="data">DATA</p>
                             <p className="cliente">FUNCIONÁRIO</p>
                             <p className="titulo">TÍTULO</p>
@@ -175,24 +169,27 @@ export default function AtenderChamado() {
                                 <summary>
                                     <p className="id">#{ i.cha_cod }</p>
                                     
+                                    { prioridades.map( p =>
+                                        (i.cha_prioridade === p.id) && 
+                                        <div className="prioridade">
+                                            <p className={`prioridade ${p.nome.toLowerCase()}`}>{ p.nome }</p>
+                                        </div>
+                                    )}
                                     
-                                    <p className="data">{ i.cha_data }</p>
-                                    
-
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
                                     <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
-                                    <p className="status">{ i.sta_nome }</p>
+                                    <p className="status">{ i.sta_nome.toUpperCase() }</p>
                                     <p className="tipo">Hardware</p>
                                 </summary>
                                 <div className="descricao">
                                     <p>{ i.cha_desc }</p>
 
                                     <div className="botoes">
-                                        <Link to='/base'>
+                                        <Link to='/funcionario'>
                                             <button className="iniciar">Iniciar</button>
                                         </Link>
-                                        <Link to='/'>
+                                        <Link to='/funcionario'>
                                             <button className="cancelar">Cancelar</button>
                                         </Link>
                                     </div>
