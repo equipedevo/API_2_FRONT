@@ -9,12 +9,19 @@
   --branco:#FBFBFB;
   --cinzaHover: #F7F7F7;
   --cinzaClaro: #dbd9d9;
-  /* --cinzaClaro: #F2F2F2; */
+  --cinzaFundo: #F2F2F2;
   --cinzaPadrao: #7D7D7D;
   --cinzaEscuro: #4B4B55;
   --preto:#000000;
   --vermelho:#F4324A;
+  --vermelhoClaro: #FF516C;
+  --cancelado: #FF5151;
+  --reaberto: #EF9A4C;
+  --andamento: #e9d62d;
+  --concluido: #61E366;
   --verdeClaro:#34B132;
+  --aberto: #5182FF;
+  --azulClaro: #9BA5B7;
   /* FONTES-GERAIS */
   --widthTítulosGrande:calc(20px + 2.5vw);
   --títulosGrande: 400 var(--widthTítulosGrande) "Noto Serif Bengali";

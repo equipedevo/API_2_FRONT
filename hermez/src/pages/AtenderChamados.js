@@ -92,7 +92,7 @@ export default function AtenderChamado() {
                                     )}
                                     
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
-                                    <p className="cliente">{ i.fun_nome }</p>
+                                    <p className="nome">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
                                     <p className="status">{ i.sta_nome.toUpperCase() }</p>
                                     <p className="tipo">Hardware</p>
