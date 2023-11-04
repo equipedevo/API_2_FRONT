@@ -76,7 +76,7 @@ export default function Funcionarios() {
                                         <option value="2">Técnico</option>  
                                     </select>
                                     <div className="divButtonTabelaFuncionarios">
-                                        <Link to="">
+                                        <Link to={`../editar-funcionario?idfuncionario=${funcionario.fun_cod}`}>
                                             Editar
                                         </Link>
                                     </div>
