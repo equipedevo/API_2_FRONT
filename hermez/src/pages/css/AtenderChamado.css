@@ -42,7 +42,10 @@
 }
 
 /*FILTROS*/
-.filtros_cima{
+
+/* ESTOU USANDO O FORMS PADRAO PARA ESTILIZAR */
+
+/* .filtros_cima{
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +61,7 @@
 
 .filtros_cima select{
     width: 300px;
-}
+} */
 
 
 
