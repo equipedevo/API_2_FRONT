@@ -22,11 +22,13 @@ export default function AtenderChamado() {
     ];
 
 
+    useEffect(() => {
         fetch(process.env.REACT_APP_URL_CHAMADO_FILTRO, {
             method: 'POST',
             body: JSON.stringify({
-                codEmp: localStorage.getItem('emp_cod'),
+                emp_cod: localStorage.getItem('emp_cod'),
                 priori: prioridade,
+                func: funcionario,
                 status: status,
                 tipo: tipo
             }),
@@ -66,7 +68,7 @@ export default function AtenderChamado() {
                                         >
 
                                             <option
-                                                value='0'
+                                                value=''
                                                 style={{display: 'block'}}
                                             >
                                             </option>
@@ -116,7 +118,7 @@ export default function AtenderChamado() {
                                         >
                                         
                                             <option
-                                                value='0'
+                                                value=''
                                                 style={{display: 'block'}}
                                             >
                                             </option>
@@ -141,7 +143,7 @@ export default function AtenderChamado() {
                                             >
                                             
                                                 <option
-                                                    value='0'
+                                                    value=''
                                                     style={{display: 'block'}}
                                                 >
                                                 </option>
@@ -150,6 +152,15 @@ export default function AtenderChamado() {
                                             
                                             </select>
                                     </div>
+                                </div>
+                            </div>
+                            <div className="divFormsPadrao">
+                                <div className="divBotaoEnviar">
+                                    <input
+                                        id="aplicarFiltros"
+                                        value="Aplicar Filtro(s)"
+                                        type="Submit"
+                                    />
                                 </div>
                             </div>
                         </form>
