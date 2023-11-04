@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, {useState} from "react";
 import { Link } from 'react-router-dom';
 import './css/AtenderChamado.css';
 // import DateRangeComp from './components/DateRangeComp.jsx'
@@ -15,17 +15,20 @@ export default function AtenderChamado() {
     const [tipo, setTipo] = useState(0);
 
     const prioridades = [
-        {id: 1, nome: 'Alta'},
+        {id: 1, nome: 'Baixa'},
         {id: 2, nome: 'Média'},
-        {id: 3, nome: 'Baixa'}
+        {id: 3, nome: 'Alta'},
+        {id: 4, nome: 'Urgente'}
     ];
 
 
-    useEffect(() => {
-        fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
+        fetch(process.env.REACT_APP_URL_CHAMADO_FILTRO, {
             method: 'POST',
             body: JSON.stringify({
-                codEmp: localStorage.getItem('emp_cod')
+                codEmp: localStorage.getItem('emp_cod'),
+                priori: prioridade,
+                status: status,
+                tipo: tipo
             }),
             headers: {
                 'Accept': 'application/json',
@@ -38,8 +41,6 @@ export default function AtenderChamado() {
         })
 
         .catch((error) => console.log(error));
-
-    }, []);
 
     console.log(database)
 
@@ -58,8 +59,8 @@ export default function AtenderChamado() {
                                     <label>PRIORIDADE</label>
 
                                         <select
-                                        id='selectdata'
-                                        name='data'
+                                        id='selectPrioridade'
+                                        name='prioridade'
                                         value={prioridade}
                                         onChange={(e) => setPrioridade(e.target.value)}
                                         >
@@ -72,7 +73,7 @@ export default function AtenderChamado() {
                                             <option value='1'>Baixa</option>
                                             <option value='2'>Média</option>
                                             <option value='3'>Alta</option>
-                                            <option value='4'>Urgente</option>
+                                            {/* <option value='4'>Urgente</option> */}
 
                                         </select>
                                 </div>
@@ -91,9 +92,10 @@ export default function AtenderChamado() {
 
                                         <option
                                         value='0'
-                                        style={{displau: 'block'}}
+                                        style={{display: 'block'}}
                                         >   
                                         </option>
+                                        <option value='caique'>Caique</option>
 
                                     </select>
                                 </div>   
@@ -118,11 +120,12 @@ export default function AtenderChamado() {
                                                 style={{display: 'block'}}
                                             >
                                             </option>
-                                            <option value='1'>Em Andamento</option>
-                                            <option value='2'>Aberto</option>
-                                            <option value='3'>Fechado</option>
-                                            <option value='4'>Cancelado</option>
-                                            <option value='5'>Concluído</option>
+                                            <option value='Aberto'>Aberto</option>
+                                            <option value='Em andamento'>Em Andamento</option>
+                                            <option value='Reaberto'>Reaberto</option>
+                                            <option value='Cancelado'>Cancelado</option>
+                                            <option value='Concluido'>Concluído</option>
+                                            <option value='Fechado'>Fechado</option>
 
                                         </select>
                                 </div>
@@ -142,8 +145,8 @@ export default function AtenderChamado() {
                                                     style={{display: 'block'}}
                                                 >
                                                 </option>
-                                                <option value='1'>Hardware</option>
-                                                <option value='2'>Software</option>
+                                                <option value='Hardware'>Hardware</option>
+                                                <option value='Software'>Software</option>
                                             
                                             </select>
                                     </div>
