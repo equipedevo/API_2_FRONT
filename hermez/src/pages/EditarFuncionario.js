@@ -1,8 +1,10 @@
 import { useEffect, useState, } from "react";
 import '../components/css/FormsPadrao.css';
+import Popup from '../components/Popup';
 import { Link } from 'react-router-dom';
 import fechar from '../img/fechar.svg';
 import papelComLapis from '../img/menu/papelComLapis.png';
+import lupa from '../img/lupa.png';
 
 export default function EditarFuncionario() {
     const queryParameters = new URLSearchParams(window.location.search);
@@ -41,18 +43,17 @@ export default function EditarFuncionario() {
             })}
         })
     }, []);
-    const [mudaNome,    setMudaNome] = useState(true);
-    const [mudaEmail,   setMudaEmail] = useState(true);
-    const [mudaFuncao,  setMudaFuncao] = useState(true);
-    const [mudaCelular, setMudaCelular] = useState(true);
-    const [mudaCargo,   setMudaCargo] = useState(true);
 
-    
-    const [novoNome,    setNovoNome] = useState('');
-    const [novoEmail,   setNovoEmail] = useState('');
-    const [novaFuncao,  setNovaFuncao] = useState('');
+    const [mudaNome, setMudaNome] = useState(false);
+    const [mudaEmail, setMudaEmail] = useState(false);
+    const [mudaFuncao, setMudaFuncao] = useState(false);
+    const [mudaCelular, setMudaCelular] = useState(false);
+    const [mudaCargo, setMudaCargo] = useState(false);
+    const [novoNome, setNovoNome] = useState('');
+    const [novoEmail, setNovoEmail] = useState('');
+    const [novaFuncao, setNovaFuncao] = useState('');
     const [novoCelular, setNovoCelular] = useState('');
-    const [novoCargo,   setNovoCargo] = useState('');
+    const [novoCargo, setNovoCargo] = useState('');
 
     // Função para formatar telefone
     function formatPhoneNumber(phone) {
@@ -60,15 +61,72 @@ export default function EditarFuncionario() {
         phone = phone.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
         return phone;
     }
-
     function handleCelularChange(event) {
         const inputCelular = event.target.value;
         const formattedCelular = formatPhoneNumber(inputCelular);
         setNovoCelular(formattedCelular);
     }
 
+    /* Função Que Altera os Dados*/
     function handleSubmit(event) {
         event.preventDefault();
+        const alterar = []
+        if (mudaNome == true){
+            alterar.push(novoNome)
+        }
+        else{
+            alterar.push(nome)
+        }
+        if (mudaFuncao == true){
+            alterar.push(novaFuncao)
+        }
+        else{
+            alterar.push(funcao)
+        }
+        if (mudaEmail == true){
+            alterar.push(novoEmail)
+        }
+        else{
+            alterar.push(email)
+        }
+        if (mudaCelular == true){
+            alterar.push(novoCelular)
+        }
+        else{
+            alterar.push(celular)
+        }
+        if (mudaCargo == true){
+            alterar.push(novoCargo)
+        }
+        else{
+            alterar.push(cargo)
+        }
+        setErro('');
+        /* ALTERAR DADOS DO FUNCIONÁRIO */
+        fetch(process.env.REACT_APP_ATUALIZAR_DADO_FUNCIONARIO, {
+            method:"POST",
+            body: JSON.stringify({
+                fun_cod: queryParameters.get("idfuncionario"),
+                nome: alterar[0],
+                funcao: alterar[1],
+                email: alterar[2],
+                celular: alterar[3],
+                car_cod: alterar[4]
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        }).then(response => {
+            if(response.status === 200) {
+                localStorage.setItem("novoPopup", 'Alteração dos dados do funcionário')
+                window.location.href = ''
+            }
+            else{(response.json()).then(data => {
+                setErro(data.msg);
+            })}
+        })
     }
     return (
         <>
@@ -83,19 +141,20 @@ export default function EditarFuncionario() {
                         <div>
                             <input
                                 className="inputFormPadrao"
-                                disabled={mudaNome ? true : false}
+                                disabled={mudaNome ? false: true }
                                 id="nome"
                                 maxLength="30"
                                 name='nome'
                                 onChange={(e) => setNovoNome(e.target.value)}
                                 placeholder='Insira um novo nome'
+                                required
                                 type="text"
-                                value={mudaNome ? nome : novoNome}
+                                value={mudaNome ? novoNome: nome}
                             />
                             <img
                                 alt='Editar dados'
                                 onClick={() => setMudaNome(!mudaNome)}
-                                src={mudaNome? papelComLapis: fechar}
+                                src={mudaNome? fechar: papelComLapis}
                             />
                         </div>
                     </div>
@@ -105,17 +164,18 @@ export default function EditarFuncionario() {
                             <div>
                                 <input
                                     className="inputFormPadrao"
-                                    disabled={mudaEmail ? true : false}
+                                    disabled={mudaEmail ? false: true }
                                     id="emailCadastro"
                                     maxLength='30'
                                     name='emailCadastro'
                                     onChange={(e) => setNovoEmail(e.target.value)}
                                     placeholder='Insira um novo E-mail'
+                                    required
                                     type="email"
-                                    value={mudaEmail? email : novoEmail}
+                                    value={mudaEmail? novoEmail : email}
                                 />
                                 <img
-                                    src={mudaEmail? papelComLapis: fechar}
+                                    src={mudaEmail? fechar: papelComLapis}
                                     alt='Editar dados'
                                     onClick={() => setMudaEmail(!mudaEmail)}
                                 />
@@ -126,17 +186,18 @@ export default function EditarFuncionario() {
                             <div>
                                 <input
                                     className="inputFormPadrao"
-                                    disabled={mudaFuncao ? true : false}
+                                    disabled={mudaFuncao ? false: true}
                                     id="funcaoCadastro"
                                     maxLength='15'
                                     name='funcaoCadastro'
                                     onChange={(e) => setNovaFuncao(e.target.value)}
                                     placeholder='Insira uma nova Função'
+                                    required
                                     type="text"
-                                    value={mudaFuncao? funcao : novaFuncao}
+                                    value={mudaFuncao? novaFuncao: funcao}
                                 />
                                 <img
-                                    src={mudaFuncao? papelComLapis: fechar}
+                                    src={mudaFuncao? fechar: papelComLapis}
                                     alt='Editar dados'
                                     onClick={() => setMudaFuncao(!mudaFuncao)}
                                 />
@@ -149,19 +210,20 @@ export default function EditarFuncionario() {
                             <div>
                                 <input
                                     className="inputFormPadrao"
-                                    disabled={mudaCelular ? true : false}
+                                    disabled={mudaCelular ? false: true  }
                                     id="celularCadastro"
                                     maxLength="16"
                                     name='celularCadastro'
                                     onChange={handleCelularChange}
                                     placeholder='Insira um novo celular'
+                                    required
                                     type="text"
-                                    value={mudaCelular ? celular : novoCelular}
+                                    value={mudaCelular ? novoCelular: celular}
                                 />
                                 <img
                                     alt='Editar dados'
                                     onClick={() => setMudaCelular(!mudaCelular)}
-                                    src={mudaCelular? papelComLapis: fechar}
+                                    src={mudaCelular? fechar: papelComLapis}
                                 />
                             </div>
                         </div>
@@ -169,22 +231,6 @@ export default function EditarFuncionario() {
                             <label htmlFor='cargoCadastro'>CARGO</label>
                             <div>
                                 {mudaCargo ? 
-                                    <input
-                                        className="inputFormPadrao"
-                                        disabled
-                                        id="cargoCadastro"
-                                        maxLength="16"
-                                        name='cargoCadastro'
-                                        type="text"
-                                        value={
-                                            cargo === 1 ? 'Funcionário':
-                                            cargo === 2 ? 'Técnico':
-                                            localStorage.getItem('fun_cod') === null &&
-                                            cargo === 3 ? 'Administrador':
-                                            'Unknown'
-                                        }
-                                    />
-                                    :
                                     <select
                                         className="selectFormPadrao"
                                         id="cargoCadastro"
@@ -201,48 +247,68 @@ export default function EditarFuncionario() {
                                         <option value="2">Técnico</option>
                                         {(localStorage.getItem('fun_cod') === null) && <option value="3">Administrador</option>}
                                     </select>
+                                    :
+                                    <input
+                                        className="inputFormPadrao"
+                                        disabled
+                                        id="cargoCadastro"
+                                        maxLength="16"
+                                        name='cargoCadastro'
+                                        type="text"
+                                        value={
+                                            cargo === 1 ? 'Funcionário':
+                                            cargo === 2 ? 'Técnico':
+                                            localStorage.getItem('fun_cod') === null &&
+                                            cargo === 3 ? 'Administrador':
+                                            'Unknown'
+                                        }
+                                    />
                                 }
                                 <img
                                     alt='Editar dados'
                                     onClick={() => setMudaCargo(!mudaCargo)}
-                                    src={mudaCargo? papelComLapis: fechar}
+                                    src={mudaCargo? fechar: papelComLapis}
                                 />
                             </div>
                         </div>
                     </div>
-                    {/*
-                    <div className='divDuasColunasFormPadrao'>
+                    {/* <div className='divDuasColunasFormPadrao'>
                         <div>
-                            <label htmlFor='senha'>SENHA</label>
-                            <input
-                                className="inputFormPadrao"
-                                id="senha"
-                                maxLength='9'
-                                name='senha'
-                                onChange={(e) => setSenha(e.target.value)}
-                                value={senha}
-                                placeholder='Senha'
-                                required
-                                type="password"
-                            />
+                            <label htmlFor='senhaAntiga'>SENHA ANTIGA</label>
+                            <div>
+                                <input
+                                    className="inputFormPadrao"
+                                    disabled={senhaCorreta ? true: false}
+                                    id="senhaAntiga"
+                                    maxLength='9'
+                                    name='senhaAntiga'
+                                    onChange={(e) => setSenhaAntiga(e.target.value)}
+                                    value={senhaAntiga}
+                                    placeholder='Senha Antiga'
+                                    type="password"
+                                />
+                                <img
+                                    alt='Editar dados'
+                                    onClick={() => VerificarSenha()}
+                                    src={senhaCorreta? fechar: lupa}
+                                />
+                            </div>
                         </div>
                         <div>
-                            <label htmlFor='senhaConfirmada'>CONFIRMAR SENHA</label>
-                            <input
-                                className="inputFormPadrao"
-                                id="senhaConfirmada"
-                                maxLength='9'
-                                name='senhaConfirmada'
-                                onChange={(e) => setSenhaConfirmada(e.target.value)}
-                                value={senhaConfirmada}
-                                placeholder='Senha'
-                                required
-                                type="password"
-                            />
+                            <label htmlFor='senhaConfirmada'>NOVA SENHA</label>
+                                <input
+                                    className="inputFormPadrao"
+                                    id="senhaConfirmada"
+                                    disabled={senhaCorreta ? false: true  }
+                                    maxLength='9'
+                                    name='senhaConfirmada'
+                                    onChange={(e) => setSenhaNova(e.target.value)}
+                                    value={senhaNova}
+                                    placeholder='Senha'
+                                    type="password"
+                                    />
                         </div>
-                    </div>
-                    */}
-                    {/*     
+                    </div> */}
                     <div className='divBotaoEnviar'>
                         <input
                             id="cadastrandoFuncionario"
@@ -250,10 +316,10 @@ export default function EditarFuncionario() {
                             type='submit'
                         />
                     </div>
-                    */}
-                    {erro &&    <p className="erro">{erro}</p>}
+                    {erro && <p className="erro">{erro}</p>}
                 </form>
             </div>
+            <Popup/>
         </>
     );
 }
