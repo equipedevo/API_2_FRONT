@@ -17,6 +17,8 @@
     --widthFormPadrao: 90%;
     --widthInputFormPadrao: 30px;
     --widthItensDivUmaColuna: calc(100% - 2 * var(--paddingInputSelectFormPadrao));
+
+    --EspacoDireitaBotaoEditar: 10px;
 }
 
 .divFormPadrao{
@@ -77,9 +79,39 @@
     text-align: center;
 }
 
-.divUmaColunaFormPadrao > *{
+.divUmaColunaFormPadrao > *:first-child,
+.divUmaColunaFormPadrao > *:last-child + *:not(:nth-child(2)){
     width: var(--widthItensDivUmaColuna);
 }
+
+/* EDITAR */
+.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:first-child,
+.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > select:first-child{
+    width: var(--widthItensDivUmaColuna);
+}
+
+.divUmaColunaFormPadrao > div:last-child:has(:nth-child(2)),
+.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > select:first-child{
+    width: 100%;
+}
+
+.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:first-child{
+    width: calc(100% - var(--EspacoDireitaBotaoEditar));
+}
+
+.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:first-child,
+.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:first-child{
+    margin-right: calc(-1 * var(--widthBotaoFechar) - var(--EspacoDireitaBotaoEditar));
+    margin-top: auto;
+}
+
+.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:last-child,
+.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:last-child{
+    height: var(--widthBotaoFechar);
+    cursor: pointer;
+    margin-top: auto;
+}
+
 .divDuasColunasFormPadrao > *
 {
     width: var(--widthDivsDuasColunas);
