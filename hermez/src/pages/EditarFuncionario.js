@@ -43,7 +43,34 @@ export default function EditarFuncionario() {
             })}
         })
     }, []);
-
+    const [senhaAntiga, setSenhaAntiga] = useState('');
+    const [senhaNova,   setSenhaNova] = useState('');
+    const [senhaCorreta, setSenhaCorreta] = useState(false);
+    function VerificarSenha(){
+        fetch(process.env.REACT_APP_TROCAR_SENHA, {
+            method:"POST",
+            body: JSON.stringify({
+                email: email,
+                senha: senhaAntiga,
+                novaSenha: senhaAntiga
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        }).then(response => {
+            if(response.status === 200) {
+                setErro('')
+                setSenhaCorreta(!senhaCorreta)
+            }
+            else{(response.json()).then(data => {
+                setErro(data.msg);
+            })}
+        })
+        return;
+    }
+    
     const [mudaNome, setMudaNome] = useState(false);
     const [mudaEmail, setMudaEmail] = useState(false);
     const [mudaFuncao, setMudaFuncao] = useState(false);
@@ -70,6 +97,37 @@ export default function EditarFuncionario() {
     /* Função Que Altera os Dados*/
     function handleSubmit(event) {
         event.preventDefault();
+        if (senhaCorreta==true){
+            const criterioDeAceitacao = (
+                senhaNova.length >= 8 &&
+                /[A-Z]/.test(senhaNova) &&
+                /[!@#$%^&*()_+{}[\]:;<>,.?~\\-]/.test(senhaNova) &&
+                /\d/.test(senhaNova)
+            );
+            if (!criterioDeAceitacao){
+                setErro('A senha nova não atende os critérios de cadastro! (No mínimo 8 caracteres, tendo pelo menos: 1 número; 1 letra maiúscula; 1 caracter especial!');
+                return;
+            }
+            fetch(process.env.REACT_APP_TROCAR_SENHA, {
+                method:"POST",
+                body: JSON.stringify({
+                    email: email,
+                    senha: senhaAntiga,
+                    novaSenha: senhaNova
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                mode: 'cors'
+            }).then(response => {
+                if(response.status !== 200) {
+                    (response.json()).then(data => {
+                        setErro(data.msg);
+                    })
+                }
+            })
+        }
         const alterar = []
         if (mudaNome == true){
             alterar.push(novoNome)
@@ -272,7 +330,7 @@ export default function EditarFuncionario() {
                             </div>
                         </div>
                     </div>
-                    {/* <div className='divDuasColunasFormPadrao'>
+                    <div className='divDuasColunasFormPadrao'>
                         <div>
                             <label htmlFor='senhaAntiga'>SENHA ANTIGA</label>
                             <div>
@@ -308,7 +366,7 @@ export default function EditarFuncionario() {
                                     type="password"
                                     />
                         </div>
-                    </div> */}
+                    </div>
                     <div className='divBotaoEnviar'>
                         <input
                             id="cadastrandoFuncionario"
