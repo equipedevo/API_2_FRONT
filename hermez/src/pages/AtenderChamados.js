@@ -15,7 +15,7 @@ export default function AtenderChamado() {
         fetch(process.env.REACT_APP_URL_CHAMADO_GET_TODOS, {
             method: 'POST',
             body: JSON.stringify({
-                codEmp: localStorage.getItem('emp_cod')
+                emp_cod: localStorage.getItem('emp_cod')
             }),
             headers: {
                 'Accept': 'application/json',
@@ -92,7 +92,7 @@ export default function AtenderChamado() {
                                     )}
                                     
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
-                                    <p className="nome">{ i.fun_nome }</p>
+                                    <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
                                     <p className="status">{ i.sta_nome.toUpperCase() }</p>
                                     <p className="tipo">Hardware</p>
@@ -101,7 +101,7 @@ export default function AtenderChamado() {
                                     <p>{ i.cha_desc }</p>
 
                                     <div className="botoes">
-                                        <Link to='/funcionario'>
+                                        <Link to='/funcionario/chats'>
                                             <button className="iniciar">Iniciar</button>
                                         </Link>
                                         <Link to='/funcionario'>

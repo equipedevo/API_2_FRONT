@@ -1,5 +1,13 @@
-.container, .lista, .chat, .icone, .conversa, .resposta{
+.container, .lista, .chat, .icone, .resposta{
     display: flex;
+}
+
+.conversa-aberta, .conversa-default{
+    display: flex;
+}
+
+.conversa-fechada{
+    display: none;
 }
 
 .container{
@@ -66,7 +74,19 @@
 
 
 /* Conversa */
-.conversa{
+.conversa-default{
+    justify-content: center;
+    align-items: center;
+    flex: 65%;
+    background-color: var(--cinzaClaro);
+}
+
+.conversa-default p{
+    color: #aaa;
+    font-style: italic;
+}
+
+.conversa-aberta{
     position: relative;
     flex: 65%;
     flex-direction: column;
@@ -75,7 +95,7 @@
     border-left: 0.5px solid var(--cinzaEscuro);
 }
 
-.conversa::before{
+.conversa-aberta::before{
     content: ' ';
     position: absolute;
     top: 0;
@@ -84,7 +104,7 @@
     height: 100%;
 }
 
-.conversa img{
+.conversa-aberta img{
     width: 1rem;
 }
 
