@@ -129,36 +129,11 @@ export default function EditarFuncionario() {
             })
         }
         const alterar = []
-        if (mudaNome == true){
-            alterar.push(novoNome)
-        }
-        else{
-            alterar.push(nome)
-        }
-        if (mudaFuncao == true){
-            alterar.push(novaFuncao)
-        }
-        else{
-            alterar.push(funcao)
-        }
-        if (mudaEmail == true){
-            alterar.push(novoEmail)
-        }
-        else{
-            alterar.push(email)
-        }
-        if (mudaCelular == true){
-            alterar.push(novoCelular)
-        }
-        else{
-            alterar.push(celular)
-        }
-        if (mudaCargo == true){
-            alterar.push(novoCargo)
-        }
-        else{
-            alterar.push(cargo)
-        }
+        alterar.push(mudaNome? novoNome: nome)
+        alterar.push(mudaFuncao? novaFuncao: funcao)
+        alterar.push(mudaEmail? novoEmail: email)
+        alterar.push(mudaCelular? novoCelular: celular)
+        alterar.push(mudaCargo? novoCargo: cargo)
         setErro('');
         /* ALTERAR DADOS DO FUNCIONÁRIO */
         fetch(process.env.REACT_APP_ATUALIZAR_DADO_FUNCIONARIO, {
