@@ -34,7 +34,7 @@
 /* FLEX DIRECTION COLUMN */
 .formPadrao,
 .divUmaColunaFormPadrao,
-.divDuasColunasFormPadrao div{
+.divDuasColunasFormPadrao > div{
     flex-direction: column;
 }
 
@@ -80,9 +80,8 @@
 .divUmaColunaFormPadrao > *{
     width: var(--widthItensDivUmaColuna);
 }
-.divDuasColunasFormPadrao > *,
-.divDuasColunasFormPadrao > .textareaFormPadrao,
-.divDuasColunasFormPadrao > .selectFormPadrao{
+.divDuasColunasFormPadrao > *
+{
     width: var(--widthDivsDuasColunas);
 }
 .divDuasColunasFormPadrao > div:first-of-type{
