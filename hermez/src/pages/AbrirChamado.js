@@ -26,6 +26,7 @@ export default function AbrirChamado() {
                     desc: descricao,
                     local: local,
                     titulo: titulo,
+                    serv: tipo,
                     codFun: localStorage.getItem("fun_cod"),
                     codEmp: localStorage.getItem("emp_cod")
                     //imagem: img
@@ -117,8 +118,13 @@ export default function AbrirChamado() {
                                 >
                                     Selecione
                                 </option>
-                                <option value="1">Hardware</option>
-                                <option value="2">Software</option>
+                                <option value="manuntenção de cpu">Manuntenção de Cpu</option>
+                                <option value="Consertar sua Placa-mãe">Consertar sua Placa-mãe</option>
+                                <option value="reestabelecer internet">Reestabelecer Internet</option>
+                                <option value="computador quebrou">Computador Quebrou</option>
+                                <option value="computador lento">Computador Lento</option>
+                                <option value="Outros.">Outros</option>
+
                             </select>
                         </div>
 

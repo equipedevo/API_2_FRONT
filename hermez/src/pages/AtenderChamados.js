@@ -29,6 +29,21 @@ export default function AtenderChamado() {
 
         .catch((error) => console.log(error));
 
+        fetch(process.env.REACT_APP_URL_CHAMADO_ATRIBUIR, {
+            method: 'POST',
+            body: JSON.stringify({
+                fun_cod: localStorage.getItem('fun_cod'),
+                cha_cod: localStorage.getItem('cha_cod')
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+
     }, []);
 
     console.log(database)
@@ -102,7 +117,7 @@ export default function AtenderChamado() {
 
                                     <div className="botoes">
                                         <Link to='/funcionario/chats'>
-                                            <button className="iniciar">Iniciar</button>
+                                            <button className="iniciar" onClick={() => localStorage.setItem('cha_cod', i.cha_cod)}>Iniciar</button>
                                         </Link>
                                         <Link to='/funcionario'>
                                             <button className="cancelar">Cancelar</button>
