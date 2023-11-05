@@ -12,6 +12,7 @@ import AtenderChamado from './pages/AtenderChamados';
 import CadastroFuncionario from './pages/CadastroFuncionario';
 import TodosFuncionários from './pages/TodosFuncionários';
 import EditarFuncionario from './pages/EditarFuncionario';
+import Chats from './pages/Chats';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="empresa/cadastro" element={<CadastroEmpresa />}/>
         <Route path="/funcionario" element={<Base />}>
           <Route index element={<Home />} />
+          <Route path="chats" element={< Chats/>} />
           <Route path="realizar-chamado" element={< AbrirChamado />} />
           <Route path="atender-chamados" element={<AtenderChamado />} />
           <Route path="cadastrar-usuario" element={<CadastroFuncionario />} />

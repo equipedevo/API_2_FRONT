@@ -167,6 +167,7 @@ details[open] .listaTabelaChamados:after {
 .iniciar{
     background-color: transparent;
     border: 0.5px solid #EF9A4C;
+    background-color: transparent;
 }
 .iniciar:hover{
     background-color: #EF9A4C;
@@ -175,6 +176,7 @@ details[open] .listaTabelaChamados:after {
 .cancelar{
     background-color: transparent;
     border: 0.5px solid var(--vermelho);
+    background-color: transparent;
 }
 .cancelar:hover{
     background-color: var(--vermelho);

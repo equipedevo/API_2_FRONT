@@ -1,0 +1,255 @@
+.container, .lista, .chat, .icone, .resposta{
+    display: flex;
+}
+
+.conversa-aberta, .conversa-default{
+    display: flex;
+}
+
+.conversa-fechada{
+    display: none;
+}
+
+.container{
+    justify-content: center;
+    position: relative;
+    max-width: 100%;
+    height: 90vh;
+}
+
+
+/* Lista de chats */
+.lista{
+    flex-direction: column;
+    position: relative;
+    flex: 35%;
+    overflow-y: auto;
+    background-color: var(--cinzaFundo);
+}
+
+.chat{
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    cursor: pointer;
+    border-bottom: 0.5px solid var(--cinzaEscuro);
+}
+
+.chat:hover{
+    background-color: var(--cinzaHover);
+}
+
+.chat.active{
+    background-color: #cfcfcf;
+}
+
+.icone{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icone img{
+    width: 50%;
+}
+
+.icone .status{
+    width: fit-content;
+}
+
+.tituloChat{
+    font: var(--títulos);
+}
+
+.subtitulo{
+    color: #aaa;
+    font-size: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+
+
+/* Conversa */
+.conversa-default{
+    justify-content: center;
+    align-items: center;
+    flex: 65%;
+    background-color: var(--cinzaClaro);
+}
+
+.conversa-default p{
+    color: #aaa;
+    font-style: italic;
+}
+
+.conversa-aberta{
+    position: relative;
+    flex: 65%;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--cinzaClaro);
+    border-left: 0.5px solid var(--cinzaEscuro);
+}
+
+.conversa-aberta::before{
+    content: ' ';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.conversa-aberta img{
+    width: 1rem;
+}
+
+.tituloConv{
+    font-size: 25px;
+    text-align: center;
+    margin: 5px 0;
+}
+
+.mensagens{
+    position: relative;
+    width: auto;
+    height: calc(100% - 90px);
+    padding: 20px;
+    overflow-y: auto;
+}
+
+
+.balao{
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.mensagem{
+    position: relative;
+    right: 0;
+    max-width: 65%;
+    padding: 10px;
+    text-align: right;
+    font-size: 1em;
+    color: var(--branco);
+    background-color: var(--vermelhoClaro);
+}
+
+.mensagem::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -10px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(
+        45deg,
+        var(--vermelhoClaro) 50%,
+        var(--vermelhoClaro) 0%,
+        transparent,
+        transparent 50%);
+}
+
+.minha_msg{
+    justify-content: flex-end;
+}
+
+.pessoa_msg{
+    justify-content: flex-start;
+}
+
+.pessoa_msg .mensagem{
+    background-color: var(--cinzaPadrao);
+}
+
+.pessoa_msg .mensagem::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -10px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(
+        225deg,
+        var(--cinzaPadrao) 50%,
+        var(--cinzaPadrao) 0%,
+        transparent,
+        transparent 50%);
+}
+
+.resposta{
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+    width: auto;
+    height: 40px;
+    margin: 10px 20px 10px 20px;
+    border-radius: 10px;
+    background-color: var(--cinzaFundo);
+}
+
+.campoResposta{
+    width: 90%;
+    padding: 0 5px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+
+
+
+/* STATUS */
+    .aberto{
+        color: var(--aberto);
+    }
+
+    .andamento{
+        color: var(--andamento);
+    }
+
+    .reaberto{
+        color: var(--reaberto);
+    }
+
+    .cancelado {
+        color: var(--cancelado);
+    }
+
+    .concluido{
+        color: var(--concluido);
+    }
+
+    .fechado{
+        color: var(--cinzaEscuro);
+    }
+
+
+
+
+/* SCROLLBAR */
+/* Works on Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: var(--cinzaPadrao) transparent;
+  }
+  
+  /* Works on Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--cinzaPadrao);
+    border-radius: 20px;
+  }
