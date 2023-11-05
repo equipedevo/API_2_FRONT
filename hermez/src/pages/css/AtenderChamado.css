@@ -1,68 +1,132 @@
 /*TABELA DE CHAMADOS*/
-.tabela{
-    display: flex;
+.tabelaChamados,
+.tabelaChamados > div:last-child{
     flex-direction: column;
+}
+.tabelaChamados{
+    overflow-x: auto;
+}
+.tabelaChamados,
+.tabelaChamados > div,
+.listaTabelaChamados,
+.divPrioridade,
+.divDescricaoChamado,
+.divDescricaoChamado > div{
+    display: flex;
+}
+.tabelaChamados > div,
+.tabelaChamados > div > details{
+    min-width: 1000px;
     width: 100%;
 }
 
-.header{
-    border-bottom: 0.5px solid var(--cinzaEscuro);
+.tituloTabelaChamados{
+    border-bottom: var(--borderListaFuncionarios);
     display: flex;
-    height: 50px;
-    justify-content: space-between;
+    width: 100%;
+}
+.tituloTabelaChamados *{
+    font-weight: var(--fontHeightTituloTabelaFuncionarios);
+    text-align: center;
 }
 
-.header p{
-    align-items: center;
+.tituloTabelaChamados > *:first-child,
+.listaTabelaChamados > *:first-child{
+    min-width: 50px;
+    width: 5%;
+}
+.tituloTabelaChamados > *:nth-child(2),
+.listaTabelaChamados > *:nth-child(2){
+    min-width: 150px;
+    width: 15%;
+}
+.tituloTabelaChamados > *:nth-child(3),
+.listaTabelaChamados > *:nth-child(3){
+    min-width: 100px;
+    width: 10%;
+}
+.tituloTabelaChamados > *:nth-child(4),
+.listaTabelaChamados > *:nth-child(4){
+    min-width: 200px;
+    width: 20%;
+}
+.tituloTabelaChamados > *:nth-child(5),
+.listaTabelaChamados > *:nth-child(5){
+    min-width: 200px;
+    width: 20%;
+}
+.tituloTabelaChamados > *:nth-child(6),
+.listaTabelaChamados > *:nth-child(6){
+    min-width: 100px;
+    width: 10%;
+}
+.tituloTabelaChamados > *:last-child,
+.listaTabelaChamados > *:last-child{
+    min-width: 200px;
+    width: 20%;
+}
+
+
+.tabelaChamados > div > details:nth-child(odd){
+    background-color: var(--branco); /* DIVS IMPARES*/
+}
+
+.tabelaChamados > div > details:nth-child(even){
+    background-color: var(--cinzaClaro); /* DIVS PARES */
+}
+/* ABRIR DETALHES */
+.listaTabelaChamados::-webkit-details-marker {
+    display: none;
+}
+
+.listaTabelaChamados {
+    min-width: 100%;
     display: flex;
-    font-weight: 700;
+    position: relative;
+    cursor: pointer;
+    height: auto;
+    align-items: center;
+    list-style: none;
+    outline: 0;
+}
+
+.listaTabelaChamados:after { 
+    content: "+";
+    position: absolute;
+    top: auto;
+    font: var(--fontFecharPopUpCadastro);
+    transition: 200ms linear;
+}
+@media (max-width: 999px){
+    .listaTabelaChamados:after {
+        left: 0;
+    }
+}
+@media (min-width: 1000px){
+    .listaTabelaChamados:after {
+        right: 0;
+    }
+}
+
+
+details[open] .listaTabelaChamados:after {
+    transform: rotate(45deg);
+}
+
+.listaTabelaChamados > * {
+    text-align: center;}
+
+/* DIV PRIORIDADE */
+.divPrioridade{
+    align-items: center;
     justify-content: center;
 }
-
-.dashboard summary{
-    display: flex;
-    height: 50px;
-    justify-content: space-between;
-}
-
-.dashboard summary p{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-
-}
-
-.dashboard details:nth-child(odd){
-    background-color: var(--cinzaHover);
-}
-
-.id{
-    width: 50px;
-}
-
-.data, .cliente {
-    width: 140px;
-}
-
-.titulo{
-    width: 200px;
-}
-
-.status, .tipo, .prioridade{
-    width: 200px;
-}
-
-.prioridade{
-    align-items: center;
-    display: flex;
-    justify-content: center;
-}
-
-.prioridade p{
-    border-radius: 10px;
+.divPrioridade p{
+    border-radius: var(--borderRadiusDivButtonTabelaFuncionarios);
     color: var(--branco);
-    padding: 0 5%;
-    width: auto;
+    padding: var(--paddingDivButtonTabelaFuncionarios);
+    margin: var(--paddingDivButtonTabelaFuncionarios);
+    text-decoration: none;
 }
 
 .urgente{
@@ -80,24 +144,24 @@
     background-color: #E5D123;
 }
 
-.descricao{
-    padding: 10px;
+/* DIV DESCRIÇÃO */
+.divDescricaoChamado{
+    flex-direction: column;
 }
-
-.descricao p{
-    margin-bottom: 2%;
-    text-align: justify;
+.divDescricaoChamado,
+.divDescricaoChamado > *{
+    width: 100%;
 }
-
-.botoes{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+.divDescricaoChamado > div > *{
+    width: calc(15% + 20px);
+    text-decoration: none;
+    text-align: center;
 }
-
-.dashboard button{
-    padding: 5px;
-    border-radius: 10px;
+.divDescricaoChamado > div > *:first-child{
+    margin: auto;
+}
+.divDescricaoChamado > div > *:last-child{
+    margin-right: auto;
 }
 
 .iniciar{
