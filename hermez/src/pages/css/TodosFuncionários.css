@@ -1,6 +1,7 @@
 :root{
     --borderDivPesquisarFuncionário: var(--cinzaEscuro) solid 0.5px;
-    --borderListaFuncionarios: var(--cinzaEscuro) solid 2px;
+    --borderListaFuncionarios: var(--cinzaEscuro) solid var(--borderWidthListaFuncionarios);
+    --borderWidthListaFuncionarios: 2px;
     --borderSelectTabelaFuncionarios: 1.5px;
 
     --borderRadiusSelectTabelaFuncionarios: 5px;
@@ -17,7 +18,7 @@
 
     --minHeightDivTodosFuncionarios: 80vh;
     --minHeightDivListaFuncionarios: 200px;
-    --minHeightLinhasListaFuncionarios: 25px;
+    --minHeightLinhasListaFuncionarios: 30px;
     
     --heightDivListaFuncionarios: 60vh;
     --heightDivTabelaFuncionario: 50vh;
@@ -28,10 +29,9 @@
     --paddingInputPesquisarFuncionário: 10px;
     --padingDivPesquisarFuncionário: 5px 10px;
 
-    --widthColuna1TabelaFuncionarios: calc(45% - var(--MarginColunasTabelaFuncionarios));
-    --widthColuna2TabelaFuncionarios: 25%;
-    --widthColuna3TabelaFuncionarios: calc(30% - var(--MarginColunasTabelaFuncionarios));
-    --widthDivTodosFuncionarios: calc(80vw - var(--paddingDivTodosFuncionarios));
+    --widthColuna1TabelaFuncionarios: calc(40% - var(--MarginColunasTabelaFuncionarios));
+    --widthColuna2TabelaFuncionarios: 20%;
+    --widthColuna3TabelaFuncionarios: calc(40% - var(--MarginColunasTabelaFuncionarios));
     --widthDivPesquisarFuncionário: 70vw;
     --widthImgPesquisarFuncionário: 20px;
     --widthInputPesquisarFuncionário: calc(var(--widthDivPesquisarFuncionário) - 2 * var(--marginInputPesquisarFuncionário) - var(--paddingInputPesquisarFuncionário));
@@ -76,22 +76,28 @@
 /* TABELA FUNCIONÁRIOS */
 .divListaFuncionarios{
     width: 100%;
+    border-bottom: var(--borderListaFuncionarios);
 }
 
 /* COLUNA E LINHAS DA TABELA */
 .divTituloTabelaFuncionarios,
 .divListaFuncionarios > div{
     align-items: center;
+    text-align: center;
     display: flex;
     height: 100%;
 }
 
-.divListaFuncionarios > div *:has(:not(:nth-child(2))){
+.bordasLaterais{
     align-items: center;
     border-left: var(--borderListaFuncionarios);
     border-right: var(--borderListaFuncionarios);
     display: flex;
     min-height: var(--minHeightLinhasListaFuncionarios);
+}
+
+.bordasLaterais > *{
+    margin: auto;
 }
 
 .divListaFuncionarios > div:nth-child(odd) {
@@ -149,16 +155,17 @@
 }
 
 .divButtonTabelaFuncionarios > *{
-    background-color: var(--vermelho);
     border-radius: var(--borderRadiusDivButtonTabelaFuncionarios);
     color: var(--branco);
-    margin: auto;
     padding: var(--paddingDivButtonTabelaFuncionarios);
     text-decoration: none;
 }
 
-.divButtonTabelaFuncionarios > *:hover{
-    background-color: var(--vermelhoEscuro);
+.vermelho{
+    background-color: var(--vermelho)
+}
+.vermelho:hover{
+    background-color: var(--vermelhoEscuro)
 }
 
 .divTituloTabelaFuncionarios > *:first-child,
@@ -177,13 +184,19 @@
     width: var(--widthColuna3TabelaFuncionarios);
 }
 
-@media (max-width: 690px){
+@media (max-width: 569px){
     :root{
-        --widthTabelaFuncionarios: calc(var(--minWidthColuna1TabelaFuncionarios) + var(--minWidthColuna2TabelaFuncionarios) + var(--minWidthColuna3TabelaFuncionarios) + 2 * var(--MarginColunasTabelaFuncionarios) + 4 * var(--widthBorderSelectTabelaFuncionarios) + 2px);
+        --widthTabelaFuncionarios: calc(
+            var(--minWidthColuna1TabelaFuncionarios) +
+            var(--minWidthColuna2TabelaFuncionarios) +
+            var(--minWidthColuna3TabelaFuncionarios) +
+            2 * var(--MarginColunasTabelaFuncionarios) + 
+            4 * var(--borderWidthListaFuncionarios));
         --minWidthColuna1TabelaFuncionarios: 200px;
         --minWidthColuna2TabelaFuncionarios: 100px;
-        --minWidthColuna3TabelaFuncionarios: 150px;
+        --minWidthColuna3TabelaFuncionarios: 250px;
         --MarginColunasTabelaFuncionarios: 10px;
+        --widthDivTodosFuncionarios: calc(100vw - 2 * var(--paddingDivTodosFuncionarios));
     }
 
     .divTabelaFuncionarios{
@@ -210,11 +223,22 @@
     }
 }
 
-@media (min-width: 691px){
+@media (min-width: 570px){
     :root{
         --MarginColunasTabelaFuncionarios: 15px;
     }
     .divListaFuncionarios{
         overflow-x: hidden;
+    }
+}
+
+@media (min-width: 570px) and (max-width:780px){
+    :root{
+    --widthDivTodosFuncionarios: calc(100vw - 2 * var(--paddingDivTodosFuncionarios));
+    }
+}
+@media (min-width: 781px){
+    :root{
+    --widthDivTodosFuncionarios: calc(80vw - 2 * var(--paddingDivTodosFuncionarios));
     }
 }
