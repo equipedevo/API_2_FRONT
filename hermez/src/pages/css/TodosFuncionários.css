@@ -161,10 +161,10 @@
     text-decoration: none;
 }
 
-.vermelho{
+.divListaFuncionarios .vermelho{
     background-color: var(--vermelho)
 }
-.vermelho:hover{
+.divListaFuncionarios .vermelho:hover{
     background-color: var(--vermelhoEscuro)
 }
 
