@@ -106,8 +106,8 @@
     margin-top: auto;
 }
 
-.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:last-child,
-.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:last-child{
+.divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > img:last-child,
+.divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > img:last-child{
     width: var(--widthIconesBotaoEditar);
     max-height: var(--widthIconesBotaoEditar);
     cursor: pointer;
