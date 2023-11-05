@@ -1,12 +1,12 @@
-.container, .lista, .chat, .icone, .resposta{
+.container, .container .lista, .container .chat, .container .icone, .container .resposta{
     display: flex;
 }
 
-.conversa-aberta, .conversa-default{
+.container .conversa-aberta, .container .conversa-default{
     display: flex;
 }
 
-.conversa-fechada{
+.container .conversa-fechada{
     display: none;
 }
 
@@ -19,7 +19,7 @@
 
 
 /* Lista de chats */
-.lista{
+.container .lista{
     flex-direction: column;
     position: relative;
     flex: 35%;
@@ -27,7 +27,7 @@
     background-color: var(--cinzaFundo);
 }
 
-.chat{
+.container .chat{
     align-items: center;
     width: 100%;
     padding: 1rem 0;
@@ -35,33 +35,33 @@
     border-bottom: 0.5px solid var(--cinzaEscuro);
 }
 
-.chat:hover{
+.container .chat:hover{
     background-color: var(--cinzaHover);
 }
 
-.chat.active{
+.container .chat.active{
     background-color: #cfcfcf;
 }
 
-.icone{
+.container .icone{
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.icone img{
+.container .icone img{
     width: 50%;
 }
 
-.icone .status{
+.container .icone .status{
     width: fit-content;
 }
 
-.tituloChat{
+.container .tituloChat{
     font: var(--títulos);
 }
 
-.subtitulo{
+.container .subtitulo{
     color: #aaa;
     font-size: 1rem;
     display: -webkit-box;
@@ -71,22 +71,20 @@
 }
 
 
-
-
 /* Conversa */
-.conversa-default{
+.container .conversa-default{
     justify-content: center;
     align-items: center;
     flex: 65%;
     background-color: var(--cinzaClaro);
 }
 
-.conversa-default p{
+.container .conversa-default p{
     color: #aaa;
     font-style: italic;
 }
 
-.conversa-aberta{
+.container .conversa-aberta{
     position: relative;
     flex: 65%;
     flex-direction: column;
@@ -95,7 +93,7 @@
     border-left: 0.5px solid var(--cinzaEscuro);
 }
 
-.conversa-aberta::before{
+.container .conversa-aberta::before{
     content: ' ';
     position: absolute;
     top: 0;
@@ -104,17 +102,17 @@
     height: 100%;
 }
 
-.conversa-aberta img{
+.container .conversa-aberta img{
     width: 1rem;
 }
 
-.tituloConv{
+.container .tituloConv{
     font-size: 25px;
     text-align: center;
     margin: 5px 0;
 }
 
-.mensagens{
+.container .mensagens{
     position: relative;
     width: auto;
     height: calc(100% - 90px);
@@ -122,15 +120,14 @@
     overflow-y: auto;
 }
 
-
-.balao{
+.container .balao{
     position: relative;
     display: flex;
     width: 100%;
     margin: 10px 0;
 }
 
-.mensagem{
+.container .mensagem{
     position: relative;
     right: 0;
     max-width: 65%;
@@ -141,7 +138,7 @@
     background-color: var(--vermelhoClaro);
 }
 
-.mensagem::before{
+.container .mensagem::before{
     content: '';
     position: absolute;
     bottom: 0;
@@ -156,19 +153,19 @@
         transparent 50%);
 }
 
-.minha_msg{
+.container .minha_msg{
     justify-content: flex-end;
 }
 
-.pessoa_msg{
+.container .pessoa_msg{
     justify-content: flex-start;
 }
 
-.pessoa_msg .mensagem{
+.container .pessoa_msg .mensagem{
     background-color: var(--cinzaPadrao);
 }
 
-.pessoa_msg .mensagem::before{
+.container .pessoa_msg .mensagem::before{
     content: '';
     position: absolute;
     top: 0;
@@ -183,7 +180,7 @@
         transparent 50%);
 }
 
-.resposta{
+.container .resposta{
     position: relative;
     justify-content: space-around;
     align-items: center;
@@ -194,7 +191,7 @@
     background-color: var(--cinzaFundo);
 }
 
-.campoResposta{
+.container .campoResposta{
     width: 90%;
     padding: 0 5px;
     border: none;
@@ -202,54 +199,47 @@
     background-color: transparent;
 }
 
-
-
-
 /* STATUS */
-    .aberto{
+    .container .aberto{
         color: var(--aberto);
     }
 
-    .andamento{
+    .container .andamento{
         color: var(--andamento);
     }
 
-    .reaberto{
+    .container .reaberto{
         color: var(--reaberto);
     }
 
-    .cancelado {
+    .container .cancelado {
         color: var(--cancelado);
     }
 
-    .concluido{
+    .container .concluido{
         color: var(--concluido);
     }
 
-    .fechado{
+    .container .fechado{
         color: var(--cinzaEscuro);
     }
-
-
-
-
 /* SCROLLBAR */
 /* Works on Firefox */
-* {
+   .container * {
     scrollbar-width: thin;
     scrollbar-color: var(--cinzaPadrao) transparent;
   }
   
   /* Works on Chrome, Edge, and Safari */
-  *::-webkit-scrollbar {
+  .container ~ *::-webkit-scrollbar {
     width: 5px;
   }
   
-  *::-webkit-scrollbar-track {
+  .container ~ *::-webkit-scrollbar-track {
     background: transparent;
   }
   
-  *::-webkit-scrollbar-thumb {
+  .container ~ *::-webkit-scrollbar-thumb {
     background-color: var(--cinzaPadrao);
     border-radius: 20px;
   }
