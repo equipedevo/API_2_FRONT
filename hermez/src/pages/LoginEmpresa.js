@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useEffect, useState } from "react";
 import Popup from '../components/Popup';
 import { Link } from 'react-router-dom';
 import './css/Login.css';
@@ -11,6 +11,32 @@ import perfil from '../img/login/perfil.png';
 import check from '../img/login/check.png';
 
 export default function Login(){
+    useEffect(() => {
+        const lembrar = localStorage.getItem('lembrar');
+        const empCod = localStorage.getItem('emp_cod');
+        const email = localStorage.getItem('email');
+        const nome = localStorage.getItem('nome');
+        const carCod = localStorage.getItem('car_cod');
+        const celular = localStorage.getItem('celular');
+        const funCod = localStorage.getItem('fun_cod');
+        const funcao = localStorage.getItem('funcao');
+        const cnpj = localStorage.getItem('cnpj');
+    
+        if (lembrar !== null && empCod !== null && email !== null && nome !== null) {
+            if (carCod !== null && celular !== null && funCod !== null && funcao !== null) {
+                if (cnpj === null) {
+                    window.location.href = '/funcionario';
+                    return;
+                }
+            } else if (cnpj !== null) {
+                window.location.href = '/empresa';
+                return;
+            }
+        }
+    
+        localStorage.clear();
+    }, []);
+    
     /* MOSTRAR SENHA */
     const [email, setEmail] = useState('');
     const [mostraSenha, setmostraSenha] = useState(false);
@@ -38,10 +64,13 @@ export default function Login(){
                 })
             )).then(dados => {
                 if (dados.status===200) {
+                    if (statusCheckbox){
+                        localStorage.setItem("lembrar", 1)
+                    }
                     localStorage.setItem("emp_cod", dados.resposta.emp_cod)
+                    localStorage.setItem("email", dados.resposta.email)
                     localStorage.setItem("nome", dados.resposta.nome)
                     localStorage.setItem("cnpj", dados.resposta.cnpj)
-                    localStorage.setItem("email", dados.resposta.email)
                     window.location.href = '/empresa'
                 }
                 else {
