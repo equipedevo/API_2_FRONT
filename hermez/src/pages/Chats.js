@@ -116,7 +116,7 @@ export default function Chats() {
             
             setTimeout(function(){
                 reloadDiv();
-             }, 10);
+             }, 100);
     }, [selectChaCod])
 
 
