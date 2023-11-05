@@ -10,15 +10,16 @@
     --paddingDivFormPadrao: 30px;
     --paddingFormPadrao: 20px;
     --paddingInputSelectFormPadrao: 5px;
-
+    
     --widthBotaoEnviar: 30px;
     --widthBotaoFechar: 30px;
     --widthDivsDuasColunas: calc((100% - var(--espacamentoDivsDuasColunas)) / 2);
     --widthFormPadrao: 90%;
     --widthInputFormPadrao: 30px;
     --widthItensDivUmaColuna: calc(100% - 2 * var(--paddingInputSelectFormPadrao));
-
+    
     --EspacoDireitaBotaoEditar: 10px;
+    --widthIconesBotaoEditar: 20px;
 }
 
 .divFormPadrao{
@@ -101,15 +102,16 @@
 
 .divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:first-child,
 .divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:first-child{
-    margin-right: calc(-1 * var(--widthBotaoFechar) - var(--EspacoDireitaBotaoEditar));
+    margin-right: calc(-1 * var(--widthIconesBotaoEditar) - var(--EspacoDireitaBotaoEditar));
     margin-top: auto;
 }
 
 .divUmaColunaFormPadrao > *:last-child:has(:nth-child(2)) > *:last-child,
 .divDuasColunasFormPadrao > * > *:last-child:has(:nth-child(2)) > *:last-child{
-    height: var(--widthBotaoFechar);
+    width: var(--widthIconesBotaoEditar);
+    max-height: var(--widthIconesBotaoEditar);
     cursor: pointer;
-    margin-top: auto;
+    margin: auto;
 }
 
 .divDuasColunasFormPadrao > *
