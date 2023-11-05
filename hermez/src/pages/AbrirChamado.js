@@ -10,6 +10,16 @@ export default function AbrirChamado() {
     const [descricao, setDescricao] = useState("");
     const [tipo, setTipo] = useState(0)
     const [erroSenha, setErro] = useState('');
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('desc', descricao);
+    formData.append('local', local);
+    formData.append('titulo', titulo);
+    formData.append('serv', tipo);
+    formData.append('fun_cod', localStorage.getItem("fun_cod"));
+    formData.append('emp_cod', localStorage.getItem("emp_cod"));
+    console.log(formData);
+
     const submitForm = (e) => {
         e.preventDefault();
         if (tipo===0){
@@ -21,19 +31,9 @@ export default function AbrirChamado() {
 
             fetch(process.env.REACT_APP_URL_CHAMADO_CADASTRO, {
                 method:'POST',
-                body: JSON.stringify({
-                    nome: nome,
-                    desc: descricao,
-                    local: local,
-                    titulo: titulo,
-                    serv: tipo,
-                    codFun: localStorage.getItem("fun_cod"),
-                    codEmp: localStorage.getItem("emp_cod")
-                    //imagem: img
-                }),
+                body: formData,
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 },
                 mode: 'cors'
             }).then(response => {
@@ -130,7 +130,7 @@ export default function AbrirChamado() {
 
                         <div>
                             <label htmlFor='arquivo'>INSIRA UMA IMAGEM</label>
-                            <UploadArquivo/>
+                            <UploadArquivo onFileSelect={(file) => {formData.append('imagem', file)}} />
                         </div>
                     </div>
                     <div className='divUmaColunaFormPadrao'>

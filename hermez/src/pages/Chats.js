@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import aberto from "../img/chats/iconeAberto.svg";
 import andamento from "../img/chats/iconeAndamento.svg";
 import reaberto from "../img/chats/iconeReaberto.svg";
@@ -17,7 +17,24 @@ export default function Chats() {
     const [textoMsg, setTextoMsg] = useState('');
     const [selectChaCod, setSelectChaCod] = useState(null);
     const [atribuidos, setAtribuidos] = useState([]);
+    const [file, setFile] = useState(null);
+
+    const fileInput = useRef(null);
+
     const [timer, setTimer] = useState(new Date());
+    
+    
+    
+    const formData = new FormData();
+    formData.append('arq_cod', file);
+    formData.append('msg_texto', textoMsg);
+    formData.append('fun_cod', localStorage.getItem('fun_cod'));
+    formData.append('ct_cod', selectChaCod);
+
+    const handleFileInput = (e) => {
+        const fileuploaded = e.target.files[0];
+        setFile(fileuploaded);
+    }
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -25,22 +42,12 @@ export default function Chats() {
             alert('Selecione um chamado')
         }
         else {
-            const mensagem = textoMsg;
-            const ctCod = selectChaCod;
-
-
 
             fetch(process.env.REACT_APP_URL_CHAT_NOVA_MENSAGEM, {
                 method: 'POST',
-                body: JSON.stringify({
-                    msg_texto: mensagem,
-                    fun_cod: localStorage.getItem('fun_cod'),
-                    ct_cod: ctCod,
-                    arq_cod: null
-                }),
+                body: formData,
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 }
             })
                 .then((response) => response.json())
@@ -49,35 +56,15 @@ export default function Chats() {
                     console.log('Mensagem enviada com sucesso', data)
                 })
                 .catch((error) => console.log('Erro no envio da mensagem', error));
-        reloadDiv()
+        
         }
     }
 
-    const reloadDiv = () => {
-        fetch(process.env.REACT_APP_URL_CHAT_MENSAGENS, {
-            method: 'POST',
-            body: JSON.stringify({
-                cha_cod: selectChaCod,
-                remetente: localStorage.getItem('fun_cod'),
-                pag: 0
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.mensagens == null) {
-                    setMensagens([]);
-                } else {
-                    setMensagens(data.mensagens.reverse());
-                    console.log(data.mensagens)
-                }
-                
-            })
-            .catch((error) => console.log(error));
+    const sleep = ms => new Promise (r => setTimeout(r, ms));
+    const reload = async function() {
+        console.log('1segundo');
+        await sleep(1000);
+        reload();
     }
 
     useEffect(() => {
@@ -113,10 +100,32 @@ export default function Chats() {
             .then((data) => { setAtribuidos(data); console.log(atribuidos); })
             .catch((error) => console.log(error));
             
+            fetch(process.env.REACT_APP_URL_CHAT_MENSAGENS, {
+                method: 'POST',
+                body: JSON.stringify({
+                    cha_cod: selectChaCod,
+                    remetente: localStorage.getItem('fun_cod'),
+                    pag: 0
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+    
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.mensagens == null) {
+                        setMensagens([]);
+                    } else {
+                        setMensagens(data.mensagens.reverse());
+                        console.log(data.mensagens)
+                    }
+                    
+                })
+                .catch((error) => console.log(error));
             
-            setTimeout(function(){
-                reloadDiv();
-             }, 100);
+            reload();
     }, [selectChaCod])
 
 
@@ -213,7 +222,7 @@ export default function Chats() {
                     <div className="mensagens">
 
                         {Array.isArray(mensagens) ?
-
+                            
                             mensagens.map(msg => (
                                 <div className={`balao ${msg.remetente == localStorage.getItem('fun_cod') ? 'minha_msg' : 'pessoa_msg'}`}>
                                     <p className="mensagem">{msg.texto}</p>
@@ -238,7 +247,7 @@ export default function Chats() {
                                 onSubmit={submitForm}
                             />
 
-                            <label htmlFor="arquivo" className="botao">
+                            <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
                                 <span>
                                     <img src={anexo} alt="enviar arquivo" />
                                 </span>
@@ -247,6 +256,9 @@ export default function Chats() {
                                 type="file"
                                 id="arquivo"
                                 multiple={false}
+                                ref={fileInput}
+                                value={file}
+                                onChange={handleFileInput}
                                 style={{ display: 'none' }}
                             />
 
