@@ -20,7 +20,7 @@ export default function EditarFuncionario() {
     useEffect(() => {
         setErro('');
         /* CONEXÃO COM BACK PARA PEGAR OS DADOS DO FUNCIONÁRIO */
-        fetch(process.env.REACT_APP_PEGAR_DADO_FUNCIONARIO, {
+        fetch(`${process.env.REACT_APP_PEGAR_DADO_FUNCIONARIO}?dev=true`, {
             method: "POST",
             body: JSON.stringify({
                 fun_cod: queryParameters.get("idfuncionario"),
@@ -55,7 +55,7 @@ export default function EditarFuncionario() {
 
     function VerificarSenha() {
         /* CONEXÃO COM BACK PARA VERIFICAR A SENHA ANTIGA */
-        fetch(process.env.REACT_APP_TROCAR_SENHA, {
+        fetch(`${process.env.REACT_APP_TROCAR_SENHA}?dev=true`, {
             method: "POST",
             body: JSON.stringify({
                 email: email,
@@ -120,7 +120,7 @@ export default function EditarFuncionario() {
             );
             if (criterioDeAceitacao) {
                 /* CONEXÃO COM BACK PARA ALTERAR A SENHA */
-                fetch(process.env.REACT_APP_TROCAR_SENHA, {
+                fetch(`${process.env.REACT_APP_TROCAR_SENHA}?dev=true`, {
                     method: "POST",
                     body: JSON.stringify({
                         email: email,
@@ -153,7 +153,7 @@ export default function EditarFuncionario() {
             alterar.push(mudaCargo ? novoCargo : cargo)
             setErro('');
             /* CONEXÃO COM BACK PARA ALTERAR OS DADOS DO FUNCIONÁRIO */
-            fetch(process.env.REACT_APP_ATUALIZAR_DADO_FUNCIONARIO, {
+            fetch(`${process.env.REACT_APP_ATUALIZAR_DADO_FUNCIONARIO}?dev=true`, {
                 method: "POST",
                 body: JSON.stringify({
                     fun_cod: queryParameters.get("idfuncionario"),

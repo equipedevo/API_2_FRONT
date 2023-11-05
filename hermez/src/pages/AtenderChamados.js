@@ -24,7 +24,7 @@ export default function AtenderChamado() {
             status: status,
             tipo: tipo
         };
-        fetch(process.env.REACT_APP_URL_CHAMADO_FILTRO, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_FILTRO}?dev=true`, {
             method: 'POST',
             body: JSON.stringify(filtro),
 

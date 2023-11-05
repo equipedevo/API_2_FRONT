@@ -19,8 +19,7 @@ export default function AbrirChamado() {
         else{
             setErro('');
             console.log('dados formulario:  ', descricao)
-
-            fetch(process.env.REACT_APP_URL_CHAMADO_CADASTRO, {
+            fetch(`${process.env.REACT_APP_URL_CHAMADO_CADASTRO}?dev=true`, {
                 method:'POST',
                 body: JSON.stringify({
                     nome: nome,
