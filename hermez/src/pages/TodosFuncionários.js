@@ -56,27 +56,25 @@ export default function Funcionarios() {
                 <div className="divTabelaFuncionarios">
                     <div className="divTituloTabelaFuncionarios">
                         <p>Nome do Usuário</p>
-                        <p>Serviço</p>
+                        <p>Cargo</p>
                         <p>Editar dados</p>
                     </div>
                     <form className="divListaFuncionarios" >
                         {localStorage.getItem('fun_cod') !== null ?(listaFuncionarios.map
                             (funcionario => funcionario.car_cod !== 3 &&
                                 <div key={funcionario.fun_cod}>
-                                    <div>
+                                    <div className="bordasLaterais">
                                         <p>{funcionario.fun_nome}</p>
                                     </div>
-                                    <select className="selectTabelaFuncionarios">
-                                        <option value={funcionario.car_cod} style={{display: 'none'}}>{
+                                    <p>
+                                        {
                                             funcionario.car_cod === 1 ? 'Funcionário':
                                             funcionario.car_cod === 2 ? 'Técnico':
-                                            'Unknown'
-                                        }</option>
-                                        <option value="1">Funcionário</option>
-                                        <option value="2">Técnico</option>  
-                                    </select>
-                                    <div className="divButtonTabelaFuncionarios">
-                                        <Link to={`../editar-funcionario?idfuncionario=${funcionario.fun_cod}`}>
+                                            '???'
+                                        }
+                                    </p>
+                                    <div className="divButtonTabelaFuncionarios bordasLaterais">
+                                        <Link to={`../editar-funcionario?idfuncionario=${funcionario.fun_cod}`} className="vermelho">
                                             Editar
                                         </Link>
                                     </div>
@@ -85,20 +83,19 @@ export default function Funcionarios() {
                         ):(listaFuncionarios.map
                             (funcionario =>
                             <div key={funcionario.fun_cod}>
+                                <div className="bordasLaterais">
                                 <p>{funcionario.fun_nome}</p>
-                                <select className="selectTabelaFuncionarios">
-                                    <option value={funcionario.car_cod} style={{display: 'none'}}>{
-                                        funcionario.car_cod === 1 ? 'Funcionário':
+                                </div>
+                                <p>
+                                    {
+                                        funcionario.car_cod === 1 ? 'Fun':
                                         funcionario.car_cod === 2 ? 'Técnico':
                                         funcionario.car_cod === 3 ? 'Administrador':
-                                        'Unknown'
-                                    }</option>
-                                    <option value="1">Funcionário</option>
-                                    <option value="2">Técnico</option>  
-                                    <option value="3">Administrador</option>  
-                                </select>
-                                <div className="divButtonTabelaFuncionarios">
-                                    <Link to={`../editar-funcionario?idfuncionario=${funcionario.fun_cod}`}>
+                                        '???'
+                                    }
+                                </p>
+                                <div className="divButtonTabelaFuncionarios bordasLaterais">
+                                    <Link to={`../editar-funcionario?idfuncionario=${funcionario.fun_cod}`} className="vermelho">
                                         Editar
                                     </Link>
                                 </div>
