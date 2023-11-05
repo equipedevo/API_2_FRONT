@@ -19,20 +19,20 @@
     justify-content: center;
 }
 
-.dashboard summary{
+details summary{
     display: flex;
-    height: 50px;
     justify-content: space-between;
+    height: 50px;
 }
 
-.dashboard summary p{
-    align-items: center;
+details summary p{
     display: flex;
+    align-items: center;
     justify-content: center;
 
 }
 
-.dashboard details:nth-child(odd){
+details details:nth-child(even){
     background-color: var(--cinzaHover);
 }
 
@@ -40,12 +40,13 @@
     width: 50px;
 }
 
-.data, .cliente {
+.data, .nome {
     width: 140px;
 }
 
 .titulo{
-    width: 200px;
+    width: 300px;
+    text-align: center;
 }
 
 .status, .tipo, .prioridade{
@@ -53,8 +54,8 @@
 }
 
 .prioridade{
-    align-items: center;
     display: flex;
+    align-items: center;
     justify-content: center;
 }
 
@@ -81,6 +82,8 @@
 }
 
 .descricao{
+    display: flex;
+    flex-direction: column;
     padding: 10px;
 }
 
@@ -95,7 +98,7 @@
     gap: 20px;
 }
 
-.dashboard button{
+details button{
     padding: 5px;
     border-radius: 10px;
 }
@@ -103,6 +106,7 @@
 .iniciar{
     background-color: transparent;
     border: 0.5px solid #EF9A4C;
+    background-color: transparent;
 }
 .iniciar:hover{
     background-color: #EF9A4C;
@@ -111,6 +115,7 @@
 .cancelar{
     background-color: transparent;
     border: 0.5px solid var(--vermelho);
+    background-color: transparent;
 }
 .cancelar:hover{
     background-color: var(--vermelho);

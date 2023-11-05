@@ -37,6 +37,26 @@ export default function AtenderChamado() {
         }).catch((error) => console.log(error));
     };
 
+    useEffect(() => {
+        fetch(process.env.REACT_APP_URL_CHAMADO_ATRIBUIR, {
+            method: 'POST',
+            body: JSON.stringify({
+                fun_cod: localStorage.getItem('fun_cod'),
+                cha_cod: localStorage.getItem('cha_cod')
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+
+    }, []);
+
+    console.log(database)
+
     useEffect(() => { 
         const filtroEffect = () => {
             aplicarFiltro();
@@ -149,6 +169,7 @@ export default function AtenderChamado() {
                                             <p className={`prioridade ${p.nome.toLowerCase()}`}>{ p.nome }</p>
                                         </div>
                                     )}
+                                    
                                     <p className="data">{ new Date(i.cha_dataInicio).toLocaleDateString() }</p>
                                     <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
@@ -159,7 +180,7 @@ export default function AtenderChamado() {
                                     <p>{ i.cha_desc }</p>
                                     <div className="botoes">
                                         <Link to='/funcionario/chats'>
-                                            <button className="iniciar">Iniciar</button>
+                                            <button className="iniciar" onClick={() => localStorage.setItem('cha_cod', i.cha_cod)}>Iniciar</button>
                                         </Link>
                                         <Link to='/funcionario'>
                                             <button className="cancelar">Cancelar</button>
