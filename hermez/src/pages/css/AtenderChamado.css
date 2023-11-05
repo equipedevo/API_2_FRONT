@@ -1,40 +1,3 @@
-.dashboard{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    width: 80%;
-    margin: 5% 10%;
-    padding: 2%;
-
-    border-radius: 20px;
-    background-color: var(--cinzaClaro);
-}
-
-.dashboard h1{
-    font: var(--títulos);
-    margin-bottom: 5%;
-}
-
-/*FILTROS*/
-.filtros{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 5%;
-}
-
-.filtros div{
-    width: auto;
-}
-
-.filtro select{
-    width: 300px;
-}
-
-
-
 /*TABELA DE CHAMADOS*/
 .tabela{
     display: flex;
@@ -43,30 +6,29 @@
 }
 
 .header{
+    border-bottom: 0.5px solid var(--cinzaEscuro);
     display: flex;
-    justify-content: space-between;
     height: 50px;
-
-    background-color: var(--cinzaHover);
+    justify-content: space-between;
 }
 
 .header p{
-    display: flex;
-    justify-content: center;
     align-items: center;
-
+    display: flex;
     font-weight: 700;
+    justify-content: center;
 }
 
 .dashboard summary{
     display: flex;
     height: 50px;
+    justify-content: space-between;
 }
 
 .dashboard summary p{
+    align-items: center;
     display: flex;
     justify-content: center;
-    align-items: center;
 
 }
 
@@ -90,6 +52,34 @@
     width: 200px;
 }
 
+.prioridade{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.prioridade p{
+    border-radius: 10px;
+    color: var(--branco);
+    padding: 0 5%;
+    width: auto;
+}
+
+.urgente{
+    background-color: #4d0047;
+}
+.alta {
+    background-color: var(--vermelho);
+}
+
+.média {
+    background-color: #EF9A4C;
+}
+
+.baixa {
+    background-color: #E5D123;
+}
+
 .descricao{
     padding: 10px;
 }
@@ -97,12 +87,7 @@
 .descricao p{
     margin-bottom: 2%;
     text-align: justify;
-
 }
-
-
-
-
 
 .botoes{
     display: flex;
@@ -115,16 +100,16 @@
     border-radius: 10px;
 }
 
-
 .iniciar{
+    background-color: transparent;
     border: 0.5px solid #EF9A4C;
 }
 .iniciar:hover{
     background-color: #EF9A4C;
 }
 
-
 .cancelar{
+    background-color: transparent;
     border: 0.5px solid var(--vermelho);
 }
 .cancelar:hover{
