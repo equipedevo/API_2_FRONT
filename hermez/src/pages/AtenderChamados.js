@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect,useState} from "react";
 import { Link } from 'react-router-dom';
 import './css/AtenderChamado.css';
 // import DateRangeComp from './components/DateRangeComp.jsx'
@@ -8,11 +8,11 @@ import './css/AtenderChamado.css';
 export default function AtenderChamado() {
     const [database, setDatabase] = useState([]);
     // const [data, setData] = useState(0);
-    const [prioridade, setPrioridade] = useState(0);
+    const [prioridade, setPrioridade] = useState('');
     // const [periodo, setPeriodo] = useState('');
     const [funcionario, setFuncionario] = useState('');
-    const [status, setStatus] = useState(0);
-    const [tipo, setTipo] = useState(0);
+    const [status, setStatus] = useState('');
+    const [tipo, setTipo] = useState('');
 
     const prioridades = [
         {id: 1, nome: 'Baixa'},
@@ -21,39 +21,55 @@ export default function AtenderChamado() {
         {id: 4, nome: 'Urgente'}
     ];
 
+    const aplicarFiltro = () => {
+        // Construa a consulta de filtro com base nos estados de filtro
+        const filtro = {
+            emp_cod: localStorage.getItem('emp_cod'),
+            priori: prioridade,
+            func: funcionario,
+            status: status,
+            tipo: tipo
+        };
 
-    useEffect(() => {
-        fetch(process.env.REACT_APP_URL_CHAMADO_FILTRO, {
-            method: 'POST',
-            body: JSON.stringify({
-                emp_cod: localStorage.getItem('emp_cod'),
-                priori: prioridade,
-                func: funcionario,
-                status: status,
-                tipo: tipo
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            setDatabase(data);
-        })
+    
+    fetch(process.env.REACT_APP_URL_CHAMADO_FILTRO, {
+        method: 'POST',
+        body: JSON.stringify(filtro),
 
-        .catch((error) => console.log(error));
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+
+    .then((response) => response.json())
+    .then((data) => {
+        setDatabase(data);
+    })
+    .catch((error) => console.log(error));
+};
+
+useEffect(() => { 
+    const filtroEffect = () => {
+        aplicarFiltro();
+    }
+    
+filtroEffect();
+}, [prioridade, funcionario, status, tipo]);
 
     console.log(database)
 
     return (
         <>
+                AQUI COMEÇAM OS FILTROS
                 <div className="dashboard">
             
                     <div className='divFormPadrao'>
                         <form className='formPadrao'>
 
-                            <h1>LISTA DE CHAMADOS</h1>
+                            <h1>LISTA DE CHAMADOS </h1>
+
+                            {/* {prioridade}{funcionario}{status}{tipo} */}
 
                             <div className='divDuasColunasFormPadrao'>
 
@@ -71,11 +87,12 @@ export default function AtenderChamado() {
                                                 value=''
                                                 style={{display: 'block'}}
                                             >
+                                                Todos
                                             </option>
                                             <option value='1'>Baixa</option>
                                             <option value='2'>Média</option>
                                             <option value='3'>Alta</option>
-                                            {/* <option value='4'>Urgente</option> */}
+                                            <option value='4'>Urgente</option>
 
                                         </select>
                                 </div>
@@ -85,21 +102,17 @@ export default function AtenderChamado() {
                                 <div className="filtros" id='funcionario'>
                                     <label>FUNCIONÁRIO</label>
 
-                                    <select
+                                    <input
                                     id='selectFuncionario'
                                     name='funcionario'
                                     value={funcionario}
                                     onChange={(e) => setFuncionario(e.target.value)}
+                                    placeholder="Nome do Funcionário"
+                                    // required
+                                    type='text'
                                     >
+                                    </input>
 
-                                        <option
-                                        value='0'
-                                        style={{display: 'block'}}
-                                        >   
-                                        </option>
-                                        <option value='caique'>Caique</option>
-
-                                    </select>
                                 </div>   
                             </div>
 
@@ -121,6 +134,7 @@ export default function AtenderChamado() {
                                                 value=''
                                                 style={{display: 'block'}}
                                             >
+                                                Todos
                                             </option>
                                             <option value='Aberto'>Aberto</option>
                                             <option value='Em andamento'>Em Andamento</option>
@@ -146,25 +160,39 @@ export default function AtenderChamado() {
                                                     value=''
                                                     style={{display: 'block'}}
                                                 >
+                                                    Todos
                                                 </option>
-                                                <option value='Hardware'>Hardware</option>
-                                                <option value='Software'>Software</option>
+
+                                                <option value="manuntenção de cpu">Manuntenção de Cpu</option>
+                                                <option value="Consertar sua Placa-mãe">Consertar sua Placa-mãe</option>
+                                                <option value="reestabelecer internet">Reestabelecer Internet</option>
+                                                <option value="computador quebrou">Computador Quebrou</option>
+                                                <option value="computador lento">Computador Lento</option>
+                                                <option value="Outros.">Outros</option>
                                             
                                             </select>
                                     </div>
                                 </div>
                             </div>
-                            <div className="divFormsPadrao">
+
+                            {/* ESTA ATUALIZANDO NA HORA ENTÃO TIRAMOS O BOTÃO */}
+                            {/* <div className="divFormsPadrao">
                                 <div className="divBotaoEnviar">
-                                    <input
+                                <button
                                         id="aplicarFiltros"
+                                        onClick={aplicarFiltro}
                                         value="Aplicar Filtro(s)"
                                         type="Submit"
-                                    />
+                                    >
+                                        Aplicar FIltro(s)
+                                    </button>
                                 </div>
-                            </div>
+                            </div> */}
+
+
                         </form>
                     </div>
+                    {/* AQUI TERMINA A PARTE DOS FILTROS */}
 
                     {/* LISTA DE CHAMADOS ABAIXO */}
                     <section className="tabela">
@@ -178,7 +206,8 @@ export default function AtenderChamado() {
                             <p className="tipo">TIPO</p>
                         </div>
 
-                        { database.map( i => 
+
+                        {Array.isArray(database) && database.map( i => (
                             <details key={i.cha_cod}>
                                 <summary>
                                     <p className="id">#{ i.cha_cod }</p>
@@ -194,13 +223,13 @@ export default function AtenderChamado() {
                                     <p className="cliente">{ i.fun_nome }</p>
                                     <p className="titulo">{ i.cha_titulo }</p>
                                     <p className="status">{ i.sta_nome.toUpperCase() }</p>
-                                    <p className="tipo">Hardware</p>
+                                    <p className="tipo">{i.ser_nome.toUpperCase()}</p>
                                 </summary>
                                 <div className="descricao">
                                     <p>{ i.cha_desc }</p>
 
                                     <div className="botoes">
-                                        <Link to='/funcionario'>
+                                        <Link to='/funcionario/chats'>
                                             <button className="iniciar">Iniciar</button>
                                         </Link>
                                         <Link to='/funcionario'>
@@ -210,7 +239,7 @@ export default function AtenderChamado() {
                                 </div>
                             </details>
 
-                        ) }
+                        ))}
                     </section>
                 </div>
         </>

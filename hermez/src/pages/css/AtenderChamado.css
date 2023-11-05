@@ -134,6 +134,10 @@
     color: var(--branco);
 }
 
+
+.urgente{
+    background-color: #4d0047;
+}
 .alta {
     background-color: var(--vermelho);
 }
