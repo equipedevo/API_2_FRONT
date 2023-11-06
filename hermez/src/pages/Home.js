@@ -17,10 +17,10 @@ function BotoesAdm() {
       {chamados ? (
         <Link
           className='botoesHome grande'
-          to="chats"
+          onClick={() => setChamados(!chamados)}
         >
           <div>
-            <img src={balaoChat} alt="BalaoChat" />
+            <img src={balaoChat} alt="BalaoChat"/>
             <h1>Visualizar chamados</h1>
           </div>
         </Link>
@@ -93,7 +93,7 @@ export default function Home() {
         {cargo === '3' ? (
           <BotoesAdm />
         ) : (
-          <Link className='botoesHome grande'>
+          <Link className='botoesHome grande' to="chats">
             <div>
               <img src={balaoChat} alt="BalaoChat" />
               <h1>Histórico de chamados</h1>
