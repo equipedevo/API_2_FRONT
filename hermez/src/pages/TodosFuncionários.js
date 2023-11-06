@@ -17,7 +17,7 @@ export default function Funcionarios() {
         }
     } 
     useEffect(() => {
-        fetch(process.env.REACT_APP_URL_TODOS_FUNCIONARIOS, {
+        fetch(`${process.env.REACT_APP_URL_TODOS_FUNCIONARIOS}?dev=true`, {
             method:"POST",
             body: JSON.stringify({
                 emp_cod: localStorage.getItem("emp_cod")
