@@ -48,7 +48,7 @@ export default function CadastroUser() {
         }
         else {
             setErro(``);
-            fetch(`${process.env.REACT_APP_URL_FUNCIONARIO_CADASTRO}?dev=true`, {
+            fetch(`${process.env.REACT_APP_URL_FUNCIONARIO_CADASTRO}`, {
                 method:'POST',
                 body: JSON.stringify({
                     nome: nomeCompleto,

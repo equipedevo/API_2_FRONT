@@ -43,7 +43,7 @@ export default function Chats() {
         }
         else {
 
-            fetch(process.env.REACT_APP_URL_CHAT_NOVA_MENSAGEM, {
+            fetch(`${process.env.REACT_APP_URL_CHAT_NOVA_MENSAGEM}`, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -68,7 +68,7 @@ export default function Chats() {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_TODOS}?dev=true`, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_TODOS}`, {
             method: 'POST',
             body: JSON.stringify({
                 emp_cod: localStorage.getItem('emp_cod'),
@@ -84,7 +84,7 @@ export default function Chats() {
             .then((data) => { setDatabase(data); console.log('esse é o database',database) })
             .catch((error) => console.log(error));
 
-        fetch(process.env.REACT_APP_URL_CHAMADO_GET_MEUS_ATRIBUIDOS, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS_ATRIBUIDOS}`, {
             method: 'POST',
             body: JSON.stringify({
                 emp_cod: localStorage.getItem('emp_cod'),
@@ -100,7 +100,7 @@ export default function Chats() {
             .then((data) => { setAtribuidos(data); console.log(atribuidos); })
             .catch((error) => console.log(error));
             
-            fetch(process.env.REACT_APP_URL_CHAT_MENSAGENS, {
+            fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
                 method: 'POST',
                 body: JSON.stringify({
                     cha_cod: selectChaCod,

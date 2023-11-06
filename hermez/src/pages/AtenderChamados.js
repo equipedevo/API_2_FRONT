@@ -24,7 +24,7 @@ export default function AtenderChamado() {
             status: status,
             tipo: tipo
         };
-        fetch(`${process.env.REACT_APP_URL_CHAMADO_FILTRO}?dev=true`, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_FILTRO}`, {
             method: 'POST',
             body: JSON.stringify(filtro),
 
@@ -38,7 +38,7 @@ export default function AtenderChamado() {
     };
 
     useEffect(() => {
-        fetch(process.env.REACT_APP_URL_CHAMADO_ATRIBUIR, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_ATRIBUIR}`, {
             method: 'POST',
             body: JSON.stringify({
                 fun_cod: localStorage.getItem('fun_cod'),

@@ -46,7 +46,7 @@ export default function Login(){
     function handleSubmit(event) {
         event.preventDefault();
         if (email !== '' && senha !== ''){
-            fetch(`${process.env.REACT_APP_URL_EMPRESA_LOGIN}?dev=true`, {
+            fetch(`${process.env.REACT_APP_URL_EMPRESA_LOGIN}`, {
                 method:'POST',
                 body: JSON.stringify({
                     email:email,

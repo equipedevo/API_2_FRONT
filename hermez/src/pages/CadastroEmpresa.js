@@ -44,7 +44,7 @@ export default function CadastroEmpresa() {
         }
         else {
             setErro('');
-            fetch(`${process.env.REACT_APP_URL_EMPRESA_CADASTRO}?dev=true`, {
+            fetch(`${process.env.REACT_APP_URL_EMPRESA_CADASTRO}`, {
                 method:'POST',
                 body: JSON.stringify({
                     razaoSocial:razaoSocial,
