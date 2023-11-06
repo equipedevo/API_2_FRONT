@@ -11,6 +11,14 @@ export default function AbrirChamado() {
     const [tipo, setTipo] = useState(0)
     const [arquivoImportado, setArquivoImportado] = useState(   );
     const [erroSenha, setErro] = useState('');
+    const formData = new FormData();
+    formData.append('nome', nome);
+    formData.append('desc', descricao);
+    formData.append('local', local);
+    formData.append('titulo', titulo);
+    formData.append('serv', tipo);
+    formData.append('fun_cod', localStorage.getItem("fun_cod"));
+    formData.append('emp_cod', localStorage.getItem("emp_cod"));
     const submitForm = (e) => {
         e.preventDefault();
         if (tipo===0){
@@ -21,16 +29,7 @@ export default function AbrirChamado() {
             console.log('dados formulario:  ', descricao)
             fetch(`${process.env.REACT_APP_URL_CHAMADO_CADASTRO}?dev=true`, {
                 method:'POST',
-                body: JSON.stringify({
-                    nome: nome,
-                    desc: descricao,
-                    local: local,
-                    titulo: titulo,
-                    image: arquivoImportado,
-                    codFun: localStorage.getItem("fun_cod"),
-                    codEmp: localStorage.getItem("emp_cod"),
-                    serv: tipo
-                }),
+                body: formData,
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
@@ -131,14 +130,11 @@ export default function AbrirChamado() {
                             </select>
                         </div>
                         <div>
-                            <label htmlFor='imagemChamado'>
-                                IMAGEM DO PROBLEMA
-                            </label>
-                            <UploadArquivo
+                            <label htmlFor='arquivo'>IMAGEM DO PROBLEMA</label>
+                            <UploadArquivo 
                                 id='imagemChamado'
                                 name='imagemChamado'
-                                onFileSelect={(arquivo) => setArquivoImportado(arquivo)}
-                            />
+                                onFileSelect={(arquivo) => {formData.append('imagem', arquivo)}} />
                         </div>
                     </div>
                     <div className='divUmaColunaFormPadrao'>

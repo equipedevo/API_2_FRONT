@@ -37,6 +37,24 @@ export default function AtenderChamado() {
         }).catch((error) => console.log(error));
     };
 
+    useEffect(() => {
+        fetch(process.env.REACT_APP_URL_CHAMADO_ATRIBUIR, {
+            method: 'POST',
+            body: JSON.stringify({
+                fun_cod: localStorage.getItem('fun_cod'),
+                cha_cod: localStorage.getItem('cha_cod')
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+
+    }, []);
+
     useEffect(() => { 
         const filtroEffect = () => {
             aplicarFiltro();
@@ -134,17 +152,16 @@ export default function AtenderChamado() {
                                             <p className={`${prioridade.nome.toLowerCase()}`}>{prioridade.nome}</p>
                                         </div>
                                     )}
-                                        <p>{new Date(chamado.cha_dataInicio).toLocaleDateString()}</p>
-                                        <p>{chamado.fun_nome}</p>
-                                        <p>{chamado.cha_titulo}</p>
-                                        <p>{chamado.sta_nome}</p>
-                                        <p>{chamado.ser_nome}</p>
+                                    <p>{new Date(chamado.cha_dataInicio).toLocaleDateString()}</p>
+                                    <p>{chamado.fun_nome}</p>
+                                    <p>{chamado.cha_titulo}</p>
+                                    <p>{chamado.sta_nome.toUpperCase()}</p>
+                                    <p>{chamado.ser_nome.toUpperCase()}</p>
                                 </summary>
                                 <div className="divDescricaoChamado">
                                     <p>{chamado.cha_desc}</p>
                                     <div>
-                                        <Link to='/funcionario/chats' className="iniciar">
-                                            Iniciar
+                                        <Link to='/funcionario/chats' className="iniciar" onClick={() => localStorage.setItem('cha_cod', chamado.cha_cod)}>Iniciar
                                         </Link>
                                         <Link to='/funcionario' className="cancelar">
                                             Cancelar

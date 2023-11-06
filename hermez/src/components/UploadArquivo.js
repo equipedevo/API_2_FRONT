@@ -8,6 +8,7 @@ export default function UploadArquivo({onFileSelect}){
         const fileuploaded = e.target.files[0];
         document.getElementById('botaoInputArquivo').textContent = e.target.files[0].name;
         onFileSelect(fileuploaded)
+        console.log(fileuploaded)
     }
 
     return (
