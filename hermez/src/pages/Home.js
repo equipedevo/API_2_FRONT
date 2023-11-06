@@ -20,7 +20,7 @@ function BotoesAdm() {
           onClick={() => setChamados(!chamados)}
         >
           <div>
-            <img src={balaoChat} alt="BalaoChat" />
+            <img src={balaoChat} alt="BalaoChat" to="chats"/>
             <h1>Visualizar chamados</h1>
           </div>
         </Link>

@@ -43,7 +43,7 @@ function DropdownAdms() {
                 style={{ display: chamadosVisible ? 'flex' : 'none' }}
             >
                 <Link>Relatório</Link>
-                <Link>Meus Chamados</Link>
+                <Link to="chats">Meus Chamados</Link>
             </div>
             <button onClick={toggleGerenciarUsuarios}>
                 <img src={gerenciarUsuario} alt="Gerenciar Usuários" />
@@ -95,7 +95,7 @@ export default function Header() {
                     <DropdownAdms/>
                 ):(
                     <Link>
-                        <img to="chat" src={balaoChat} alt="BalaoChat" />
+                        <img to="chats" src={balaoChat} alt="BalaoChat" />
                         <h1>Histórico de chamados</h1>
                     </Link>
                 )}
