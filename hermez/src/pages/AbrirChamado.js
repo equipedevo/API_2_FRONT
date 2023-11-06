@@ -12,7 +12,6 @@ export default function AbrirChamado() {
     const [arquivoImportado, setArquivoImportado] = useState(   );
     const [erroSenha, setErro] = useState('');
     const formData = new FormData();
-    formData.append('nome', nome);
     formData.append('desc', descricao);
     formData.append('local', local);
     formData.append('titulo', titulo);
@@ -31,8 +30,7 @@ export default function AbrirChamado() {
                 method:'POST',
                 body: formData,
                 headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Accept': 'application/json'
                 },
                 mode: 'cors'
             }).then(response => {
