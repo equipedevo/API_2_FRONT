@@ -94,8 +94,8 @@ export default function Header() {
                 {cargo === '3' ? (
                     <DropdownAdms/>
                 ):(
-                    <Link>
-                        <img to="chats" src={balaoChat} alt="BalaoChat" />
+                    <Link to="chats">
+                        <img src={balaoChat} alt="BalaoChat" />
                         <h1>Histórico de chamados</h1>
                     </Link>
                 )}

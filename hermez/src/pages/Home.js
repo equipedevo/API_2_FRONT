@@ -17,10 +17,10 @@ function BotoesAdm() {
       {chamados ? (
         <Link
           className='botoesHome grande'
-          onClick={() => setChamados(!chamados)}
+          to="chats"
         >
           <div>
-            <img src={balaoChat} alt="BalaoChat" to="chats"/>
+            <img src={balaoChat} alt="BalaoChat" />
             <h1>Visualizar chamados</h1>
           </div>
         </Link>
