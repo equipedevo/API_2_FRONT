@@ -95,7 +95,7 @@ export default function Header() {
                     <DropdownAdms/>
                 ):(
                     <Link>
-                        <img src={balaoChat} alt="BalaoChat" />
+                        <img to="chat" src={balaoChat} alt="BalaoChat" />
                         <h1>Histórico de chamados</h1>
                     </Link>
                 )}
