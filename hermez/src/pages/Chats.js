@@ -68,7 +68,7 @@ export default function Chats() {
     }
 
     useEffect(() => {
-        fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_TODOS}`, {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS}`, {
             method: 'POST',
             body: JSON.stringify({
                 emp_cod: localStorage.getItem('emp_cod'),
