@@ -7,7 +7,8 @@ export default function AtenderChamado() {
     const [prioridade, setPrioridade] = useState('');
     const [funcionario, setFuncionario] = useState('');
     const [status, setStatus] = useState('');
-    const [tipo, setTipo] = useState('');
+    const [tipo, setTipo] = useState(''); 
+    const [atualizaPrioridade, setAtualizaPrioridade] = useState(0);
 
     const prioridades = [
         {id: 1, nome: 'Baixa'},
@@ -15,6 +16,23 @@ export default function AtenderChamado() {
         {id: 3, nome: 'Alta'},
         {id: 4, nome: 'Urgente'}
     ];
+
+    const updatePrioridade = (priori, cha_cod) => {
+        fetch(`${process.env.REACT_APP_URL_ATUALIZAR_PRIORIDADE}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                priori: priori,
+                cha_cod: cha_cod
+            }),
+
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+
+            mode: 'cors'
+        }).then((response) => response.json()).catch((error) => console.log(error));
+    }
 
     const aplicarFiltro = () => {
         const filtro = {
@@ -146,10 +164,32 @@ export default function AtenderChamado() {
                             <details key={chamado.cha_cod}>
                                 <summary  className="listaTabelaChamados">
                                     <p>#{chamado.cha_cod}</p>
+                                    {/* <select
+                                        onChange = {(e) => updatePrioridade(e.target.value, chamado.cha_cod)}
+                                    >
+                                        <option className={`${prioridade.nome}`} style={{display: 'none'}} >{prioridade.nome}</option>
+                                        
+                                        <option value={setAtualizaPrioridade(1)}>Baixa</option>
+                                        <option value={setAtualizaPrioridade(2)}>Média</option>
+                                        <option value={setAtualizaPrioridade(3)}>Alta</option>
+                                        <option value={setAtualizaPrioridade(4)}>Urgente</option>
+                                        <option>{chamado.cha_cod} {atualizaPrioridade}</option>
+                                    </select> */}
+                                    <select
+                                        onChange={(e) => updatePrioridade(e.target.value, chamado.cha_cod)}
+                                    >
+                                        <option value='' disabled hidden>{prioridades.nome}</option>
+                                        <option value='1'>Baixa</option>
+                                        <option value='2'>Média</option>
+                                        <option value='3'>Alta</option>
+                                        <option value='4'>Urgente</option>
+                                    </select>
+
                                     {prioridades.map(prioridade =>
                                         (chamado.cha_prioridade === prioridade.id) &&
                                         <div className="divPrioridade">
-                                            <p className={`${prioridade.nome.toLowerCase()}`}>{prioridade.nome}</p>
+                                            
+                                            {/* <p className={`${prioridade.nome.toLowerCase()}`}>{prioridade.nome}</p> */}
                                         </div>
                                     )}
                                     <p>{new Date(chamado.cha_dataInicio).toLocaleDateString()}</p>
