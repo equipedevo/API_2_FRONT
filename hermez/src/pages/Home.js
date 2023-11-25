@@ -26,7 +26,7 @@ function BotoesAdm() {
         </Link>
       ) : (
         <div className='botoesPequenoHome' id='GerenciarUsuariosItens'>
-          <Link className='botoesHome pequeno'>
+          <Link className='botoesHome pequeno' to="relatorios">
             <div>
               <h1>Gerar relatórios</h1>
             </div>

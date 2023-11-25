@@ -42,7 +42,7 @@ function DropdownAdms() {
                 id="Chamados"
                 style={{ display: chamadosVisible ? 'flex' : 'none' }}
             >
-                <Link>Relatório</Link>
+                <Link to="relatorios">Relatório</Link>
                 <Link to="chats">Meus Chamados</Link>
             </div>
             <button onClick={toggleGerenciarUsuarios}>
