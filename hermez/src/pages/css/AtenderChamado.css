@@ -130,18 +130,18 @@ details[open] .listaTabelaChamados:after {
 }
 
 .urgente{
-    background-color: #4d0047;
+    background-color: var(--roxo);
 }
 .alta {
     background-color: var(--vermelho);
 }
 
 .média {
-    background-color: #EF9A4C;
+    background-color: var(--reaberto);
 }
 
 .baixa {
-    background-color: #E5D123;
+    background-color: var(--amarelo);
 }
 
 /* DIV DESCRIÇÃO */
@@ -166,11 +166,11 @@ details[open] .listaTabelaChamados:after {
 
 .iniciar{
     background-color: transparent;
-    border: 0.5px solid #EF9A4C;
+    border: 0.5px solid var(--reaberto);
     background-color: transparent;
 }
 .iniciar:hover{
-    background-color: #EF9A4C;
+    background-color: var(--reaberto);
 }
 
 .cancelar{
