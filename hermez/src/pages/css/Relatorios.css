@@ -1,0 +1,48 @@
+:root{
+    --gapDivsRelatorios: 30px;
+    --bordaBotaoRelatorio: 1px;
+    --paddingBotaoRelatorio: 5px;
+}
+
+.relatorios,
+.relatorios > div,
+.variaveisRelatorios > div div{
+    display: flex;
+    flex-direction: column;
+}
+
+.relatorios{
+    gap: calc(3 * var(--gapDivsRelatorios));
+}
+
+.relatorios > div{
+    align-items: center;
+    width: 80%;
+    margin: auto;
+    gap: var(--gapDivsRelatorios);
+}
+
+.relatorios > div > *{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: var(--gapDivsRelatorios);
+}
+
+.botoesRelatorios > div > button{
+    min-width: 150px;
+    width: calc(10vw + 100px);
+    padding: var(--paddingBotaoRelatorio) calc(3 * var(--paddingBotaoRelatorio));
+    border: var(--cinzaClaro) solid var(--bordaBotaoRelatorio);
+    border-radius: calc(3 * var(--paddingBotaoRelatorio));
+    background-color: inherit;
+}
+
+.botoesRelatorios > div > button:hover,
+.botoesRelatorios > div > button:active{
+    background-color: var(--cinzaClaro);
+}
+.variaveisRelatorios > div {
+    display: flex;
+    flex-wrap: wrap;
+}
