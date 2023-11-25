@@ -13,6 +13,7 @@ import CadastroFuncionario from './pages/CadastroFuncionario';
 import TodosFuncionários from './pages/TodosFuncionários';
 import EditarFuncionario from './pages/EditarFuncionario';
 import Chats from './pages/Chats';
+import Relatorios from './pages/Relatorios';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="cadastrar-usuario" element={<CadastroFuncionario />} />
           <Route path="lista-funcionarios" element={<TodosFuncionários />} />
           <Route path="editar-funcionario" element={<EditarFuncionario />} />
+          <Route path="relatorios" element={<Relatorios/>} />
         </Route>
         <Route path="/empresa" element={<BaseEmpresa />}>
           <Route index element={<CadastroFuncionario />} />
