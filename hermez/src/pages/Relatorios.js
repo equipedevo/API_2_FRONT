@@ -48,7 +48,7 @@ export default function Relatorios() {
                         const inicioPeriodo = formatacaoData(dataInicio)
                         const fimPeriodo = formatacaoData(dataFim)
                         itens.map(((prioridade) => {
-                            fetch(`${process.env.REACT_APP_URL_RELATORIO_PERIODO}`, {
+                            fetch(REACT_APP_URL_RELATORIO_PRIORIDADE, {
                                 method: 'POST',
                                 body: JSON.stringify({
                                     inicioPeriodo: inicioPeriodo,
