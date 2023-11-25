@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import aberto from "../img/chats/iconeAberto.svg";
-//import andamento from "../img/chats/iconeAndamento.svg";
-//import reaberto from "../img/chats/iconeReaberto.svg";
-//import cancelado from "../img/chats/iconeCancelado.svg";
-//import concluido from "../img/chats/iconeConcluido.svg";
-//import fechado from "../img/chats/iconeFechado.svg";
+import andamento from "../img/chats/iconeAndamento.svg";
+import reaberto from "../img/chats/iconeReaberto.svg";
+import cancelado from "../img/chats/iconeCancelado.svg";
+import concluido from "../img/chats/iconeConcluido.svg";
+import fechado from "../img/chats/iconeFechado.svg";
 import anexo from "../img/chats/clipAnexo.svg";
 import enviar from "../img/chats/enviar.svg";
 import "./css/Chats.css";
@@ -18,13 +18,11 @@ export default function Chats() {
     const [selectChaCod, setSelectChaCod] = useState(null);
     const [atribuidos, setAtribuidos] = useState([]);
     const [file, setFile] = useState(null);
+    const [staCod, setStaCod] = useState(0);
 
     const fileInput = useRef(null);
 
-    const [timer, setTimer] = useState(new Date());
-    
-    
-    
+
     const formData = new FormData();
     formData.append('arq_cod', file);
     formData.append('msg_texto', textoMsg);
@@ -39,7 +37,7 @@ export default function Chats() {
     const submitForm = (e) => {
         e.preventDefault();
         if (selectChaCod === null) {
-            alert('Selecione um chamado')
+            console.log('Selecione um chamado')
         }
         else {
 
@@ -56,16 +54,36 @@ export default function Chats() {
                     console.log('Mensagem enviada com sucesso', data)
                 })
                 .catch((error) => console.log('Erro no envio da mensagem', error));
-        
+
         }
     }
 
-    const sleep = ms => new Promise (r => setTimeout(r, ms));
-    const reload = async function() {
-        console.log('1segundo');
-        await sleep(1000);
-        reload();
+    const meusChamados = atribuidos.concat(database);
+    meusChamados.sort((a, b) => {
+        let x = new Date(a.cha_dataInicio);
+        let y = new Date(b.cha_dataInicio);
+        return x - y;
+    })
+    meusChamados.reverse();
+
+    const statusCha = (status) => {
+
+        switch (status) {
+            case 'Aberto':
+                return aberto;
+            case 'Em andamento':
+                return andamento;
+            case 'Reaberto':
+                return reaberto;
+            case 'Cancelado':
+                return cancelado;
+            case 'Concluído':
+                return concluido;
+            case 'Fechado':
+                return fechado;
+        }
     }
+
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS}`, {
@@ -81,7 +99,7 @@ export default function Chats() {
         })
 
             .then((response) => response.json())
-            .then((data) => { setDatabase(data); console.log('esse é o database',database) })
+            .then((data) => { setDatabase(data)})
             .catch((error) => console.log(error));
 
         fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS_ATRIBUIDOS}`, {
@@ -97,9 +115,17 @@ export default function Chats() {
         })
 
             .then((response) => response.json())
-            .then((data) => { setAtribuidos(data); console.log(atribuidos); })
+            .then((data) => { setAtribuidos(data) })
             .catch((error) => console.log(error));
-            
+
+
+        
+
+    }, [selectChaCod, staCod])
+
+    useEffect(() => {
+
+        const interval = setInterval(() => {
             fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
                 method: 'POST',
                 body: JSON.stringify({
@@ -112,44 +138,64 @@ export default function Chats() {
                     'Content-Type': 'application/json'
                 }
             })
-    
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.mensagens == null) {
                         setMensagens([]);
                     } else {
                         setMensagens(data.mensagens.reverse());
-                        console.log(data.mensagens)
                     }
-                    
+
                 })
                 .catch((error) => console.log(error));
-            
-            reload();
-    }, [selectChaCod])
+        }, 100);
+        return () => clearInterval(interval);
 
+    }, [selectChaCod]);
+
+    const handleOnClick = () => {
+        setStaCod(5);
+        console.log('staCod: ' + staCod);
+        console.log('selectChaCod: ' + selectChaCod);
+
+        fetch(`${process.env.REACT_APP_URL_CHAT_ATUALIZAR_STATUS}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                sta_cod: staCod,
+                cha_cod: selectChaCod
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .catch((error) => console.log(error));
+    }
 
     return (
 
         <>
             <div className="container">
                 <div className="lista">
-                    {database.map(chamado => {
+                    
+                    {Array.isArray(meusChamados) ? meusChamados.map(chamado => {
+                        const imgStatus = statusCha(chamado.sta_nome)
+
                         return (
                             <details key={chamado.cha_cod}
                                 onClick={() => {
                                     setMostraChat({ ...mostraChat, [chamado.cha_cod]: !mostraChat[chamado.cha_cod] });
-                                    setSelectChaCod(chamado.cha_cod);
+                                    setSelectChaCod(chamado.cha_cod)
                                 }}>
 
                                 <summary className={activeChat ? 'chat active' : 'chat'} >
                                     <div className="icone">
-                                        <img src={aberto} alt='icone status' />
+                                        <img src={imgStatus} alt='icone status' />
                                         <p className={`status ${chamado.sta_nome.toLowerCase()}`}>{chamado.sta_nome}</p>
                                     </div>
                                     <div className="texto">
-                                        <p className="tituloChat aberto">{chamado.cha_titulo}</p>
-                                        <p className="subtitulo">Você:a resposta como sempre foi aparentemente enorme</p>
+                                        <p className={`tituloChat ${chamado.sta_nome.toLowerCase()}`}>{chamado.cha_titulo}</p>
                                     </div>
                                 </summary>
                                 <div className="linhadotempo">
@@ -158,36 +204,8 @@ export default function Chats() {
                             </details>
                         )
                     }
-                    )}
 
-                    {Array.isArray(atribuidos) ?
-
-                        atribuidos.map(atribuido => {
-                            return (
-                                <details key={atribuido.cha_cod}
-                                    onClick={() => {
-                                        setMostraChat({ ...mostraChat, [atribuido.cha_cod]: !mostraChat[atribuido.cha_cod] });
-                                        setSelectChaCod(atribuido.cha_cod)
-                                    }}>
-
-                                    <summary className={activeChat ? 'chat active' : 'chat'} >
-                                        <div className="icone">
-                                            <img src={aberto} alt='icone status' />
-                                            <p className={`status ${atribuido.sta_nome.toLowerCase()}`}>{atribuido.sta_nome}</p>
-                                        </div>
-                                        <div className="texto">
-                                            <p className="tituloChat aberto">{atribuido.cha_titulo}</p>
-                                            <p className="subtitulo">Você:a resposta como sempre foi aparentemente enorme</p>
-                                        </div>
-                                    </summary>
-                                    <div className="linhadotempo">
-
-                                    </div>
-                                </details>
-                            )
-                        }
-
-                        )
+                    )
                         : (
                             console.log('Nenhum chamado atribuído na lista')
                         )
@@ -201,28 +219,18 @@ export default function Chats() {
                     <p>Inicie as conversas dos seus chamados</p>
                 </div>
                 <div className={mostraChat ? 'conversa-aberta' : 'conversa-fechada'} value={mostraChat}>
-                    {database
+                    {meusChamados
                         .filter(cha => cha.cha_cod === selectChaCod)
                         .map(cha => (
                             <p className={`tituloConv ${cha.sta_nome.toLowerCase()}`} key={cha.cha_cod}>{cha.cha_titulo}</p>
 
                         ))}
 
-                    { atribuidos.length > 0 ?
-                        atribuidos
-                        .filter(cha => cha.cha_cod === selectChaCod)
-                        .map(cha => (
-                            <p className={`tituloConv ${cha.sta_nome.toLowerCase()}`} key={cha.cha_cod}>{cha.cha_titulo}</p>
-
-                        ))
-                        : (console.log('Nenhum chamado atribuído'))}
-
 
                     <div className="mensagens">
 
-                        {Array.isArray(mensagens) ?
-                            
-                            mensagens.map(msg => (
+                        {Array.isArray(mensagens) ? mensagens.map(msg => (
+                                
                                 <div className={`balao ${msg.remetente == localStorage.getItem('fun_cod') ? 'minha_msg' : 'pessoa_msg'}`}>
                                     <p className="mensagem">{msg.texto}</p>
                                 </div>
@@ -234,6 +242,8 @@ export default function Chats() {
 
 
                     </div>
+
+
 
                     <div className="resposta">
                         <form className="form-resposta" onSubmit={submitForm}>
@@ -265,6 +275,11 @@ export default function Chats() {
                                 <img src={enviar} alt="enviar mensagem" />
                             </button>
                         </form>
+
+                        <button type="submit" className="btn-concluir" onClick={() => handleOnClick()}>
+                            Concluir
+                        </button>
+
                     </div>
                 </div>
             </div>

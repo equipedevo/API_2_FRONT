@@ -211,6 +211,10 @@
     display: flex;
 }
 
+.container .btn-concluir{
+    cursor: pointer;
+    z-index: 1;
+}
 
 /* STATUS */
     .container .aberto{

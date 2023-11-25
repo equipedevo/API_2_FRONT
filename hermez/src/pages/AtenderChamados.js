@@ -37,12 +37,17 @@ export default function AtenderChamado() {
         }).catch((error) => console.log(error));
     };
 
+    const mudarStatus = (novoStatus, chamado) => {
+        localStorage.setItem('sta_cod', novoStatus);
+        localStorage.setItem('cha_cod', chamado);
+    }
+
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_CHAMADO_ATRIBUIR}`, {
             method: 'POST',
             body: JSON.stringify({
                 fun_cod: localStorage.getItem('fun_cod'),
-                cha_cod: localStorage.getItem('cha_cod')
+                cha_cod: localStorage.getItem('cha_cod'),
             }),
             headers: {
                 'Accept': 'application/json',
@@ -61,6 +66,25 @@ export default function AtenderChamado() {
         }
         filtroEffect();
     }, [prioridade, funcionario, status, tipo]);
+
+
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_ATUALIZAR_STATUS}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                sta_cod: localStorage.getItem('sta_cod'),
+                cha_cod: localStorage.getItem('cha_cod')
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .catch((error) => console.log(error));
+    }, [])
+
     return (
         <>
             <div className='divFormPadrao'>
@@ -161,11 +185,12 @@ export default function AtenderChamado() {
                                 <div className="divDescricaoChamado">
                                     <p>{chamado.cha_desc}</p>
                                     <div>
-                                        <Link to='/funcionario/chats' className="iniciar" onClick={() => localStorage.setItem('cha_cod', chamado.cha_cod)}>Iniciar
+                                        <Link to='/funcionario/chats' className="iniciar" onClick={() => mudarStatus(2, chamado.cha_cod)}>
+                                            Iniciar
                                         </Link>
-                                        <Link to='/funcionario' className="cancelar">
+                                        <button className="cancelar" onClick={() => mudarStatus(4, chamado.cha_cod)}>
                                             Cancelar
-                                        </Link>
+                                        </button>
                                     </div>
                                 </div>
                             </details>
