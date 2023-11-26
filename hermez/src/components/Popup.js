@@ -6,7 +6,7 @@ export default function Popup() {
     const [conteudoPopup, setConteudoPopup] = useState(null);
     useEffect(() => {
         const valorLocalStorage = localStorage.getItem("novoPopup");
-        if (["Cadastro da empresa", "Cadastro do funcionário", "Criação do chamado", "Alteração dos dados do funcionário"].includes(valorLocalStorage)) {
+        if (["Cadastro da empresa", "Cadastro do funcionário", "Criação do chamado", "Alteração dos dados do funcionário", "Cadastro das Perguntas"].includes(valorLocalStorage)) {
             setConteudoPopup(valorLocalStorage);
             setCadastroSucesso(true);
             localStorage.removeItem("novoPopup");
