@@ -14,6 +14,7 @@ import TodosFuncionários from './pages/TodosFuncionários';
 import EditarFuncionario from './pages/EditarFuncionario';
 import Chats from './pages/Chats';
 import Relatorios from './pages/Relatorios';
+import CadastroPerguntas from './pages/CadastroPerguntas';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route index element={<CadastroFuncionario />} />
           <Route path="lista-funcionarios" element={<TodosFuncionários />} />
           <Route path="editar-funcionario" element={<EditarFuncionario />} />
+          <Route path="perguntas-frequentes" element={<CadastroPerguntas />} />
         </Route>
         {/* path="*" serve para qualquer rota, então deve ficar por último e direcionar para a home ou uma página de erro 404 */}
         <Route path="*" element={<LoginFuncionario />} />
