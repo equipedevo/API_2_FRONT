@@ -10,6 +10,7 @@ export default function Relatorios() {
     const [grafico, setGrafico] = useState('null');
     const [itens, setPrioridades] = useState([]);
     const [erro, setErro] = useState('');
+    const [dadosProntos, setDadosProntos] = useState(false);
     const handleCheckboxChange = (item) => {
         if (itens.includes(item)) {
             setPrioridades(itens.filter((p) => p !== item));
@@ -17,40 +18,35 @@ export default function Relatorios() {
             setPrioridades([...itens, item]);
         }
     };
-    function handleClickPrioridade(){
+    function handleClickPrioridade() {
         setTipoGrafico('prioridade');
         setPrioridades([])
     };
-    function handleClickStatus(){
+    function handleClickStatus() {
         setTipoGrafico('status');
         setPrioridades([])
     };
     useEffect(() => {
-        if (tipoGrafico === 'prioridade') {
-            const exemploDados = {
-                1: Array.from({ length: 10 }, (_, i) => ({ cha_cod: i + 1 })),
-                2: Array.from({ length: 8 }, (_, i) => ({ cha_cod: i + 11 })),
-                3: Array.from({ length: 6 }, (_, i) => ({ cha_cod: i + 21 })),
-                4: Array.from({ length: 4 }, (_, i) => ({ cha_cod: i + 27 }))
-            };
-            // const formatacaoData = (date) => {
-            //     const formattedDate = new Date(date).toISOString().split('T')[0];
-            //     return formattedDate;
-            // };
-            const geradorDeBarras = async () => {
-                try {
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    const titulos = ['Baixa', 'Média', 'Alta', 'Urgente'];
-                    const cores = ['#E5D123', '#EF9A4C', '#F4324A', '#4d0047'];
-                    let dadosTemporarios = [];
-                    if (dataInicio && dataFim && itens) {
-                        /*
-                        const inicioPeriodo = formatacaoData(dataInicio)
-                        const fimPeriodo = formatacaoData(dataFim)
-                        itens.map(((prioridade) => {
-                            fetch(REACT_APP_URL_RELATORIO_PRIORIDADE, {
+        const formatacaoData = (date) => {
+            const formattedDate = new Date(date).toISOString().split('T')[0];
+            return formattedDate;
+        };
+        const geradorDeBarras = async () => {
+            try {
+                const titulos = tipoGrafico === 'prioridade' ? ['Baixa', 'Média', 'Alta', 'Urgente'] : ['Aberto', 'Em Andamento', 'Reaberto', 'Cancelado', 'Concluído', 'Fechado'];
+                const cores = tipoGrafico === 'prioridade' ? ['#E5D123', '#EF9A4C', '#F4324A', '#4d0047'] : ['#5182FF', '#e9d62d', '#EF9A4C', '#FF5151', '#61E366', '#34B132'];
+
+                let dadosTemporarios = [];
+
+                if (dataInicio && dataFim && itens) {
+                    const inicioPeriodo = formatacaoData(dataInicio);
+                    const fimPeriodo = formatacaoData(dataFim);
+                    if (tipoGrafico === 'prioridade') {
+                        await Promise.all(itens.map(async (prioridade) => {
+                            const response = await fetch(`${process.env.REACT_APP_URL_RELATORIO_PRIORIDADE}`, {
                                 method: 'POST',
                                 body: JSON.stringify({
+                                    emp_cod: localStorage.getItem("emp_cod"),
                                     inicioPeriodo: inicioPeriodo,
                                     fimPeriodo: fimPeriodo,
                                     prioridade: prioridade
@@ -60,63 +56,28 @@ export default function Relatorios() {
                                     'Content-Type': 'application/json'
                                 },
                                 mode: 'cors'
-                            }).then(response => {
-                                if(response.status === 200) {
-                                    response.json().then((lista) => {
-                                        setGrafico([
-                                            titulos[prioridade - 1],
-                                            lista.chamados.lenght(),
-                                            cores[prioridade - 1],
-                                            lista.chamados.lenght()
-                                        ])
-                                    });
-                                } else{
-                                    (response.json()).then(data => setErro(data.msg))
-                                }
-                            })
-                        })
-                        */
-                        dadosTemporarios = itens.map((prioridade) => [
-                            titulos[prioridade - 1],
-                            exemploDados[prioridade].length,
-                            cores[prioridade - 1],
-                            exemploDados[prioridade].length
-                        ]);
-                    }
-                    setGrafico(dadosTemporarios);
-                    setErro('');
-                } catch (error) {
-                    setErro('Erro ao gerar o gráfico.');
-                }
-            };
-            geradorDeBarras();
-        } else {
-            const statusDados = {
-                1: Array.from({ length: 5 }, (_, i) => ({ cha_cod: i + 1 })),
-                2: Array.from({ length: 7 }, (_, i) => ({ cha_cod: i + 6 })),
-                3: Array.from({ length: 3 }, (_, i) => ({ cha_cod: i + 14 })),
-                4: Array.from({ length: 2 }, (_, i) => ({ cha_cod: i + 20 })),
-                5: Array.from({ length: 8 }, (_, i) => ({ cha_cod: i + 22 })),
-                6: Array.from({ length: 4 }, (_, i) => ({ cha_cod: i + 30 }))
-            };
-            // const formatacaoData = (date) => {
-            //     const formattedDate = new Date(date).toISOString().split('T')[0];
-            //     return formattedDate;
-            // };
-            const geradorDeBarras = async () => {
-                try {
-                    await new Promise(resolve => setTimeout(resolve, 500));
-                    const titulos = ['Aberto', 'Em Andamento', 'Reaberto', 'Cancelado', 'Concluído', 'Fechado'];
-                    const cores = ['#5182FF', '#e9d62d', '#EF9A4C', '#FF5151', '#61E366', '#34B132'];
-                    let dadosTemporarios = [];
-                    if (dataInicio && dataFim && itens) {
-                        /*
-                        const inicioPeriodo = formatacaoData(dataInicio)
-                        const fimPeriodo = formatacaoData(dataFim)
-                        itens.map(((statusP) => {
-                            fetch(`${process.env.REACT_APP_URL_RELATORIO_STATUS}`, {
+                            });
+
+                            if (response.status === 200) {
+                                const lista = await response.json();
+                                console.log(lista, prioridade)
+                                dadosTemporarios.push([
+                                    titulos[prioridade - 1],
+                                    lista.chamados.length,
+                                    cores[prioridade - 1],
+                                    lista.chamados.length,
+                                ]);
+                            } else {
+                                const data = await response.json();
+                                setErro(data.msg);
+                            }
+                        }));
+                    } else {
+                        await Promise.all(itens.map(async (statusP) => {
+                            const response = await fetch(`${process.env.REACT_APP_URL_RELATORIO_STATUS}`, {
                                 method: 'POST',
                                 body: JSON.stringify({
+                                    emp_cod: localStorage.getItem("emp_cod"),
                                     inicioPeriodo: inicioPeriodo,
                                     fimPeriodo: fimPeriodo,
                                     status: statusP
@@ -126,38 +87,31 @@ export default function Relatorios() {
                                     'Content-Type': 'application/json'
                                 },
                                 mode: 'cors'
-                            }).then(response => {
-                                if(response.statusP === 200) {
-                                    response.json().then((lista) => {
-                                        setGrafico([
-                                            titulos[statusP - 1],
-                                            lista.chamados.lenght(),
-                                            cores[statusP - 1],
-                                            lista.chamados.lenght()
-                                        ])
-                                    });
-                                } else{
-                                    (response.json()).then(data => setErro(data.msg))
-                                }
-                            })
-                        })
-                        */
-                        dadosTemporarios = itens.map((prioridade) => [
-                            titulos[prioridade - 1],
-                            statusDados[prioridade].length,
-                            cores[prioridade - 1],
-                            statusDados[prioridade].length
-                        ]);
+                            });
+                            if (response.status === 200) {
+                                const lista = await response.json();
+                                dadosTemporarios.push([
+                                    titulos[statusP - 1],
+                                    lista.chamados.length,
+                                    cores[statusP - 1],
+                                    lista.chamados.length,
+                                ]);
+                            } else {
+                                const data = await response.json();
+                                setErro(data.msg);
+                            }
+                        }));
                     }
-                    setGrafico(dadosTemporarios);
-                    setErro('');
-                } catch (error) {
-                    setErro('Erro ao gerar o gráfico.');
                 }
-            };
-            geradorDeBarras();
-        }
-    }, [dataInicio, dataFim, itens]);
+                setGrafico(dadosTemporarios);
+                setErro('');
+                setDadosProntos(true);
+            } catch (error) {
+                setErro('Erro ao gerar o gráfico.');
+            }
+        };
+        geradorDeBarras();
+    }, [dataInicio, dataFim, itens, tipoGrafico]);
 
     return (
         <>
@@ -182,7 +136,7 @@ export default function Relatorios() {
                         </div>
                         <div>
                             <span>Items:</span>
-                            {tipoGrafico==='prioridade'?(
+                            {tipoGrafico === 'prioridade' ? (
                                 <>
                                     <label>
                                         <input
@@ -221,7 +175,7 @@ export default function Relatorios() {
                                         Urgente
                                     </label>
                                 </>
-                            ):(
+                            ) : (
                                 <>
                                     <label>
                                         <input
@@ -284,17 +238,17 @@ export default function Relatorios() {
                     </div>
                 </div>
             </div>
-            {grafico && grafico.length >= 1 && (
+            {dadosProntos && grafico && grafico.length >= 1 && (
                 <Chart
                     chartType="BarChart"
                     width="100%"
                     height="300px"
                     data={[
-                        [tipoGrafico==='prioridade'?('Prioridade'):('Status'), 'Quantidade', { role: 'style' }, { role: 'annotation' }],
+                        [tipoGrafico === 'prioridade' ? ('Prioridade') : ('Status'), 'Quantidade', { role: 'style' }, { role: 'annotation' }],
                         ...grafico
                     ]}
                     options={{
-                        title: tipoGrafico==='prioridade'?('Prioridades'):('Status'),
+                        title: tipoGrafico === 'prioridade' ? ('Prioridades') : ('Status'),
                         bar: { groupWidth: '80%' },
                         legend: { position: 'none' }
                     }}
