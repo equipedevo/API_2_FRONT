@@ -65,7 +65,7 @@ export default function AtenderChamado() {
         <>
             <div className='divFormPadrao'>
                 <form className='formPadrao'>
-                    <h1>LISTA DE CHAMADOS </h1>
+                    <h1>LISTA DE CHAMADOS</h1>
                     <div className='divDuasColunasFormPadrao'>
                         <div className="filtros" id='prioridade'>
                             <label htmlFor="prioridadeFiltragem">PRIORIDADE</label>

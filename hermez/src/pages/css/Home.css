@@ -75,3 +75,98 @@
         margin-right: auto;
     }
 }
+
+
+/* ESTILIZAÇÃO DO MANUAL DO USUÁRIO */
+
+.manual{
+    background-color: var(--vermelho);
+
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 10%;
+
+    padding: 5%;
+
+    text-align: center;
+
+    border: 5px solid black;
+    border-radius: 12px;
+}
+
+.manual h1{
+    font-weight: bolder;
+    font-size: 200%;
+}
+
+.manual h2{
+    font-size: 150%;
+    text-align: center;
+    font-weight: 500;
+}
+
+.manual h3{
+    font-size: 130%;
+    text-align: center;
+    font-weight: 400;
+    
+}
+
+.manual a{
+    color: white;
+}
+
+.corpo{
+    text-align: left;
+}
+
+.manual #urgente, #alta, #media, #baixa, 
+#aberto, #andamento, #concluido, #reaberto, #fechado, #cancelado{
+    display: inline-block;
+    border: 2px solid black;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+
+/* PRIORIDADE */
+.manual #urgente{
+    background-color: #76026c;
+}
+
+.manual #alta {
+    background-color: rgb(255, 0, 17);
+}
+
+.manual #media {
+    background-color: orange;
+}
+
+.manual #baixa {
+    background-color: yellow;
+}
+
+/* STATUS */
+.manual #aberto{
+    background-color: rgb(50, 117, 226);
+}
+
+.manual #andamento{
+    background-color: yellow ;
+}
+
+.manual #concluido{
+    background-color: lightgreen;
+}
+
+.manual #reaberto{
+    background-color: orange;
+}
+
+.manual #fechado{
+    background-color: green;
+}
+
+.manual #cancelado{
+    background-color: red;
+}
