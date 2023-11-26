@@ -110,7 +110,7 @@ export default function CadastroUser() {
                             <input
                                 className="inputFormPadrao"
                                 id="senha"
-                                maxLength='9'
+                                maxLength='32'
                                 name='senha'
                                 onChange={(e) => setSenha(e.target.value)}
                                 value={senha}
@@ -124,7 +124,7 @@ export default function CadastroUser() {
                             <input
                                 className="inputFormPadrao"
                                 id="senhaConfirmada"
-                                maxLength='9'
+                                maxLength='32'
                                 name='senhaConfirmada'
                                 onChange={(e) => setSenhaConfirmada(e.target.value)}
                                 value={senhaConfirmada}
