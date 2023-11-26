@@ -18,7 +18,7 @@ export default function Chats() {
     const [selectChaCod, setSelectChaCod] = useState(null);
     const [atribuidos, setAtribuidos] = useState([]);
     const [file, setFile] = useState(null);
-    const [staCod, setStaCod] = useState(0);
+    const [staCod, setStaCod] = useState(null);
 
     const fileInput = useRef(null);
 
@@ -58,13 +58,25 @@ export default function Chats() {
         }
     }
 
-    const meusChamados = atribuidos.concat(database);
-    meusChamados.sort((a, b) => {
-        let x = new Date(a.cha_dataInicio);
-        let y = new Date(b.cha_dataInicio);
-        return x - y;
-    })
-    meusChamados.reverse();
+    const trocaStatus = (status) => {
+        setStaCod(status);
+        localStorage.setItem('sta_cod', status);
+        localStorage.setItem('cha_cod', selectChaCod);
+
+        fetch(`${process.env.REACT_APP_URL_CHAMADO_ATUALIZAR_STATUS}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                sta_cod: localStorage.getItem('sta_cod'),
+                cha_cod: localStorage.getItem('cha_cod')
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then((response) => response.json())
+            .catch((error) => console.log(error));
+    }
 
     const statusCha = (status) => {
 
@@ -84,6 +96,15 @@ export default function Chats() {
         }
     }
 
+    const meusChamados = Array.isArray(atribuidos) ? atribuidos.concat(database) : database;
+    meusChamados.sort((a, b) => {
+        let x = new Date(a.cha_dataInicio);
+        let y = new Date(b.cha_dataInicio);
+        return x - y;
+    })
+    meusChamados.reverse();
+
+
 
     useEffect(() => {
         fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS}`, {
@@ -99,7 +120,7 @@ export default function Chats() {
         })
 
             .then((response) => response.json())
-            .then((data) => { setDatabase(data)})
+            .then((data) => { setDatabase(data) })
             .catch((error) => console.log(error));
 
         fetch(`${process.env.REACT_APP_URL_CHAMADO_GET_MEUS_ATRIBUIDOS}`, {
@@ -119,50 +140,19 @@ export default function Chats() {
             .catch((error) => console.log(error));
 
 
-        
 
     }, [selectChaCod, staCod])
 
     useEffect(() => {
 
         const interval = setInterval(() => {
-            fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
-                method: 'POST',
-                body: JSON.stringify({
-                    cha_cod: selectChaCod,
-                    remetente: localStorage.getItem('fun_cod'),
-                    pag: 0
-                }),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.mensagens == null) {
-                        setMensagens([]);
-                    } else {
-                        setMensagens(data.mensagens.reverse());
-                    }
 
-                })
-                .catch((error) => console.log(error));
-        }, 100);
-        return () => clearInterval(interval);
-
-    }, [selectChaCod]);
-
-    const handleOnClick = () => {
-        setStaCod(5);
-        console.log('staCod: ' + staCod);
-        console.log('selectChaCod: ' + selectChaCod);
-
-        fetch(`${process.env.REACT_APP_URL_CHAT_ATUALIZAR_STATUS}`, {
+        fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
             method: 'POST',
             body: JSON.stringify({
-                sta_cod: staCod,
-                cha_cod: selectChaCod
+                cha_cod: selectChaCod,
+                remetente: localStorage.getItem('fun_cod'),
+                pag: 0
             }),
             headers: {
                 'Accept': 'application/json',
@@ -170,15 +160,27 @@ export default function Chats() {
             }
         })
             .then((response) => response.json())
+            .then((data) => {
+                if (data.mensagens == null) {
+                    setMensagens([]);
+                } else {
+                    setMensagens(data.mensagens.reverse());
+                }
+
+            })
             .catch((error) => console.log(error));
-    }
+        }, 100);
+        return () => clearInterval(interval);
+
+    }, [selectChaCod])
+
 
     return (
 
         <>
             <div className="container">
                 <div className="lista">
-                    
+
                     {Array.isArray(meusChamados) ? meusChamados.map(chamado => {
                         const imgStatus = statusCha(chamado.sta_nome)
 
@@ -230,11 +232,11 @@ export default function Chats() {
                     <div className="mensagens">
 
                         {Array.isArray(mensagens) ? mensagens.map(msg => (
-                                
-                                <div className={`balao ${msg.remetente == localStorage.getItem('fun_cod') ? 'minha_msg' : 'pessoa_msg'}`}>
-                                    <p className="mensagem">{msg.texto}</p>
-                                </div>
-                            ))
+
+                            <div className={`balao ${msg.remetente == localStorage.getItem('fun_cod') ? 'minha_msg' : 'pessoa_msg'}`}>
+                                <p className="mensagem">{msg.texto}</p>
+                            </div>
+                        ))
                             : (
                                 <p>Nenhuma mensagem</p>
                             )
@@ -243,44 +245,115 @@ export default function Chats() {
 
                     </div>
 
+                    {meusChamados
+                        .filter(cha => cha.cha_cod === selectChaCod)
+                        .map(cha => (
+
+                            cha.sta_nome === 'Cancelado' ?
+
+                                <div className="resposta">
+                                    <div className="avisoStatus">
+                                        <img src={cancelado} />
+                                        <h2 className="cancelado">Chamado cancelado</h2>
+                                    </div>
+                                </div>
+                            :
+                            cha.sta_nome === 'Concluído' ?
+
+                                <div className="resposta">
+                                    <div className="avisoStatus">
+                                        <img src={concluido} />
+                                        <h2 className="concluído">Chamado concluído</h2>
+                                    </div>
+                                    <button className="btn-status" onClick={() => trocaStatus(3)}>Reabrir</button>
+                                </div>
+                            :
+                            cha.sta_nome === 'Fechado' ?
+                                <div className="resposta">
+                                    <div className="avisoStatus">
+                                        <img src={fechado} />
+                                        <h2 className="fechado">Chamado fechado</h2>
+                                    </div>
+                                </div>
+                            :
+                            cha.sta_nome === 'Reaberto' ?
+                                <div className="resposta">
+
+                                    <form className="form-resposta" onSubmit={submitForm}>
+                                        <input
+                                            className="campoResposta"
+                                            placeholder="Digite sua mensagem..."
+                                            type="text"
+                                            value={textoMsg}
+                                            onChange={(e) => { setTextoMsg(e.target.value) }}
+                                            onSubmit={submitForm}
+                                        />
+
+                                        <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                            <span>
+                                                <img src={anexo} alt="enviar arquivo" />
+                                            </span>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="arquivo"
+                                            multiple={false}
+                                            ref={fileInput}
+                                            value={file}
+                                            onChange={handleFileInput}
+                                            style={{ display: 'none' }}
+                                        />
+
+                                        <button type="submit" className="botao">
+                                            <img src={enviar} alt="enviar mensagem" />
+                                        </button>
+                                    </form>
+                                    <button className="btn-status" onClick={() => trocaStatus(6)}>Fechar</button>
+                                </div>
+                                :
+
+                                //Em andamento e aberto
+
+                                <div className="resposta">
+
+                                    <form className="form-resposta" onSubmit={submitForm}>
+                                        <input
+                                            className="campoResposta"
+                                            placeholder="Digite sua mensagem..."
+                                            type="text"
+                                            value={textoMsg}
+                                            onChange={(e) => { setTextoMsg(e.target.value) }}
+                                            onSubmit={submitForm}
+                                        />
+
+                                        <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                            <span>
+                                                <img src={anexo} alt="enviar arquivo" />
+                                            </span>
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="arquivo"
+                                            multiple={false}
+                                            ref={fileInput}
+                                            value={file}
+                                            onChange={handleFileInput}
+                                            style={{ display: 'none' }}
+                                        />
+
+                                        <button type="submit" className="botao">
+                                            <img src={enviar} alt="enviar mensagem" />
+                                        </button>
+                                    </form>
+                                    <button className="btn-status" onClick={() => trocaStatus(5)}>Concluir</button>
+                                </div>
+
+                        ))}
 
 
-                    <div className="resposta">
-                        <form className="form-resposta" onSubmit={submitForm}>
-                            <input
-                                className="campoResposta"
-                                placeholder="Digite sua mensagem..."
-                                type="text"
-                                value={textoMsg}
-                                onChange={(e) => { setTextoMsg(e.target.value) }}
-                                onSubmit={submitForm}
-                            />
 
-                            <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
-                                <span>
-                                    <img src={anexo} alt="enviar arquivo" />
-                                </span>
-                            </label>
-                            <input
-                                type="file"
-                                id="arquivo"
-                                multiple={false}
-                                ref={fileInput}
-                                value={file}
-                                onChange={handleFileInput}
-                                style={{ display: 'none' }}
-                            />
 
-                            <button type="submit" className="botao">
-                                <img src={enviar} alt="enviar mensagem" />
-                            </button>
-                        </form>
 
-                        <button type="submit" className="btn-concluir" onClick={() => handleOnClick()}>
-                            Concluir
-                        </button>
-
-                    </div>
                 </div>
             </div>
         </>
