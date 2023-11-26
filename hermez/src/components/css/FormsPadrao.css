@@ -155,3 +155,29 @@
 .botaoFecharFormPadrao *{
     width: var(--widthBotaoFechar);
 }
+
+.perguntasFrequentes{
+    flex-direction: column;
+}
+.perguntasFrequentes > div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-bottom: var(--preto) solid 2px;
+}
+.perguntasFrequentes > div:nth-child(odd){
+    background-color: var(--branco);
+}
+.perguntasFrequentes > div:nth-child(even){
+    background-color: var(--cinzaClaro);
+}
+
+.perguntasFrequentes > div h1{
+    text-align: center;
+    font: var(--títulos);
+}
+
+.perguntasFrequentes > div p{
+    font: var(--textos);
+    padding-left: 2px;
+}
