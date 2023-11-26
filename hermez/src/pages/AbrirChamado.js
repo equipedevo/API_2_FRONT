@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../components/css/FormsPadrao.css';
 import fechar from '../img/fechar.svg';
@@ -20,25 +20,25 @@ export default function AbrirChamado() {
     formData.append('emp_cod', localStorage.getItem("emp_cod"));
     const submitForm = (e) => {
         e.preventDefault();
-        if (tipo===0){
+        if (tipo === 0) {
             setErro('Insira um tipo');
         }
-        else{
+        else {
             setErro('');
             console.log('dados formulario:  ', descricao)
             fetch(`${process.env.REACT_APP_URL_CHAMADO_CADASTRO}`, {
-                method:'POST',
+                method: 'POST',
                 body: formData,
                 headers: {
                     'Accept': 'application/json'
                 },
                 mode: 'cors'
             }).then(response => {
-                if(response.status === 200){
+                if (response.status === 200) {
                     localStorage.setItem("novoPopup", 'Criação do chamado');
                     window.location.href = '../funcionario'
                 }
-                else{
+                else {
                     (response.json()).then(data => {
                         setErro(data.msg)
                     })
@@ -46,6 +46,29 @@ export default function AbrirChamado() {
             })
         }
     }
+    const [perguntasFrequentes, setPerguntasFrequentes] = useState([]);
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_URL_PERGUNTAS_LISTAR}`, {
+            method:"POST",
+            body: JSON.stringify({
+                emp_cod: localStorage.getItem("emp_cod")
+            }),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            mode: 'cors'
+        }).then(response => {
+            if(response.status === 200) {
+                response.json().then((lista) => {
+                    const perguntasFrequentes = lista
+                    setPerguntasFrequentes(perguntasFrequentes)
+                })
+            } else{(response.json()).then(data => 
+                setErro(data.msg)
+            )}
+        })
+    }, [])
 
 
     return (
@@ -114,7 +137,7 @@ export default function AbrirChamado() {
                             >
                                 <option
                                     value="0"
-                                    style={{display: 'none'}}
+                                    style={{ display: 'none' }}
                                 >
                                     Selecione
                                 </option>
@@ -129,25 +152,25 @@ export default function AbrirChamado() {
                         </div>
                         <div>
                             <label htmlFor='arquivo'>IMAGEM DO PROBLEMA</label>
-                            <UploadArquivo 
+                            <UploadArquivo
                                 id='imagemChamado'
                                 name='imagemChamado'
-                                onFileSelect={(arquivo) => {formData.append('imagem', arquivo)}} />
+                                onFileSelect={(arquivo) => { formData.append('imagem', arquivo) }} />
                         </div>
                     </div>
                     <div className='divUmaColunaFormPadrao'>
-                            <label htmlFor='descricao'>DESCRIÇÃO</label>
-                            <textarea
-                                className="textareaFormPadrao"
-                                id="descricao"
-                                maxLength='690'
-                                name="descricao"
-                                onChange={(e) => setDescricao(e.target.value)}
-                                placeholder="Descrição"
-                                type='text'
-                                required
-                                value={descricao}
-                            />
+                        <label htmlFor='descricao'>DESCRIÇÃO</label>
+                        <textarea
+                            className="textareaFormPadrao"
+                            id="descricao"
+                            maxLength='690'
+                            name="descricao"
+                            onChange={(e) => setDescricao(e.target.value)}
+                            placeholder="Descrição"
+                            type='text'
+                            required
+                            value={descricao}
+                        />
                     </div>
                     <div className='divBotaoEnviar'>
                         <input
@@ -157,6 +180,16 @@ export default function AbrirChamado() {
                         />
                     </div>
                     {erroSenha && <p className="erro">{erroSenha}</p>}
+                    <h1>Perguntas frequentes</h1>
+                    <div className="perguntasFrequentes"> 
+                        {perguntasFrequentes && perguntasFrequentes.map((perguntaComResposta) => (
+                            <div key={perguntaComResposta.per_cod}>
+                                <h1>{perguntaComResposta.per_desc}</h1>
+                                <p>{perguntaComResposta.per_resposta}</p>
+
+                            </div>
+                        ))}
+                    </div>
                 </form>
             </div>
         </>
