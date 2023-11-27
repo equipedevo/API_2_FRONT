@@ -1,21 +1,38 @@
 import { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import './css/AtenderChamado.css';
-
+ 
 export default function AtenderChamado() {
     const [listaChamado, setListaChamado] = useState([]);
     const [prioridade, setPrioridade] = useState('');
     const [funcionario, setFuncionario] = useState('');
     const [status, setStatus] = useState('');
     const [tipo, setTipo] = useState('');
-
+ 
     const prioridades = [
         {id: 1, nome: 'Baixa'},
         {id: 2, nome: 'Média'},
         {id: 3, nome: 'Alta'},
         {id: 4, nome: 'Urgente'}
     ];
-
+ 
+    const updatePrioridade = (priori, cha_cod) => {
+        fetch(`${process.env.REACT_APP_URL_ATUALIZAR_PRIORIDADE}`, {
+            method: 'POST',
+            body: JSON.stringify({
+                priori: priori,
+                cha_cod: cha_cod
+            }),
+ 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+ 
+            mode: 'cors'
+        }).then((response) => response.json()).then(json => {console.log(json)}).catch((error) => console.log(error));
+    }
+ 
     const aplicarFiltro = () => {
         const filtro = {
             emp_cod: localStorage.getItem('emp_cod'),
@@ -27,7 +44,7 @@ export default function AtenderChamado() {
         fetch(`${process.env.REACT_APP_URL_CHAMADO_FILTRO}`, {
             method: 'POST',
             body: JSON.stringify(filtro),
-
+ 
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -54,13 +71,13 @@ export default function AtenderChamado() {
                 'Content-Type': 'application/json'
             }
         })
-
+ 
         .then((response) => response.json())
         .catch((error) => console.log(error));
-
+ 
     }, []);
-
-    useEffect(() => { 
+ 
+    useEffect(() => {
         const filtroEffect = () => {
             aplicarFiltro();
         }
@@ -118,7 +135,7 @@ export default function AtenderChamado() {
                                 placeholder="Nome do Funcionário"
                                 type='text'
                             />
-                        </div>   
+                        </div>  
                     </div>
                     <div className='divDuasColunasFormPadrao'>
                         <div className="filtros" id='status'>
@@ -170,12 +187,28 @@ export default function AtenderChamado() {
                             <details key={chamado.cha_cod}>
                                 <summary  className="listaTabelaChamados">
                                     <p>#{chamado.cha_cod}</p>
-                                    {prioridades.map(prioridade =>
-                                        (chamado.cha_prioridade === prioridade.id) &&
-                                        <div className="divPrioridade">
-                                            <p className={`${prioridade.nome.toLowerCase()}`}>{prioridade.nome}</p>
-                                        </div>
-                                    )}
+                                    <select
+                                        onChange={(e) => updatePrioridade(e.target.value, chamado.cha_cod)}
+                                    >
+                                        {prioridades.map(prioridade =>
+                                            (chamado.cha_prioridade === prioridade.id) &&
+                                            <option
+                                                className={`${prioridade.nome.toLowerCase()}`}
+                                                value={prioridade.id}
+                                                style={{display: 'none'}}
+                                            >
+                                                {prioridade.nome}
+                                            </option>
+                                        )}
+                                        {prioridades.map(prioridade =>
+                                            <option
+                                                value={prioridade.id}
+                                                className={`${prioridade.nome.toLowerCase()}`}
+                                            >
+                                                {prioridade.nome}
+                                            </option>
+                                        )}
+                                    </select>
                                     <p>{new Date(chamado.cha_dataInicio).toLocaleDateString()}</p>
                                     <p>{chamado.fun_nome}</p>
                                     <p>{chamado.cha_titulo}</p>
