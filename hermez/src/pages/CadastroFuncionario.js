@@ -154,7 +154,7 @@ export default function CadastroUser() {
                             <input
                                 className="inputFormPadrao"
                                 id="funcaoCadastro"
-                                maxLength='15'
+                                maxLength='20'
                                 name='funcaoCadastro'
                                 value={funcao}
                                 required

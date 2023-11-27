@@ -90,7 +90,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="razaoSocial"
-                                    maxLength="20"
+                                    maxLength="30"
                                     name='razaoSocial'
                                     onChange={(e) => setRazaoSocial(e.target.value)}
                                     value={razaoSocial}
@@ -104,7 +104,7 @@ export default function CadastroEmpresa() {
                                 <input
                                     className="inputFormPadrao"
                                     id="cnpjCadastro"
-                                    maxLength="30"
+                                    maxLength="18"
                                     name='cnpjCadastro'
                                     onChange={handleCnpjChange}
                                     value={cnpj}
@@ -149,7 +149,7 @@ export default function CadastroEmpresa() {
                             <input
                                 className="inputFormPadrao"
                                 id="email"
-                                maxLength="48"
+                                maxLength="50"
                                 name='email'
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}

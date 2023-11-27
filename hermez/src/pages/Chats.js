@@ -321,6 +321,7 @@ export default function Chats() {
                                             className="campoResposta"
                                             placeholder="Digite sua mensagem..."
                                             type="text"
+                                            maxLength="500"
                                             value={textoMsg}
                                             onChange={(e) => { setTextoMsg(e.target.value) }}
                                             onSubmit={submitForm}

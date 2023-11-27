@@ -99,7 +99,7 @@ export default function AbrirChamado() {
                             <input
                                 className="inputFormPadrao"
                                 id='tituloChamado'
-                                maxLength='72'
+                                maxLength='30'
                                 name='tituloChamado'
                                 onChange={(e) => setTitulo(e.target.value)}
                                 placeholder='Título'
@@ -116,7 +116,7 @@ export default function AbrirChamado() {
                         <input
                             className="inputFormPadrao"
                             id='localChamado'
-                            maxLength='20'
+                            maxLength='32'
                             name='localChamado'
                             onChange={(e) => setLocal(e.target.value)}
                             placeholder='Localização'
