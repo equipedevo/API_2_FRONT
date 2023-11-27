@@ -96,14 +96,6 @@ export default function Chats() {
         }
     }
 
-    const meusChamados = Array.isArray(atribuidos) ? atribuidos.concat(database) : database;
-    meusChamados.sort((a, b) => {
-        let x = new Date(a.cha_dataInicio);
-        let y = new Date(b.cha_dataInicio);
-        return x - y;
-    })
-    meusChamados.reverse();
-
 
 
     useEffect(() => {
@@ -147,28 +139,28 @@ export default function Chats() {
 
         const interval = setInterval(() => {
 
-        fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
-            method: 'POST',
-            body: JSON.stringify({
-                cha_cod: selectChaCod,
-                remetente: localStorage.getItem('fun_cod'),
-                pag: 0
-            }),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.mensagens == null) {
-                    setMensagens([]);
-                } else {
-                    setMensagens(data.mensagens.reverse());
+            fetch(`${process.env.REACT_APP_URL_CHAT_MENSAGENS}`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    cha_cod: selectChaCod,
+                    remetente: localStorage.getItem('fun_cod'),
+                    pag: 0
+                }),
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 }
-
             })
-            .catch((error) => console.log(error));
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.mensagens == null) {
+                        setMensagens([]);
+                    } else {
+                        setMensagens(data.mensagens.reverse());
+                    }
+
+                })
+                .catch((error) => console.log(error));
         }, 100);
         return () => clearInterval(interval);
 
@@ -181,7 +173,7 @@ export default function Chats() {
             <div className="container">
                 <div className="lista">
 
-                    {Array.isArray(meusChamados) ? meusChamados.map(chamado => {
+                    {Array.isArray(atribuidos) ? atribuidos.map(chamado => {
                         const imgStatus = statusCha(chamado.sta_nome)
 
                         return (
@@ -213,7 +205,37 @@ export default function Chats() {
                         )
                     }
 
+                    {Array.isArray(database) ? database.map(chamado => {
+                        const imgStatus = statusCha(chamado.sta_nome)
 
+                        return (
+                            <details key={chamado.cha_cod}
+                                onClick={() => {
+                                    setMostraChat({ ...mostraChat, [chamado.cha_cod]: !mostraChat[chamado.cha_cod] });
+                                    setSelectChaCod(chamado.cha_cod)
+                                }}>
+
+                                <summary className={activeChat ? 'chat active' : 'chat'} >
+                                    <div className="icone">
+                                        <img src={imgStatus} alt='icone status' />
+                                        <p className={`status ${chamado.sta_nome.toLowerCase()}`}>{chamado.sta_nome}</p>
+                                    </div>
+                                    <div className="texto">
+                                        <p className={`tituloChat ${chamado.sta_nome.toLowerCase()}`}>{chamado.cha_titulo}</p>
+                                    </div>
+                                </summary>
+                                <div className="linhadotempo">
+
+                                </div>
+                            </details>
+                        )
+                    }
+
+                    )
+                        : (
+                            console.log('Nenhum chamado atribuído na lista')
+                        )
+                    }
 
                 </div>
 
@@ -221,13 +243,19 @@ export default function Chats() {
                     <p>Inicie as conversas dos seus chamados</p>
                 </div>
                 <div className={mostraChat ? 'conversa-aberta' : 'conversa-fechada'} value={mostraChat}>
-                    {meusChamados
+                    {Array.isArray(database) ?  database
                         .filter(cha => cha.cha_cod === selectChaCod)
                         .map(cha => (
                             <p className={`tituloConv ${cha.sta_nome.toLowerCase()}`} key={cha.cha_cod}>{cha.cha_titulo}</p>
 
-                        ))}
+                        )): console.log('nenhum chamado')} 
 
+                    {Array.isArray(atribuidos) ?  atribuidos
+                        .filter(cha => cha.cha_cod === selectChaCod)
+                        .map(cha => (
+                            <p className={`tituloConv ${cha.sta_nome.toLowerCase()}`} key={cha.cha_cod}>{cha.cha_titulo}</p>
+
+                        )) : console.log('nenhum atribuido')}
 
                     <div className="mensagens">
 
@@ -245,7 +273,7 @@ export default function Chats() {
 
                     </div>
 
-                    {meusChamados
+                    { Array.isArray(atribuidos) ? atribuidos
                         .filter(cha => cha.cha_cod === selectChaCod)
                         .map(cha => (
 
@@ -257,101 +285,203 @@ export default function Chats() {
                                         <h2 className="cancelado">Chamado cancelado</h2>
                                     </div>
                                 </div>
-                            :
-                            cha.sta_nome === 'Concluído' ?
+                                :
+                                cha.sta_nome === 'Concluído' ?
+
+                                    <div className="resposta">
+                                        <div className="avisoStatus">
+                                            <img src={concluido} />
+                                            <h2 className="concluído">Chamado concluído</h2>
+                                        </div>
+                                        <button className="btn-status" onClick={() => trocaStatus(3)}>Reabrir</button>
+                                    </div>
+                                    :
+                                    cha.sta_nome === 'Fechado' ?
+                                        <div className="resposta">
+                                            <div className="avisoStatus">
+                                                <img src={fechado} />
+                                                <h2 className="fechado">Chamado fechado</h2>
+                                            </div>
+                                        </div>
+                                        :
+                                        cha.sta_nome === 'Reaberto' ?
+                                            <div className="resposta">
+
+                                                <form className="form-resposta" onSubmit={submitForm}>
+                                                    <input
+                                                        className="campoResposta"
+                                                        placeholder="Digite sua mensagem..."
+                                                        type="text"
+                                                        value={textoMsg}
+                                                        onChange={(e) => { setTextoMsg(e.target.value) }}
+                                                        onSubmit={submitForm}
+                                                    />
+
+                                                    <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                                        <span>
+                                                            <img src={anexo} alt="enviar arquivo" />
+                                                        </span>
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="arquivo"
+                                                        multiple={false}
+                                                        ref={fileInput}
+                                                        value={file}
+                                                        onChange={handleFileInput}
+                                                        style={{ display: 'none' }}
+                                                    />
+
+                                                    <button type="submit" className="botao">
+                                                        <img src={enviar} alt="enviar mensagem" />
+                                                    </button>
+                                                </form>
+                                                <button className="btn-status" onClick={() => trocaStatus(6)}>Fechar</button>
+                                            </div>
+                                            :
+
+                                            //Em andamento e aberto
+
+                                            <div className="resposta">
+
+                                                <form className="form-resposta" onSubmit={submitForm}>
+                                                    <input
+                                                        className="campoResposta"
+                                                        placeholder="Digite sua mensagem..."
+                                                        type="text"
+                                                        value={textoMsg}
+                                                        onChange={(e) => { setTextoMsg(e.target.value) }}
+                                                        onSubmit={submitForm}
+                                                    />
+
+                                                    <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                                        <span>
+                                                            <img src={anexo} alt="enviar arquivo" />
+                                                        </span>
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="arquivo"
+                                                        multiple={false}
+                                                        ref={fileInput}
+                                                        value={file}
+                                                        onChange={handleFileInput}
+                                                        style={{ display: 'none' }}
+                                                    />
+
+                                                    <button type="submit" className="botao">
+                                                        <img src={enviar} alt="enviar mensagem" />
+                                                    </button>
+                                                </form>
+                                                <button className="btn-status" onClick={() => trocaStatus(5)}>Concluir</button>
+                                            </div>
+
+                        )) : console.log('nenhum atribuido')}
+
+                    {Array.isArray(database) ? database
+                        .filter(cha => cha.cha_cod === selectChaCod)
+                        .map(cha => (
+
+                            cha.sta_nome === 'Cancelado' ?
 
                                 <div className="resposta">
                                     <div className="avisoStatus">
-                                        <img src={concluido} />
-                                        <h2 className="concluído">Chamado concluído</h2>
+                                        <img src={cancelado} />
+                                        <h2 className="cancelado">Chamado cancelado</h2>
                                     </div>
-                                    <button className="btn-status" onClick={() => trocaStatus(3)}>Reabrir</button>
-                                </div>
-                            :
-                            cha.sta_nome === 'Fechado' ?
-                                <div className="resposta">
-                                    <div className="avisoStatus">
-                                        <img src={fechado} />
-                                        <h2 className="fechado">Chamado fechado</h2>
-                                    </div>
-                                </div>
-                            :
-                            cha.sta_nome === 'Reaberto' ?
-                                <div className="resposta">
-
-                                    <form className="form-resposta" onSubmit={submitForm}>
-                                        <input
-                                            className="campoResposta"
-                                            placeholder="Digite sua mensagem..."
-                                            type="text"
-                                            value={textoMsg}
-                                            onChange={(e) => { setTextoMsg(e.target.value) }}
-                                            onSubmit={submitForm}
-                                        />
-
-                                        <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
-                                            <span>
-                                                <img src={anexo} alt="enviar arquivo" />
-                                            </span>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            id="arquivo"
-                                            multiple={false}
-                                            ref={fileInput}
-                                            value={file}
-                                            onChange={handleFileInput}
-                                            style={{ display: 'none' }}
-                                        />
-
-                                        <button type="submit" className="botao">
-                                            <img src={enviar} alt="enviar mensagem" />
-                                        </button>
-                                    </form>
-                                    <button className="btn-status" onClick={() => trocaStatus(6)}>Fechar</button>
                                 </div>
                                 :
+                                cha.sta_nome === 'Concluído' ?
 
-                                //Em andamento e aberto
+                                    <div className="resposta">
+                                        <div className="avisoStatus">
+                                            <img src={concluido} />
+                                            <h2 className="concluído">Chamado concluído</h2>
+                                        </div>
+                                        <button className="btn-status" onClick={() => trocaStatus(3)}>Reabrir</button>
+                                    </div>
+                                    :
+                                    cha.sta_nome === 'Fechado' ?
+                                        <div className="resposta">
+                                            <div className="avisoStatus">
+                                                <img src={fechado} />
+                                                <h2 className="fechado">Chamado fechado</h2>
+                                            </div>
+                                        </div>
+                                        :
+                                        cha.sta_nome === 'Reaberto' ?
+                                            <div className="resposta">
 
-                                <div className="resposta">
+                                                <form className="form-resposta" onSubmit={submitForm}>
+                                                    <input
+                                                        className="campoResposta"
+                                                        placeholder="Digite sua mensagem..."
+                                                        type="text"
+                                                        value={textoMsg}
+                                                        onChange={(e) => { setTextoMsg(e.target.value) }}
+                                                        onSubmit={submitForm}
+                                                    />
 
-                                    <form className="form-resposta" onSubmit={submitForm}>
-                                        <input
-                                            className="campoResposta"
-                                            placeholder="Digite sua mensagem..."
-                                            type="text"
-                                            maxLength="500"
-                                            value={textoMsg}
-                                            onChange={(e) => { setTextoMsg(e.target.value) }}
-                                            onSubmit={submitForm}
-                                        />
+                                                    <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                                        <span>
+                                                            <img src={anexo} alt="enviar arquivo" />
+                                                        </span>
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="arquivo"
+                                                        multiple={false}
+                                                        ref={fileInput}
+                                                        value={file}
+                                                        onChange={handleFileInput}
+                                                        style={{ display: 'none' }}
+                                                    />
 
-                                        <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
-                                            <span>
-                                                <img src={anexo} alt="enviar arquivo" />
-                                            </span>
-                                        </label>
-                                        <input
-                                            type="file"
-                                            id="arquivo"
-                                            multiple={false}
-                                            ref={fileInput}
-                                            value={file}
-                                            onChange={handleFileInput}
-                                            style={{ display: 'none' }}
-                                        />
+                                                    <button type="submit" className="botao">
+                                                        <img src={enviar} alt="enviar mensagem" />
+                                                    </button>
+                                                </form>
+                                                <button className="btn-status" onClick={() => trocaStatus(6)}>Fechar</button>
+                                            </div>
+                                            :
 
-                                        <button type="submit" className="botao">
-                                            <img src={enviar} alt="enviar mensagem" />
-                                        </button>
-                                    </form>
-                                    <button className="btn-status" onClick={() => trocaStatus(5)}>Concluir</button>
-                                </div>
+                                            //Em andamento e aberto
 
-                        ))}
+                                            <div className="resposta">
 
+                                                <form className="form-resposta" onSubmit={submitForm}>
+                                                    <input
+                                                        className="campoResposta"
+                                                        placeholder="Digite sua mensagem..."
+                                                        type="text"
+                                                        value={textoMsg}
+                                                        onChange={(e) => { setTextoMsg(e.target.value) }}
+                                                        onSubmit={submitForm}
+                                                    />
 
+                                                    <label id='textArquivo' htmlFor="arquivo" className="botao" onClick={e => fileInput.current && fileInput.current.click(e)}>
+                                                        <span>
+                                                            <img src={anexo} alt="enviar arquivo" />
+                                                        </span>
+                                                    </label>
+                                                    <input
+                                                        type="file"
+                                                        id="arquivo"
+                                                        multiple={false}
+                                                        ref={fileInput}
+                                                        value={file}
+                                                        onChange={handleFileInput}
+                                                        style={{ display: 'none' }}
+                                                    />
+
+                                                    <button type="submit" className="botao">
+                                                        <img src={enviar} alt="enviar mensagem" />
+                                                    </button>
+                                                </form>
+                                                <button className="btn-status" onClick={() => trocaStatus(5)}>Concluir</button>
+                                            </div>
+
+                        )) : console.log('nenhum atribuido')}
 
 
 
